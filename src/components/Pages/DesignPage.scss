@@ -1,0 +1,78 @@
+.detail-page {
+    background-color: white; 
+    color: black; 
+    padding: 20px;
+    border-radius: 8px;
+  
+    h2 {
+      color: black; 
+      margin-bottom: 20px;
+    }
+  
+    form {
+      display: grid;
+      gap: 15px;
+  
+      div {
+        display: flex;
+        flex-direction: column;
+  
+        label {
+          color: black;
+          margin-bottom: 5px;
+          font-weight: bold;
+        }
+  
+        select, input[type="color"] {
+          padding: 10px;
+          border: 1px solid #444; 
+          border-radius: 4px;
+          background-color: white; 
+          color: black; 
+  
+          &::placeholder {
+            color: #aaa; 
+          }
+        }
+  
+        input[type="color"] {
+          width: 40px;
+          height: 40px;
+          cursor: pointer;
+          border: none;
+        }
+  
+        .color-picker-container {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          .color-boxes {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-direction: row;
+  
+            .color-box {
+              width: 20px;
+              height: 20px;
+              border-radius: 4px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+              cursor: pointer;
+            }
+          }
+  
+          .customize-section {
+            display: flex;
+            flex-direction: row;
+            margin-left: 10px;
+            align-items: center;
+  
+            label {
+              margin-bottom: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+  

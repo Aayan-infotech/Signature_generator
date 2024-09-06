@@ -1,0 +1,92 @@
+.signature-container {
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    position: relative;
+  }
+  
+  .signature-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .signature-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -0.5rem;
+  }
+  
+  .signature-image {
+    flex: 1;
+    padding: 0.5rem;
+    max-width: 33.33%;
+  }
+  
+  .signature-details {
+    flex: 1;
+    padding: 0.5rem;
+    max-width: 33.33%;
+  }
+  
+  .signature-name,
+  .signature-role {
+    font-size: 1.25rem;
+    color: #333;
+  }
+  
+  .signature-role {
+    color: #555;
+  }
+  
+  .signature-address {
+    margin: 1rem 0;
+    color: #666;
+  }
+  
+  .signature-contact {
+    flex: 1;
+    padding: 0.5rem;
+    max-width: 33.33%;
+  }
+  
+  .contact-info p,
+  .social-icons .icon {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .icon {
+    margin-right: 0.5rem;
+    transition: color 0.3s ease;
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .done-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 150px; /* Adjusted width */
+    text-align: center; /* Center text inside button */
+    position: absolute;
+    bottom: -10rem; /* Positioned outside the main content box */
+    right: 1rem;
+  }
+  
+  .done-button:hover {
+    background-color: #0056b3;
+  }
+  

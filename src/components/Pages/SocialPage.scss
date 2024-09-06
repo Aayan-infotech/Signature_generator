@@ -1,0 +1,80 @@
+.social-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  height: 10%;
+}
+
+.social-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.social-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 10px; 
+}
+
+.social-item input {
+  flex: 1;
+  padding-right: 30px; 
+  padding-top: 12px; 
+  padding-bottom: 12px; 
+}
+
+.social-item svg {
+  font-size: 22px; 
+  color: inherit; 
+}
+
+.remove-icon {
+  cursor: pointer;
+  color: #ff4d4d !important; 
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.social-select {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  justify-content: center;
+  width: 100%; 
+
+  select {
+    // flex: 1; 
+    padding: 12px 20px; 
+    border: 1px solid #ccc;
+    border-radius: 4px;  
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    max-width: 400px; 
+    width:77%;
+    margin-left: auto;
+  }
+}
+
+.add-icon {
+  cursor: pointer;
+  font-size: 24px;
+  color: #1e90fa; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s ease;
+}
+
+.add-icon:hover {
+  background-color: #e0e0e0;
+}

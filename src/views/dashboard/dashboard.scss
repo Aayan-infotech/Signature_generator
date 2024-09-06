@@ -1,0 +1,143 @@
+.dashboard {
+    font-family: 'Poppins', sans-serif;
+    padding: 2rem;
+
+    h1 {
+        font-size: 58px;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .signature-card {
+        padding: 50px;
+        background-color: #000;
+        color: #fff;
+        margin-bottom: 1.5rem;
+
+        .card-header {
+            font-size: 32px;
+            font-weight: 600;
+            color: #3EB2F0;
+            display: flex;
+            justify-content: space-between;
+
+            .down-btn{
+                display: inline-block;
+                content: '⬇';
+                color: black;
+                background:#3EB2F0;
+                width: 50px;
+                height: 50px;
+                padding: 0 15px;
+                border-radius: 50%;
+            }
+        }
+
+        .email-section {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+
+            
+
+            h5 {
+                margin-bottom: 0.5rem;
+                font-size: 15px;
+                font-weight: 400;
+            }
+            .ename{
+                font-size: 16px;
+                font-weight: 100;
+            }
+        }
+
+        .signature-section {
+
+            h5 {
+                margin-bottom: 0.5rem;
+                font-size: 15px;
+                font-weight: 400;
+            }
+
+            .signature-box {
+                padding: 1rem;
+                background-color: #fff;
+                border-radius: 5px;
+                color: #5363F2;
+                font-size: 12px;
+                width: 65%;
+
+                .profile-pic {
+                    margin-top: 10px;
+                    img {
+                        width: 100px;
+                        border-radius: 50%;
+                    }
+                }
+
+                .user-info{
+                    font-size: 10px;
+                    font-weight: 700;
+
+                    .cname{
+                        font-size: 16px;
+                    }
+
+                    .crole{
+                        font-size: 12px;
+                        color: black;
+                        font-weight: 300;
+                    }
+
+                    .csocial{
+                        font-size: 20px;
+                    }
+                }
+
+                .contact-info{
+                    border-left: 1px solid grey;
+                }
+
+                .user-info,
+                .contact-info {
+                    p {
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .social-icon {
+                        margin-left: 0.5rem;
+                        color:#5363F2;
+                    }
+                }
+
+                
+            }
+            .edit-button {
+                position: absolute;
+                bottom: 1rem;
+                right: 1rem;
+                // background-color: #007bff;
+                border: none;
+                width: 101px;
+                height: 41px;
+                border-radius: 10px;
+
+                &:hover {
+                    background-color: #858586;
+                }
+            }
+        }
+    }
+
+    .create-signature-button {
+        border: 2px dashed #3EB2F0;
+        color: #3EB2F0;
+        font-weight: 700;
+        width: 100%;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+}

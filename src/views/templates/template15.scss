@@ -1,0 +1,38 @@
+// Make sure to import this file in your component or main style file
+.footer {
+    background-color: #3EB2F0;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  .detailsSection {
+    background-color: #ffffff;
+    padding: 15px;
+    color: #333;
+    border-radius: 5px;
+  }
+  
+  .avatarImage {
+    max-width: 100%;
+    border-radius: 50%;
+    border: 4px solid #3EB2F0;
+  }
+  
+  .socialStrip {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 15px;  // Gap between icons
+    color: #3EB2F0;
+  }
+  
+  .socialIconsContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  

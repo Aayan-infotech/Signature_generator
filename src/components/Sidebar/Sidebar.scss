@@ -1,0 +1,38 @@
+.sidebar {
+  width: 4%;
+  border-right: 1px solid rgb(218, 214, 214);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.sidebar-link {
+  text-decoration: none;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  background-color: transparent;
+  border-radius: 4px;
+  color: #333; 
+  width: 100%;
+  text-align: center;
+  transition: color 0.3s ease, background-color 0.3s ease;
+
+  &.active {
+    background-color: transparent;
+    color: #1e90fa; 
+  }
+}
+
+.sidebar-icon {
+  transition: color 0.3s ease;
+  color: #333; 
+}
+
+.active-icon {
+  background-color: #1e90fa; 
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+}
