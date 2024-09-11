@@ -1,31 +1,43 @@
 import React from 'react';
 import {
   FaPhone, FaMobileAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt,
-  FaGithub, FaInstagram, FaLinkedin, FaAmazon, FaTwitter, FaWhatsapp, FaTiktok
+  FaGithub, FaInstagram, FaLinkedin, FaAmazon, FaTwitter, FaWhatsapp
 } from 'react-icons/fa';
 
 const Template4 = ({ data, onSubmit }) => {
+  const getFontSize = () => {
+    switch (data.size) {
+      case 'small': return '12px';
+      case 'medium': return '16px';
+      case 'large': return '20px';
+      default: return '16px';
+    }
+  };
+
+  const getSpacing = () => {
+    return data.spacing === 'wide' ? '1.5em' : '1em';
+  };
+
   const containerStyle = {
     fontFamily: data.font || 'Arial, sans-serif',
     color: data.color || '#4A4A4A',
-    fontSize: '16px',
-    lineHeight: '1.5em',
+    fontSize: getFontSize(),
+    lineHeight: getSpacing(),
     display: 'flex',
     maxWidth: '900px',
     margin: '20px auto',
     padding: '20px',
     backgroundColor: data.backgroundColor || '#FFFFFF',
     borderRadius: '10px',
+    boxShadow: '0 0 10px rgba(0,0,0,0.1)',
   };
 
   const leftSectionStyle = {
     flex: '0 0 20%',
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    borderRight: `2px solid ${data.borderColor || '#ddd'}`,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
     paddingRight: '20px',
-    height: '100%',
   };
 
   const rightSectionStyle = {
@@ -40,21 +52,19 @@ const Template4 = ({ data, onSubmit }) => {
     width: '100px',
     height: '100px',
     objectFit: 'cover',
-    borderRadius: '50%',
+    borderRadius: '10px',
     marginBottom: '20px',
   };
 
   const iconStyle = {
-    color: '#4A4A4A',
+    color: data.fontColor || '#4A4A4A',
     marginRight: '8px',
   };
 
   const socialIconsContainerStyle = {
     display: 'flex',
     gap: '10px',
-    justifyContent: 'flex-start',
     marginTop: '20px',
-    flexWrap: 'wrap',
   };
 
   return (
@@ -67,19 +77,28 @@ const Template4 = ({ data, onSubmit }) => {
           <h2 style={{ color: data.fontColor || '#4A4A4A', marginBottom: '10px' }}>{data.name}</h2>
           <p style={{ margin: '0 0 5px', fontWeight: 'bold' }}>{data.title}</p>
           <p style={{ margin: '0 0 10px', fontWeight: 'bold' }}>{data.company}</p>
-          <p style={{ margin: '0 0 20px', fontWeight: 'bold' }}>{data.department}</p>
-          <p style={{ margin: '10px 0' }}><FaMobileAlt style={iconStyle} /> {data.phone}</p>
-          <p style={{ margin: '10px 0' }}><FaGlobe style={iconStyle} /> {data.website}</p>
-          <p style={{ margin: '10px 0' }}><FaEnvelope style={iconStyle} /> {data.email}</p>
-          <p style={{ margin: '10px 0' }}><FaMapMarkerAlt style={iconStyle} /> {data.address}</p>
+          <p style={{ margin: '10px 0' }}>
+            <FaMobileAlt style={{ ...iconStyle, color: data.fontColor || '#4A4A4A' }} /> {data.phone}
+          </p>
+          <p style={{ margin: '10px 0' }}>
+            <FaGlobe style={{ ...iconStyle, color: data.fontColor || '#4A4A4A' }} /> {data.website}
+          </p>
+          <p style={{ margin: '10px 0' }}>
+            <FaEnvelope style={{ ...iconStyle, color: data.fontColor || '#4A4A4A' }} /> {data.email}
+          </p>
+          <p style={{ margin: '10px 0' }}>
+            <FaMapMarkerAlt style={{ ...iconStyle, color: data.fontColor || '#4A4A4A' }} /> {data.address}
+          </p>
         </div>
         <div style={socialIconsContainerStyle}>
-          <FaInstagram size={30} color={data.iconColors?.instagram || "#E4405F"} />
-          <FaLinkedin size={30} color={data.iconColors?.linkedin || "#0077B5"} />
-          <FaAmazon size={30} color={data.iconColors?.amazon || "#FF9900"} />
-          <FaGithub size={30} color={data.iconColors?.github || "#000000"} />
-          <FaWhatsapp size={30} color={data.iconColors?.whatsapp || "#25D366"} />
-          <FaTwitter size={30} color={data.iconColors?.twitter || "#1DA1F2"} />
+          {data.socialLinks && data.socialLinks.map((social) => {
+            const Icon = social.icon;
+            return (
+              <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: social.color }}>
+                <Icon size={30} />
+              </a>
+            );
+          })}
         </div>
         <button onClick={() => onSubmit(data)} style={{
           marginTop: '20px',
@@ -88,7 +107,7 @@ const Template4 = ({ data, onSubmit }) => {
           color: '#fff',
           border: 'none',
           borderRadius: '5px',
-          fontSize: '16px',
+          fontSize: getFontSize(),
         }}>
           OK, I'm done
         </button>

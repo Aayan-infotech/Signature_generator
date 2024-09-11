@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt,
-  FaFacebook, FaInstagram, FaLinkedin, FaAmazon,
-  FaGithub, FaWhatsapp, FaTwitter, FaTiktok
+  FaPhone,
+  FaGlobe,
+  FaEnvelope,
+  FaMapMarkerAlt,
 } from 'react-icons/fa';
 
 const Template3 = ({ data, onSubmit }) => {
@@ -19,92 +20,86 @@ const Template3 = ({ data, onSubmit }) => {
     return data.spacing === 'wide' ? '1.5em' : '1em';
   };
 
-  const containerStyle = {
-    fontFamily: data.font || 'Arial, sans-serif',
-    color: 'inherit',
-    fontSize: getFontSize(),
-    lineHeight: getSpacing(),
-    maxWidth: '700px',
-    margin: '20px auto',
-    padding: '20px',
-    border: `1px solid ${data.borderColor || '#ddd'}`,
-    borderRadius: '10px',
-    backgroundColor: data.backgroundColor || '#f9f9f9',
-  };
-
-  const imageContainerStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: '20px',
-    border: `2px solid ${data.borderColor || '#ddd'}`,
-    borderRadius: '8px',
-    overflow: 'hidden',
-    width: '100px', // Size of the image frame
-    height: '100px', // Size of the image frame
-    marginRight: '20px',
-  };
-
-  const imageStyle = {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  };
-
-  const contentStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-  };
-
-  const horizontalLineStyle = {
-    margin: '20px 0',
-    borderColor: data.borderColor || '#ddd',
-  };
-
-  const iconContainerStyle = {
-    display: 'flex',
-    gap: '10px',
-    marginTop: '20px',
-  };
-
-  const iconStyle = (color) => ({
-    color: color || data.fontColor,
-    fontSize: '24px',
-  });
-
   return (
-    <div style={containerStyle}>
-      <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-        <div style={imageContainerStyle}>
-          <img src={data.image} alt="Profile" style={imageStyle} />
+    <div style={{
+      fontFamily: data.font,
+      color: 'inherit',
+      fontSize: getFontSize(),
+      lineHeight: getSpacing(),
+      maxWidth: '100%',
+      padding: '20px',
+      border: '1px solid #ddd',
+      borderRadius: '10px',
+      backgroundColor: '#f9f9f9',
+      display: 'flex',
+      flexDirection: 'column',
+    }}>
+      {/* Container Split */}
+      <div style={{ display: 'flex' }}>
+        {/* Left Side (Image - 20%) */}
+        <div style={{
+          width: '20%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+        }}>
+          <img src={data.image} alt="Profile"
+            style={{
+              borderRadius: '5px',
+              width: '100px',  // Square size
+              height: '100px',  // Square size
+              objectFit: 'cover',
+            }} />
         </div>
-        <div style={contentStyle}>
-          <h2 style={{ margin: 0, color: data.fontColor }}>{data.name}</h2>
-          <p style={{ marginBottom: '10px', fontStyle: 'italic', color: '#555' }}>{data.title}, {data.company}</p>
-          <p style={{ margin: '0 0 10px' }}><FaPhone style={iconStyle(data.fontColor)} /> {data.phone}</p>
-          <p style={{ margin: '0 0 10px' }}><FaGlobe style={iconStyle(data.fontColor)} /> <a href={`http://${data.website}`} style={{ color: 'black', textDecoration: 'none' }}>{data.website}</a></p>
-          <p style={{ margin: '0 0 10px' }}><FaEnvelope style={iconStyle(data.fontColor)} /> {data.email}</p>
-          <p style={{ margin: '0 0 10px' }}>          <FaMapMarkerAlt style={iconStyle(data.fontColor)} /> {data.address}</p>
+
+        {/* Right Side (Content - 80%) */}
+        <div style={{ width: '80%', paddingLeft: '20px' }}>
+          {/* Name, Title, Company and Social Icons */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <h2 style={{ margin: 0, color: data.fontColor }}>{data.name}</h2>
+              <p style={{ margin: 0, fontStyle: 'italic', color: '#555' }}>
+                {data.title}, {data.company}
+              </p>
+            </div>
+            {/* Social Media Icons Next to Title and Company */}
+            <div style={{ display: 'flex', gap: '10px' }}>
+              {data.socialLinks && data.socialLinks.map(social => {
+                const Icon = social.icon;
+                return (
+                  <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: social.color }}>
+                    <Icon size={24} />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Horizontal Line after Name, Title, Company */}
+          <hr style={{ margin: '20px 0', borderColor: data.fontColor || '#ddd', borderWidth: '2px' }} />
+
+          {/* Contact Information */}
+          <div>
+            <p><FaPhone style={{ color: data.fontColor }} /> {data.phone}</p>
+            <p><FaGlobe style={{ color: data.fontColor }} /> <a href={`http://${data.website}`} style={{ color: 'black', textDecoration: 'none' }}>{data.website}</a></p>
+            <p><FaEnvelope style={{ color: data.fontColor }} /> {data.email}</p>
+            <p><FaMapMarkerAlt style={{ color: data.fontColor }} /> {data.address}</p>
+          </div>
+
+          {/* Horizontal Line after Contact Information */}
+          <hr style={{ margin: '20px 0', borderColor: data.fontColor || '#ddd', borderWidth: '2px' }} />
         </div>
       </div>
-      <hr style={horizontalLineStyle} />
-      <div style={iconContainerStyle}>
-        {data.socialLinks && data.socialLinks.map(social => {
-          const Icon = social.icon;
-          return (
-            <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={iconStyle(social.color)}>
-              <Icon size={24} />
-            </a>
-          );
-        })}
-      </div>
+
+      {/* "OK, I'm done" Button */}
       <button onClick={() => onSubmit(data)} style={{
         marginTop: '20px',
         padding: '10px 20px',
         backgroundColor: '#007bff',
         color: '#fff',
         border: 'none',
-        borderRadius: '5px'
+        borderRadius: '5px',
+        alignSelf: 'center'
       }}>
         OK, I'm done
       </button>
@@ -113,4 +108,3 @@ const Template3 = ({ data, onSubmit }) => {
 };
 
 export default Template3;
-
