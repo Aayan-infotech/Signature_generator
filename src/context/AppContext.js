@@ -12,7 +12,7 @@ export const AppProvider = ({ children }) => {
     fontSize: 14,
     backgroundColor: '#ffffff',
     borderRadius: 0,
-    template: 'Template9',
+    template: 'Template12',
     socialLinks: [], 
     additionalFields: [], 
   });
