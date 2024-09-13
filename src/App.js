@@ -19,6 +19,7 @@ const App = () => {
             <Route path="images" element={<ImageUploadPage />} />
             <Route path="social" element={<SocialPage />} />
             <Route path="design" element={<DesignPage />} />
+            {/* <Route path="template" element={<TamplatesPreview />} /> */}
           </Route>
         </Routes>
       </Router>
