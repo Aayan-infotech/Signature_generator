@@ -22,12 +22,9 @@ const App = () => {
             <Route path="social" element={<SocialPage />} />
             <Route path="template" element={<TamplatesPreview />} />
             <Route path="design" element={<DesignPage />} />
-<<<<<<< HEAD
             <Route path="AppPage" element={<AppPage />} />
             {/* <Route path="AppPages" element={<AppPages />} /> */}
-=======
             {/* <Route path="template" element={<TamplatesPreview />} /> */}
->>>>>>> dd052e6dc046b52f66ee83adba6eff1cd1a5f92a
           </Route>
         </Routes>
       </Router>
