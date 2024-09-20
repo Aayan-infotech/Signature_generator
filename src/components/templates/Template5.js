@@ -82,7 +82,7 @@ const Template5 = ({ data, onSubmit }) => {
 
       {/* Name, Title, Company */}
       <div style={contentStyle}>
-        <h2 style={{ color: data.fontColor || '#4A4A4A', marginBottom: '10px' }}>{data.name}</h2>
+        <h2 style={{ color: data.fontColor || '#4A4A4A', margin: '20px' }}>{data.name}</h2>
         <p style={{ margin: '0 0 5px', fontWeight: 'bold' }}>{data.title}</p>
         <p style={{ margin: '0 0 10px', fontWeight: 'bold' }}>{data.company}</p>
       </div>
@@ -90,7 +90,7 @@ const Template5 = ({ data, onSubmit }) => {
       {/* Contact Information */}
       <div style={contactStyle}>
         <p style={{ margin: '0' }}><FaPhone style={iconStyle} /> {data.phone}</p>
-        <p style={{ margin: '0' }}><FaGlobe style={iconStyle} /> <a href={`http://${data.website}`} style={{ color: data.fontColor, textDecoration: 'none' }}>{data.website}</a></p>
+        <p style={{ margin: '0' }}><FaGlobe style={iconStyle} /> <a href={`http://${data.website}`} style={{color:'black', textDecoration: 'none' }}>{data.website}</a></p>
       </div>
 
       <div style={contactStyle}>

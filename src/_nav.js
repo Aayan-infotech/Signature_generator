@@ -60,7 +60,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Apps',
-    to: '/test',
+    to: '/AppPage',
     icon: <FaUsers className="nav-icon" />,
   },
   {
