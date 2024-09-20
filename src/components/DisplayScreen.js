@@ -14,17 +14,18 @@ import Template11 from './templates/Template11';
 import Template12 from './templates/Template12';
 
 const DisplayScreen = () => {
-  const { data ,selectedTamplate} = useAppContext();
+  const { data } = useAppContext();
   const [selectedTemplate, setSelectedTemplate] = useState('Template1');
 
   const handleSubmit = () => {
     console.log("Submitted Data:", data);
+    // Add further submission logic here (e.g., API call)
   };
 
   const renderTemplate = () => {
     const templateProps = { data, onSubmit: handleSubmit };
 
-    switch (selectedTamplate) {
+    switch (selectedTemplate) {
       case 'Template1':
         return <Template1 {...templateProps} />;
       case 'Template2':

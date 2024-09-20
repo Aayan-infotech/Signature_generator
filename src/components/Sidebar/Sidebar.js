@@ -19,7 +19,6 @@ const Sidebar = () => {
       >
         <FaPencilAlt className={`sidebar-icon ${activeLink === '/details' ? 'active-icon' : ''}`} /> Details
       </Link>
-
       <Link
         to="/images"
         className={`sidebar-link ${activeLink === '/images' ? 'active' : ''}`}
@@ -27,7 +26,6 @@ const Sidebar = () => {
       >
         <FaImage className={`sidebar-icon ${activeLink === '/images' ? 'active-icon' : ''}`} /> Images
       </Link>
-      
       <Link
         to="/social"
         className={`sidebar-link ${activeLink === '/social' ? 'active' : ''}`}
@@ -50,11 +48,11 @@ const Sidebar = () => {
         <FaPaintBrush className={`sidebar-icon ${activeLink === '/design' ? 'active-icon' : ''}`} /> Design
       </Link>
       <Link
-        to="/appPage"
+        to="/app"
         className={`sidebar-link ${activeLink === '/app' ? 'active' : ''}`}
-        onClick={() => handleClick('/appPage')}
+        onClick={() => handleClick('/app')}
       >
-        <FaThLarge className={`sidebar-icon ${activeLink === '/appPage' ? 'active-icon' : ''}`} /> Apps
+        <FaThLarge className={`sidebar-icon ${activeLink === '/app' ? 'active-icon' : ''}`} /> Apps
       </Link>
     </div>
   );

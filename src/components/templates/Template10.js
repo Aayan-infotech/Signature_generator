@@ -98,7 +98,7 @@ const Template10 = ({ data, onSubmit }) => {
       {/* Right Section */}
       <div style={rightSectionStyle}>
         <p style={{ margin: '5px 0' }}><FaPhone style={{ color: socialIconColor }} /> {data.phone}</p>
-        <p style={{ margin: '5px 0' }}><FaGlobe style={{ color: socialIconColor }} /> <a href={`http://${data.website}`} style={{ textDecoration: 'none', color:'black' }}>{data.website}</a></p>
+        <p style={{ margin: '5px 0' }}><FaGlobe style={{ color: socialIconColor }} /> <a href={`http://${data.website}`} style={{ color: socialIconColor, textDecoration: 'none' }}>{data.website}</a></p>
         <p style={{ margin: '5px 0' }}><FaEnvelope style={{ color: socialIconColor }} /> {data.email}</p>
         <p style={{ margin: '5px 0' }}><FaMapMarkerAlt style={{ color: socialIconColor }} /> {data.address}</p>
       </div>
