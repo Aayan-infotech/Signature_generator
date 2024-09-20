@@ -88,10 +88,9 @@ const Template9 = ({ data, onSubmit }) => {
           <p style={{ margin: `5px 0 ${getSpacing()}`, fontWeight: 'bold' }}>{data.title}</p>
           <p style={{ margin: `5px 0 ${getSpacing()}` }}>{data.company}</p>
           <p style={{ margin: `5px 0 ${getSpacing()}` }}><FaPhone style={{ color: data.fontColor }} /> {data.phone}</p>
-          <p style={{ margin: `5px 0 ${getSpacing()}` }}>
+          <p style={{ margin: 0 }}>
             <FaGlobe style={{ color: data.fontColor }} />
-            <a href={`http://${data.website}`}
-              style={{ color: data.fontColor || 'inherit', textDecoration: 'none' }}>
+            <a href={`http://${data.website}`} style={{ color: 'black', textDecoration: 'none' }}>
               {data.website}
             </a>
           </p>
@@ -108,9 +107,17 @@ const Template9 = ({ data, onSubmit }) => {
             <div
               key={social.name}
               onClick={() => setActiveIcon(social.name)}
-              style={{ ...iconStyle, color: activeIcon === social.name ? '#007bff' : iconStyle.color }}
+              style={{ ...iconStyle, color: activeIcon === social.name ? data.fontColor : iconStyle.color }}
             >
-              <a href={social.url} target="_blank" rel="noopener noreferrer">
+              <a 
+                href={social.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style={{ 
+                  color: data.fontColor || '#000', // Apply fontColor passed in data or default to black
+                  textDecoration: 'none' // Ensure no underline
+                }}
+              >
                 <Icon size={24} />
               </a>
             </div>

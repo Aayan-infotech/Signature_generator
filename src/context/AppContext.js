@@ -12,10 +12,10 @@ export const AppProvider = ({ children }) => {
     fontSize: 14,
     backgroundColor: '#ffffff',
     borderRadius: 0,
-    template: 'Template2',
-    socialLinks: [], 
-    additionalFields: [], 
-  });
+    template: 'Template1',
+    socialLinks: [],
+    additionalFields: [],
+  })
 
   const [selectedTamplate, setSelectedTamplate] = useState('Template1')
 
@@ -51,4 +51,4 @@ export const AppProvider = ({ children }) => {
   )
 }
 
-export const useAppContext = () => useContext(AppContext);
+export const useAppContext = () => useContext(AppContext)
