@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+=======
+import { FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaTiktok } from 'react-icons/fa';
+>>>>>>> dd052e6dc046b52f66ee83adba6eff1cd1a5f92a
 
 const Template9 = ({ data, onSubmit }) => {
   // State to manage active social media icon
@@ -88,9 +92,16 @@ const Template9 = ({ data, onSubmit }) => {
           <p style={{ margin: `5px 0 ${getSpacing()}`, fontWeight: 'bold' }}>{data.title}</p>
           <p style={{ margin: `5px 0 ${getSpacing()}` }}>{data.company}</p>
           <p style={{ margin: `5px 0 ${getSpacing()}` }}><FaPhone style={{ color: data.fontColor }} /> {data.phone}</p>
+<<<<<<< HEAD
           <p style={{ margin: 0 }}>
             <FaGlobe style={{ color: data.fontColor }} />
             <a href={`http://${data.website}`} style={{ color: 'black', textDecoration: 'none' }}>
+=======
+          <p style={{ margin: `5px 0 ${getSpacing()}` }}>
+            <FaGlobe style={{ color: data.fontColor }} />
+            <a href={`http://${data.website}`}
+              style={{ color: data.fontColor || 'inherit', textDecoration: 'none' }}>
+>>>>>>> dd052e6dc046b52f66ee83adba6eff1cd1a5f92a
               {data.website}
             </a>
           </p>
@@ -107,6 +118,7 @@ const Template9 = ({ data, onSubmit }) => {
             <div
               key={social.name}
               onClick={() => setActiveIcon(social.name)}
+<<<<<<< HEAD
               style={{ ...iconStyle, color: activeIcon === social.name ? data.fontColor : iconStyle.color }}
             >
               <a 
@@ -118,6 +130,11 @@ const Template9 = ({ data, onSubmit }) => {
                   textDecoration: 'none' // Ensure no underline
                 }}
               >
+=======
+              style={{ ...iconStyle, color: activeIcon === social.name ? '#007bff' : iconStyle.color }}
+            >
+              <a href={social.url} target="_blank" rel="noopener noreferrer">
+>>>>>>> dd052e6dc046b52f66ee83adba6eff1cd1a5f92a
                 <Icon size={24} />
               </a>
             </div>

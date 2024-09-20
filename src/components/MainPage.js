@@ -14,6 +14,10 @@ import Template9 from './templates/Template9';
 import Template10 from './templates/Template10';
 import Template11 from './templates/Template11';
 import Template12 from './templates/Template12';
+<<<<<<< HEAD
+=======
+
+>>>>>>> dd052e6dc046b52f66ee83adba6eff1cd1a5f92a
 
 const MainPage = () => {
   const { data, setData } = useAppContext();
@@ -23,6 +27,7 @@ const MainPage = () => {
     console.log('Template Data:', templateData);
   };
 
+  
   const renderTemplate = () => {
     switch (data.template) {
       case 'Template1':
