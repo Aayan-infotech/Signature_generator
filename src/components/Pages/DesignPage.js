@@ -31,14 +31,11 @@ const DesignPage = () => {
             value={data.font || 'Arial'}
             onChange={handleChange}
           >
-          <option value="Arial">Arial</option>
-          <option value="Trebuchet MS">Trebuchet MS</option>
-          <option value="Times New Roman">Times New Roman</option>
-          <option value="Courier New">Courier New</option>
-          <option value="Palatino">Palatino</option>
-          <option value="Verdana">Verdana</option>
-          <option value="Georgia">Georgia</option>
-          <option value="Lucida Sans">Lucida Sans</option>
+            <option value="Arial">Arial</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Courier New">Courier New</option>
           </select>
         </div>
         

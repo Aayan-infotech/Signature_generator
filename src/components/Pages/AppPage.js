@@ -5,7 +5,6 @@ import {
   FaThumbsUp, FaDownload, FaLaptop, FaHandPointUp, FaEnvelope
 } from 'react-icons/fa'
 import { MdDesignServices, MdWeb, MdUpload } from 'react-icons/md'
-
 const AppPage = () => {
   // Define an array of custom names for the template boxes
   const templateNames = [
@@ -28,7 +27,6 @@ const AppPage = () => {
     'Download app',
     'Post a job offer',
   ]
-
   // Define an array of corresponding icons for each template
   const templateIcons = [
     <MdDesignServices />,
@@ -50,28 +48,23 @@ const AppPage = () => {
     <FaDownload />,
     <FaBriefcase />
   ]
-
   // State to track selected items
   const [selectedItems, setSelectedItems] = useState([])
-
   // Handler to add selected item into the array
   const handleOptionClick = (index) => {
     const newItem = {
       name: templateNames[index],
       icon: templateIcons[index],
     }
-
     // Add the selected item to the list
     setSelectedItems([...selectedItems, newItem])
   }
-
   return (
     <div>
       {/* Content at the start */}
       <div style={{ gridColumn: 'span 2', padding: '2px' }}>
         <h3>Enhance your Signature</h3>
       </div>
-
       {/* Template Buttons Section */}
       <div
         style={{
@@ -104,7 +97,6 @@ const AppPage = () => {
               {templateIcons[index]} {/* Icon before the template name */}
               {template} {/* Display custom template name */}
             </button>
-
             {/* Check if this is after the 6th box and insert the text */}
             {index === 5 && (
               <div style={{ gridColumn: 'span 2', padding: '2px' }}>
@@ -114,7 +106,6 @@ const AppPage = () => {
           </React.Fragment>
         ))}
       </div>
-
       {/* Display Selected Templates */}
       <div style={{ marginTop: '30px', maxWidth: '600px', margin: '0 auto' }}>
         <h3>Selected Templates:</h3>
@@ -144,5 +135,4 @@ const AppPage = () => {
     </div>
   )
 }
-
 export default AppPage

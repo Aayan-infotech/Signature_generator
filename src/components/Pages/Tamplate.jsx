@@ -6,6 +6,7 @@ const TamplatesPreview = () => {
 
   // Create an array with 12 elements (representing 12 templates)
   const templates = Array.from({ length: 12 }, (_, index) => `Template${index + 1}`)
+console.log(templates);
 
   return (
     <div>
@@ -23,7 +24,7 @@ const TamplatesPreview = () => {
       >
         {templates.map((template, index) => (
           <>
-            <button
+            {/* <button
             key={index}
             onClick={() => handleTamplate(template)}  // Call your handleTamplate function
             style={{
@@ -36,9 +37,9 @@ const TamplatesPreview = () => {
             }}
           >
             {template}
-          </button>
+          </button> */}
 
-            {/* <img
+            <img
               src={`/preview/${template}.jpg`}
               style={{
                 padding: '15px',
@@ -52,7 +53,7 @@ const TamplatesPreview = () => {
               }}
               height={100}
               onClick={() => handleTamplate(template)}
-            /> */}
+            />
           </>
         ))}
       </div>
