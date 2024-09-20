@@ -50,6 +50,14 @@ const MainPage = () => {
           return <Template11 data={data} onSubmit={handleSubmit} />;
         case 'Template12':
           return <Template12 data={data} onSubmit={handleSubmit} />;
+          // case 'Template13':
+          //   return <Template13 data={data} onSubmit={handleSubmit} />;
+          // case 'Template14':
+          //   return <Template14 data={data} onSubmit={handleSubmit} />;
+          // case 'Template15':
+          //   return <Template15 data={data} onSubmit={handleSubmit} />;
+          // case 'Template16':
+          //   return <Template16 data={data} onSubmit={handleSubmit} />;
       default:
         return <Template1 data={data} onSubmit={handleSubmit} />;
     }

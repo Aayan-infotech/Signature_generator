@@ -1,5 +1,10 @@
 import React from 'react';
-import { FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import {
+  FaPhone,
+  FaGlobe,
+  FaEnvelope,
+  FaMapMarkerAlt,
+} from 'react-icons/fa';
 
 const Template1 = ({ data, onSubmit }) => {
   const getFontSize = () => {
@@ -28,7 +33,7 @@ const Template1 = ({ data, onSubmit }) => {
       borderRadius: '10px',
       backgroundColor: '#f9f9f9',
     }}>
-
+      
       {/* Left side: Image (20% of the width) */}
       <div style={{
         width: '20%',
@@ -38,10 +43,10 @@ const Template1 = ({ data, onSubmit }) => {
         justifyContent: 'flex-start',
       }}>
         <div style={{
-          width: '80%',
-          paddingTop: '80%',
+          width: '80%',       // Adjust width to fit within the container
+          paddingTop: '80%', // This maintains a square aspect ratio
           position: 'relative',
-          marginBottom: '20px'
+          marginBottom: '20px' // Space below the image
         }}>
           <img src={data.image} alt="Profile"
             style={{
@@ -50,7 +55,7 @@ const Template1 = ({ data, onSubmit }) => {
               left: 0,
               width: '100%',
               height: '100%',
-              objectFit: 'cover',
+              objectFit: 'cover', // Ensure the image covers the square area
               borderRadius: '5px',
             }} />
         </div>
@@ -70,9 +75,11 @@ const Template1 = ({ data, onSubmit }) => {
         flexDirection: 'column',
         justifyContent: 'space-between',
       }}>
-
+        
         {/* Top part: Name, Title, Company */}
-        <div style={{ marginBottom: '20px' }}>
+        <div style={{
+          marginBottom: '20px',
+        }}>
           <h2 style={{ margin: 0, color: data.fontColor }}>{data.name}</h2>
           <p style={{ margin: 0, fontStyle: 'italic', color: '#555' }}>{data.title}, {data.company}</p>
         </div>
@@ -86,80 +93,47 @@ const Template1 = ({ data, onSubmit }) => {
           fontSize: getFontSize()
         }}>
           {/* Phone */}
-          {data.phone && (
-            <>
-              <p style={{ margin: 0 }}>
-                <FaPhone style={{ color: data.fontColor }} /> {data.phone}
-              </p>
-              <span style={{ margin: '0 5px' }}>|</span>
-            </>
-          )}
+          <p style={{ margin: 0 }}>
+            <FaPhone style={{ color: data.fontColor }} /> {data.phone}
+          </p>
+          <span style={{ margin: '0 5px' }}>|</span>
 
           {/* Website */}
-          {data.website && (
-            <>
-              <p style={{ margin: 0 }}>
-                <FaGlobe style={{ color: data.fontColor }} />
-                <a href={`http://${data.website}`} style={{ color: 'black', textDecoration: 'none' }}>
-                  {data.website}
-                </a>
-              </p>
-              <span style={{ margin: '0 5px' }}>|</span>
-            </>
-          )}
+          <p style={{ margin: 0 }}>
+            <FaGlobe style={{ color: data.fontColor }} /> 
+            <a href={`http://${data.website}`} style={{ color: 'black', textDecoration: 'none' }}>
+              {data.website}
+            </a>
+          </p>
+          <span style={{ margin: '0 5px' }}>|</span>
 
           {/* Email */}
-          {data.email && (
-            <>
-              <p style={{ margin: 0 }}>
-                <FaEnvelope style={{ color: data.fontColor }} /> {data.email}
-              </p>
-              <span style={{ margin: '0 5px' }}>|</span>
-            </>
-          )}
+          <p style={{ margin: 0 }}>
+            <FaEnvelope style={{ color: data.fontColor }} /> {data.email}
+          </p>
+          <span style={{ margin: '0 5px' }}>|</span>
 
           {/* Address */}
-          {data.address && (
-            <p style={{ margin: 0 }}>
-              <FaMapMarkerAlt style={{ color: data.fontColor }} /> {data.address}
-            </p>
-          )}
-
-          {/* Additional Fields */}
-          {data.additionalFields && data.additionalFields.length > 0 && (
-            <div style={{
-              display: 'flex',
-              // flexDirection: 'row',
-              gap: '10px',
-            }}>
-              {data.additionalFields.map((field, index) => (
-                <div key={index} style={{ fontSize: getFontSize(), color: data.fontColor }}>
-                  <strong>{field.label}|</strong> {field.value}
-                </div>
-              ))}
-            </div>
-          )}
+          <p style={{ margin: 0 }}>
+            <FaMapMarkerAlt style={{ color: data.fontColor }} /> {data.address}
+          </p>
         </div>
 
         {/* Social Media Links */}
-        {data.socialLinks && data.socialLinks.length > 0 && (
-          <div style={{
-            marginTop: '20px',
-            display: 'flex',
-            gap: '10px',
-          }}>
-            {data.socialLinks.map(social => {
-              const Icon = social.icon;
-              return (
-                <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: social.color }}>
-                  <Icon size={24} />
-                </a>
-              );
-            })}
-          </div>
-        )}
-
-
+        <div style={{
+          marginTop: '20px',
+          display: 'flex',
+          gap: '10px',
+        }}>
+          {data.socialLinks && data.socialLinks.map(social => {
+            const Icon = social.icon;
+            return (
+              <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: social.color }}>
+                <Icon size={24} />
+              </a>
+            );
+          })}
+        </div>
 
         {/* Submit Button */}
         <button onClick={() => onSubmit(data)} style={{

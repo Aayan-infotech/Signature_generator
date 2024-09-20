@@ -93,7 +93,7 @@ const Template7 = ({ data, onSubmit }) => {
               <a 
                 href={`http://${data.website}`} 
                 style={{ 
-                  color: 'black', // Use fontColor for the link as well
+                  color: data.fontColor, // Use fontColor for the link as well
                   textDecoration: 'none' 
                 }}
               >
