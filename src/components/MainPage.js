@@ -15,7 +15,6 @@ import Template10 from './templates/Template10';
 import Template11 from './templates/Template11';
 import Template12 from './templates/Template12';
 
-
 const MainPage = () => {
   const { data, setData } = useAppContext();
 
