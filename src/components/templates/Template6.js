@@ -3,6 +3,8 @@ import {
   FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt,
   FaFacebook, FaInstagram, FaLinkedin, FaTiktok
 } from 'react-icons/fa';
+import Parent from './Parent';
+import AppContent from './AppContent';
 
 const Template6 = ({ data, onSubmit }) => {
   // Function to determine font size
@@ -54,63 +56,54 @@ const Template6 = ({ data, onSubmit }) => {
     justifyContent: 'center',
     gap: '15px',
     padding: '10px',
-    backgroundColor: data.fontColor || '#2c3e50', 
+    backgroundColor: data.fontColor || '#2c3e50',
     borderRadius: '5px',
   };
 
   return (
-    <div style={containerStyle}>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-        <img src={data.image || 'default.jpg'} alt="Profile" style={imageStyle} />
-        <div>
-          <h2 style={{ margin: 0, fontWeight: 'bold', color: data.fontColor || '#000000' }}>{data.name}</h2>
-          <p style={{ margin: 0, fontStyle: 'italic', color: '#555' }}>{data.title}, {data.company}</p>
+    <Parent>
+      <div style={containerStyle}>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+          <img src={data.image || 'default.jpg'} alt="Profile" style={imageStyle} />
+          <div>
+            <h2 style={{ margin: 0, fontWeight: 'bold', color: data.fontColor || '#000000' }}>{data.name}</h2>
+            <p style={{ margin: 0, fontStyle: 'italic', color: '#555' }}>{data.title}, {data.company}</p>
+          </div>
         </div>
-      </div>
-      
-      {/* Contact Info */}
-      <div>
-        <p><FaPhone style={iconStyle} /> {data.phone}</p>
-        <p><FaGlobe style={iconStyle} /> 
-          <a 
-            href={`http://${data.website}`} 
-            style={{ 
-              color: data.color || '#000000', 
-              textDecoration: 'none' 
-            }}
-          >
-            {data.website}
-          </a>
-        </p>
-        <p><FaEnvelope style={iconStyle} /> {data.email}</p>
-        <p><FaMapMarkerAlt style={iconStyle} /> {data.address}</p>
-      </div>
 
-      {/* Social Media Icons */}
-      <div style={socialIconsContainerStyle}>
-        {data.socialLinks && data.socialLinks.map((social) => {
-          const Icon = social.icon;
-          return (
-            <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: '#fff' }}>
-              <Icon size={24} />
+        {/* Contact Info */}
+        <div>
+          <p><FaPhone style={iconStyle} /> {data.phone}</p>
+          <p><FaGlobe style={iconStyle} />
+            <a
+              href={`http://${data.website}`}
+              style={{
+                color: data.color || '#000000',
+                textDecoration: 'none'
+              }}
+            >
+              {data.website}
             </a>
-          );
-        })}
-      </div>
+          </p>
+          <p><FaEnvelope style={iconStyle} /> {data.email}</p>
+          <p><FaMapMarkerAlt style={iconStyle} /> {data.address}</p>
+        </div>
 
-      {/* Submit Button */}
-      <button onClick={() => onSubmit(data)} style={{
-        marginTop: '20px',
-        padding: '10px 20px',
-        backgroundColor: '#007bff',
-        color: '#fff',
-        border: 'none',
-        borderRadius: '5px',
-        float: 'right',
-      }}>
-        OK, I'm done
-      </button>
-    </div>
+        {/* Social Media Icons */}
+        <div style={socialIconsContainerStyle}>
+          {data.socialLinks && data.socialLinks.map((social) => {
+            const Icon = social.icon;
+            return (
+              <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: '#fff' }}>
+                <Icon size={24} />
+              </a>
+            );
+          })}
+        </div>
+
+        <AppContent />
+      </div>
+    </Parent>
   );
 };
 

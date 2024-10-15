@@ -6,7 +6,6 @@ const TamplatesPreview = () => {
 
   // Create an array with 12 elements (representing 12 templates)
   const templates = Array.from({ length: 12 }, (_, index) => `Template${index + 1}`)
-console.log(templates);
 
   return (
     <div>

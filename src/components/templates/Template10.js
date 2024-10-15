@@ -1,5 +1,7 @@
 import React from 'react';
 import { FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaAmazon, FaWhatsapp, FaTiktok } from 'react-icons/fa';
+import AppContent from './AppContent';
+import Parent from './Parent';
 
 const Template10 = ({ data, onSubmit }) => {
   // Function to determine font size
@@ -72,6 +74,7 @@ const Template10 = ({ data, onSubmit }) => {
   const socialIconColor = data.fontColor || '#000000';
 
   return (
+    <Parent>
     <div style={containerStyle}>
       {/* Left Section */}
       <div style={leftSectionStyle}>
@@ -105,7 +108,7 @@ const Template10 = ({ data, onSubmit }) => {
 
       {/* Submit Button */}
       <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '20px' }}>
-        <button onClick={() => onSubmit(data)} style={{
+        {/* <button onClick={() => onSubmit(data)} style={{
           padding: '10px 20px',
           backgroundColor: '#007bff',
           color: '#fff',
@@ -113,9 +116,11 @@ const Template10 = ({ data, onSubmit }) => {
           borderRadius: '5px',
         }}>
           OK, I'm done
-        </button>
+        </button> */}
+         <AppContent/>
       </div>
     </div>
+    </Parent>
   );
 };
 

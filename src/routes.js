@@ -19,12 +19,6 @@ const template9 = React.lazy(() => import('./views/templates/template9'))
 const template10 = React.lazy(() => import('./views/templates/template10'))
 const template11 = React.lazy(() => import('./views/templates/template11'))
 const template12 = React.lazy(() => import('./views/templates/template12'))
-const template13 = React.lazy(() => import('./views/templates/template13'))
-const template14 = React.lazy(() => import('./views/templates/template14'))
-const template15 = React.lazy(() => import('./views/templates/template15'))
-const template16 = React.lazy(() => import('./views/templates/template16'))
-// const template17 = React.lazy(() => import('./views/templates/template17'))
-// const template18 = React.lazy(() => import('./views/templates/template18'))
 
 // const OutfitterManagement = React.lazy(() => import('./views/outfitterManagement/OutfitterManagement'))
 // const Oversight = React.lazy(() => import('./views/oversight/Oversight'))
@@ -101,13 +95,7 @@ const routes = [
   { path: '/template10', element: template10},
   { path: '/template11', element: template11},
   { path: '/template12', element: template12},
-  { path: '/template13', element: template13},
-  { path: '/template14', element: template14},
-  { path: '/template15', element: template15},
-  { path: '/template16', element: template16},
-  // { path: '/template17', element: template17},
-  // { path: '/template18', element: template18},
-  // { path: '/template1', element: template1},
+
   // { path: '/outfitterManagement', name: 'OutfitterManagement', element: OutfitterManagement },
   // { path: '/oversight', name: 'Oversight', element: Oversight },
   // { path: '/userManagement', name: 'UserManagement', element: UserManagement },

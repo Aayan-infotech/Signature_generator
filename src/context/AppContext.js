@@ -16,8 +16,8 @@ export const AppProvider = ({ children }) => {
     socialLinks: [],
     additionalFields: [],
   })
-
-  const [selectedTamplate, setSelectedTamplate] = useState('Template1')
+  const [selectedContent, setSelectedContent] = useState({})
+  const [selectedTemplate, setSelectedTemplate] = useState("")
 
   const availableTemplates = [
     'Template1',
@@ -34,17 +34,26 @@ export const AppProvider = ({ children }) => {
     'Template12',
   ]
 
+  const handleModalSelect = (content) => {
+    setSelectedContent({ ...selectedContent, [selectedTemplate]: content })
+  }
+
   const handleTamplate = (t) => {
-    setSelectedTamplate(t)
-    setData((prevData) => ({
-      ...prevData,
-      template: t,
-    }))
+    setData((prev) => ({ ...prev, template: t })) 
   }
 
   return (
     <AppContext.Provider
-      value={{ data, setData, availableTemplates, selectedTamplate, handleTamplate }}
+      value={{
+        data,
+        setData,
+        availableTemplates,
+        selectedContent,
+        handleModalSelect,
+        setSelectedTemplate,
+        selectedTemplate,
+        handleTamplate
+      }}
     >
       {children}
     </AppContext.Provider>

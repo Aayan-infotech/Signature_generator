@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt,
-  FaInstagram, FaFacebook, FaLinkedin, FaAmazon, FaTwitter, FaWhatsapp
+  FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt
 } from 'react-icons/fa';
+import Parent from './Parent'; // Importing Parent component
+import AppContent from './AppContent'; // Importing AppContent component
 
 const Template5 = ({ data, onSubmit }) => {
   // Function to determine font size
@@ -34,8 +35,8 @@ const Template5 = ({ data, onSubmit }) => {
     backgroundColor: data.backgroundColor || '#FFFFFF',
     borderRadius: '10px',
     boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-    width: '100%', // Ensure it adapts to the container width
-    boxSizing: 'border-box', // Includes padding and border in the element’s total width and height
+    width: '100%',
+    boxSizing: 'border-box',
   };
 
   // Image style
@@ -43,30 +44,30 @@ const Template5 = ({ data, onSubmit }) => {
     width: '100px',
     height: '100px',
     objectFit: 'cover',
-    borderRadius: '10px', // Rounded corners
-    marginBottom: '20px', // Adjust as needed
+    borderRadius: '10px',
+    marginBottom: '20px',
   };
 
   // Content style
   const contentStyle = {
     display: 'flex',
     flexDirection: 'column',
-    gap: '10px', // Static gap between content items
+    gap: '10px',
   };
 
   // Contact style for aligning phone and website in one row, and email and address in another
   const contactStyle = {
     display: 'flex',
     flexDirection: 'row',
-    gap: '20px', // Static gap between contact items
+    gap: '20px',
     marginTop: '10px',
-    flexWrap: 'wrap', // Allow wrapping of items if necessary
+    flexWrap: 'wrap',
   };
 
   // Social icons style
   const socialIconsStyle = {
     display: 'flex',
-    gap: '10px', // Static gap between social icons
+    gap: '10px',
     marginTop: '20px',
   };
 
@@ -76,53 +77,45 @@ const Template5 = ({ data, onSubmit }) => {
   };
 
   return (
-    <div style={containerStyle}>
-      {/* Image */}
-      <img src={data.image || '/path/to/default/image.jpg'} alt="Profile" style={imageStyle} />
+    
+      <div style={containerStyle}>
+        <Parent>
+        {/* Image */}
+        <img src={data.image || '/path/to/default/image.jpg'} alt="Profile" style={imageStyle} />
 
-      {/* Name, Title, Company */}
-      <div style={contentStyle}>
-        <h2 style={{ color: data.fontColor || '#4A4A4A', marginBottom: '10px' }}>{data.name}</h2>
-        <p style={{ margin: '0 0 5px', fontWeight: 'bold' }}>{data.title}</p>
-        <p style={{ margin: '0 0 10px', fontWeight: 'bold' }}>{data.company}</p>
+        {/* Name, Title, Company */}
+        <div style={contentStyle}>
+          <h2 style={{ color: data.fontColor || '#4A4A4A', marginBottom: '10px' }}>{data.name}</h2>
+          <p style={{ margin: '0 0 5px', fontWeight: 'bold' }}>{data.title}</p>
+          <p style={{ margin: '0 0 10px', fontWeight: 'bold' }}>{data.company}</p>
+        </div>
+
+        {/* Contact Information */}
+        <div style={contactStyle}>
+          <p style={{ margin: '0' }}><FaPhone style={iconStyle} /> {data.phone}</p>
+          <p style={{ margin: '0' }}><FaGlobe style={iconStyle} /> <a href={`http://${data.website}`} style={{ color: data.fontColor, textDecoration: 'none' }}>{data.website}</a></p>
+        </div>
+
+        <div style={contactStyle}>
+          <p style={{ margin: '0' }}><FaEnvelope style={iconStyle} /> {data.email}</p>
+          <p style={{ margin: '0' }}><FaMapMarkerAlt style={iconStyle} /> {data.address}</p>
+        </div>
+
+        {/* Social Media Icons */}
+        <div style={socialIconsStyle}>
+          {data.socialLinks && data.socialLinks.map((social) => {
+            const Icon = social.icon;
+            return (
+              <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: social.color }}>
+                <Icon size={30} />
+              </a>
+            );
+          })}
+        </div>
+        <AppContent />
+        </Parent>
       </div>
-
-      {/* Contact Information */}
-      <div style={contactStyle}>
-        <p style={{ margin: '0' }}><FaPhone style={iconStyle} /> {data.phone}</p>
-        <p style={{ margin: '0' }}><FaGlobe style={iconStyle} /> <a href={`http://${data.website}`} style={{ color: data.fontColor, textDecoration: 'none' }}>{data.website}</a></p>
-      </div>
-
-      <div style={contactStyle}>
-        <p style={{ margin: '0' }}><FaEnvelope style={iconStyle} /> {data.email}</p>
-        <p style={{ margin: '0' }}><FaMapMarkerAlt style={iconStyle} /> {data.address}</p>
-      </div>
-
-      {/* Social Media Icons */}
-      <div style={socialIconsStyle}>
-        {data.socialLinks && data.socialLinks.map((social) => {
-          const Icon = social.icon;
-          return (
-            <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: social.color }}>
-              <Icon size={30} />
-            </a>
-          );
-        })}
-      </div>
-
-      {/* "OK, I'm done" Button */}
-      <button onClick={() => onSubmit(data)} style={{
-        marginTop: '20px',
-        padding: '10px 20px',
-        backgroundColor: '#007bff',
-        color: '#fff',
-        border: 'none',
-        borderRadius: '5px',
-        fontSize: getFontSize(), // Ensure button font size is adjustable
-      }}>
-        OK, I'm done
-      </button>
-    </div>
+    
   );
 };
 

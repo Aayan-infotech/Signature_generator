@@ -2,14 +2,32 @@ import React from 'react';
 import {
   FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt,
 } from 'react-icons/fa';
+import AppContent from './AppContent';
+import Parent from './Parent';
 
 const Template2 = ({ data, onSubmit }) => {
+  // Function to get font size based on the provided data
+  const getFontSize = () => {
+    switch (data.size) {
+      case 'small': return '12px';
+      case 'medium': return '16px';
+      case 'large': return '20px';
+      default: return '16px';
+    }
+  };
+
+  // Function to get line height (spacing) based on the provided data
+  const getSpacing = () => {
+    return data.spacing === 'wide' ? '1.5em' : '1em';
+  };
+
+  // Styling with updated font size and line height
   const containerStyle = {
     display: 'flex',
     fontFamily: data.font || 'Arial, sans-serif',
     color: '#333',
-    fontSize: '16px',
-    lineHeight: '1.5em',
+    fontSize: getFontSize(),
+    lineHeight: getSpacing(),
     maxWidth: '700px',
     margin: '20px auto',
     padding: '20px',
@@ -42,8 +60,8 @@ const Template2 = ({ data, onSubmit }) => {
   };
 
   return (
-    <div style={containerStyle}>
-      {/* Left Side: 20% containing the image at the top */}
+    <Parent>
+
       <div style={leftColumnStyle}>
         <img src={data.image || 'default-image.jpg'} alt="Profile" style={imageStyle} />
       </div>
@@ -91,7 +109,7 @@ const Template2 = ({ data, onSubmit }) => {
 
         {/* Social Links */}
         <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-          {data.socialLinks && data.socialLinks.map(social => {
+          {data.socialLinks && data.socialLinks.map((social) => {
             const Icon = social.icon;
             return (
               <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: social.color || data.fontColor }}>
@@ -101,12 +119,25 @@ const Template2 = ({ data, onSubmit }) => {
           })}
         </div>
 
+        <AppContent />
+
         {/* Submit Button */}
-        <button onClick={() => onSubmit(data)} style={{ marginTop: '20px', padding: '10px 20px', backgroundColor: data.buttonColor || '#007bff', color: '#fff', border: 'none', borderRadius: '5px' }}>
+        {/* rtemove because it isa in parent  */}
+        {/* <button
+          onClick={() => onSubmit(data)}
+          style={{
+            marginTop: '20px',
+            padding: '10px 20px',
+            backgroundColor: data.buttonColor || '#007bff',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '5px',
+          }}
+        >
           OK, I'm done
-        </button>
+        </button> */}
       </div>
-    </div>
+    </Parent>
   );
 };
 

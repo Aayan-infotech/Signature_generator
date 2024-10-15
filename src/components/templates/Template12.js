@@ -11,6 +11,8 @@ import {
   FaWhatsapp,
   FaTiktok
 } from 'react-icons/fa';
+import AppContent from './AppContent'
+import Parent from './Parent'
 
 const Template12 = ({ data, onSubmit }) => {
   const getFontSize = () => {
@@ -38,7 +40,9 @@ const Template12 = ({ data, onSubmit }) => {
   const fontColor = data.fontColor || 'black';      
 
   return (
+   
     <div style={{ fontFamily: data.font, color: data.color, fontSize: getFontSize(), lineHeight: getSpacing(), maxWidth: '800px', padding: '20px', borderRadius: '10px', backgroundColor: '#fff', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' }}>
+       <Parent>
       <div style={{ textAlign: 'center', padding: '20px' }}>
         {/* Name, Title, and Company */}
         <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 'bold', color: fontColor }}>{data.name}</h2>
@@ -78,15 +82,12 @@ const Template12 = ({ data, onSubmit }) => {
             </div>
           )}
         </div>
+        
+        <AppContent />
       </div>
-
-      {/* Submit Button */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-        <button onClick={() => onSubmit(data)} style={{ padding: '10px 20px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px' }}>
-          OK, I'm done
-        </button>
-      </div>
+      </Parent>
     </div>
+
   );
 };
 

@@ -1,10 +1,7 @@
 import React from 'react';
-import {
-  FaPhone,
-  FaGlobe,
-  FaEnvelope,
-  FaMapMarkerAlt,
-} from 'react-icons/fa';
+import { FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import Parent from './Parent';
+import AppContent from './AppContent';  
 
 const Template3 = ({ data, onSubmit }) => {
   const getFontSize = () => {
@@ -21,19 +18,7 @@ const Template3 = ({ data, onSubmit }) => {
   };
 
   return (
-    <div style={{
-      fontFamily: data.font,
-      color: 'inherit',
-      fontSize: getFontSize(),
-      lineHeight: getSpacing(),
-      maxWidth: '100%',
-      padding: '20px',
-      border: '1px solid #ddd',
-      borderRadius: '10px',
-      backgroundColor: '#f9f9f9',
-      display: 'flex',
-      flexDirection: 'column',
-    }}>
+    <Parent>
       {/* Container Split */}
       <div style={{ display: 'flex' }}>
         {/* Left Side (Image - 20%) */}
@@ -88,22 +73,11 @@ const Template3 = ({ data, onSubmit }) => {
 
           {/* Horizontal Line after Contact Information */}
           <hr style={{ margin: '20px 0', borderColor: data.fontColor || '#ddd', borderWidth: '2px' }} />
+          <AppContent />
         </div>
       </div>
 
-      {/* "OK, I'm done" Button */}
-      <button onClick={() => onSubmit(data)} style={{
-        marginTop: '20px',
-        padding: '10px 20px',
-        backgroundColor: '#007bff',
-        color: '#fff',
-        border: 'none',
-        borderRadius: '5px',
-        alignSelf: 'center'
-      }}>
-        OK, I'm done
-      </button>
-    </div>
+    </Parent>
   );
 };
 

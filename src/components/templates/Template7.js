@@ -1,5 +1,7 @@
 import React from 'react';
 import { FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt, FaMobileAlt } from 'react-icons/fa';
+import Parent from './Parent'; // Assuming the correct path
+import AppContent from './AppContent'; // Assuming the correct path
 
 const Template7 = ({ data, onSubmit }) => {
   const getFontSize = () => {
@@ -60,7 +62,6 @@ const Template7 = ({ data, onSubmit }) => {
     borderRadius: '50%'
   };
 
-  // Updated icon style to use the same color as the name
   const iconStyle = {
     color: data.fontColor, // Use fontColor for both name and icons
     marginRight: '8px',
@@ -80,54 +81,50 @@ const Template7 = ({ data, onSubmit }) => {
   };
 
   return (
-    <>
-      <div style={containerStyle}>
-        {/* Content on the Left */}
-        <div style={contentStyle}>
-          <h2 style={{ margin: 0, fontWeight: 'bold', color: data.fontColor }}>{data.name}</h2>
-          <p style={{ margin: 0, color: data.color }}>{data.title}</p>
-          <p style={{ margin: 0, color: data.color }}>{data.company}</p>
-          <div style={{ marginTop: '10px' }}>
-            <p><FaPhone style={iconStyle} /> {data.phone}</p>
-            <p><FaGlobe style={iconStyle} /> 
-              <a 
-                href={`http://${data.website}`} 
-                style={{ 
-                  color: data.fontColor, // Use fontColor for the link as well
-                  textDecoration: 'none' 
-                }}
-              >
-                {data.website}
-              </a>
-            </p>
-            <p><FaEnvelope style={iconStyle} /> {data.email}</p>
-            <p><FaMapMarkerAlt style={iconStyle} /> {data.address}</p>
+    <Parent>
+        <div style={containerStyle}>
+          <div style={contentStyle}>
+            <h2 style={{ margin: 0, fontWeight: 'bold', color: data.fontColor }}>{data.name}</h2>
+            <p style={{ margin: 0, color: data.color }}>{data.title}</p>
+            <p style={{ margin: 0, color: data.color }}>{data.company}</p>
+            <div style={{ marginTop: '10px' }}>
+              <p><FaPhone style={iconStyle} /> {data.phone}</p>
+              <p><FaGlobe style={iconStyle} /> 
+                <a 
+                  href={`http://${data.website}`} 
+                  style={{ 
+                    color: data.fontColor, 
+                    textDecoration: 'none' 
+                  }}
+                >
+                  {data.website}
+                </a>
+              </p>
+              <p><FaEnvelope style={iconStyle} /> {data.email}</p>
+              <p><FaMapMarkerAlt style={iconStyle} /> {data.address}</p>
+            </div>
+
+            {data.socialLinks && data.socialLinks.length > 0 && (
+              <div style={socialMediaStyle}>
+                {data.socialLinks.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: social.color }}>
+                      <Icon style={socialIconStyle} />
+                    </a>
+                  );
+                })}
+              </div>
+            )}
+                  <AppContent />
           </div>
 
-          {/* Social Media Links */}
-          {data.socialLinks && data.socialLinks.length > 0 && (
-            <div style={socialMediaStyle}>
-              {data.socialLinks.map((social) => {
-                const Icon = social.icon;
-                return (
-                  <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: social.color }}>
-                    <Icon style={socialIconStyle} />
-                  </a>
-                );
-              })}
-            </div>
-          )}
+          <img src={data.image} alt="Profile" style={imageStyle} />
         </div>
 
-        {/* Image on the Right */}
-        <img src={data.image} alt="Profile" style={imageStyle} />
-      </div>
 
-      {/* Button below the template */}
-      <button onClick={() => onSubmit(data)} style={buttonStyle}>
-        OK, I'm done
-      </button>
-    </>
+
+    </Parent>
   );
 };
 

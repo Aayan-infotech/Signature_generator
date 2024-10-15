@@ -2,18 +2,13 @@
 import React from 'react';
 import AppPageGroup1 from './AppPageGroup1';
 import AppPageGroup2 from './AppPageGroup2';
+import AppPagegroup21 from './AppPagegroup21';
 
 const AppPages = () => {
   return (
     <div>
-      <h1>Manage Your Templates</h1>
-      
-      {/* Group 1 Templates */}
       <AppPageGroup1 />
-
-      <hr />
-
-      {/* Group 2 Templates */}
+      <AppPagegroup21 />
       <AppPageGroup2 />
     </div>
   );

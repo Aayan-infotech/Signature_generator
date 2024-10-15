@@ -3,6 +3,8 @@ import {
   FaPhone, FaMobileAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt,
   FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaAmazon, FaWhatsapp
 } from 'react-icons/fa';
+import AppContent from './AppContent';
+import Parent from './Parent';
 
 const Template8 = ({ data, onSubmit }) => {
   const getFontSize = () => {
@@ -92,6 +94,7 @@ const Template8 = ({ data, onSubmit }) => {
   };
 
   return (
+    <Parent>
     <div style={containerStyle}>
       {/* Left section for square image */}
       <div style={leftSectionStyle}>
@@ -124,12 +127,14 @@ const Template8 = ({ data, onSubmit }) => {
             );
           })}
         </div>
-
-        <button onClick={() => onSubmit(data)} style={buttonStyle}>
+        <AppContent />
+        {/* <button onClick={() => onSubmit(data)} style={buttonStyle}>
           OK, I'm done
-        </button>
+        </button> */}
       </div>
+
     </div>
+    </Parent>
   );
 };
 

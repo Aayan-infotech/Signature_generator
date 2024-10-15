@@ -15,6 +15,7 @@ import Template10 from './templates/Template10';
 import Template11 from './templates/Template11';
 import Template12 from './templates/Template12';
 
+
 const MainPage = () => {
   const { data, setData } = useAppContext();
 
@@ -50,14 +51,6 @@ const MainPage = () => {
           return <Template11 data={data} onSubmit={handleSubmit} />;
         case 'Template12':
           return <Template12 data={data} onSubmit={handleSubmit} />;
-          // case 'Template13':
-          //   return <Template13 data={data} onSubmit={handleSubmit} />;
-          // case 'Template14':
-          //   return <Template14 data={data} onSubmit={handleSubmit} />;
-          // case 'Template15':
-          //   return <Template15 data={data} onSubmit={handleSubmit} />;
-          // case 'Template16':
-          //   return <Template16 data={data} onSubmit={handleSubmit} />;
       default:
         return <Template1 data={data} onSubmit={handleSubmit} />;
     }
@@ -69,7 +62,7 @@ const MainPage = () => {
       <div style={{ width: '35%', padding: '20px' }}>
         <Outlet />
       </div>
-      <div style={{ width: '80%', backgroundColor: '#f0f0f0', padding: '20px' }}>
+      <div style={{ width: '80%', padding: '20px' }}>
         {renderTemplate()}
       </div>
     </div>

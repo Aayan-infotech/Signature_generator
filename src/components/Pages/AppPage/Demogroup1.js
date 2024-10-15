@@ -33,7 +33,8 @@ export const contentOptionsByTemplate = {
     'Thanks',
     'Happy new year',
     'Merry Xmas',
-    'Happy Holidays!'],
+    'Happy Holidays!',
+  ],
 
   Disclaimer: [
     'Confidentiality',
@@ -131,6 +132,8 @@ export const extractVideoId = (url) => {
 // SelectionModal component
 const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOptions }) => {
   const [selectedOption, setSelectedOption] = useState('')
+  const [customText, setCustomText] = useState('') // State for custom text
+  const [selectedFont, setSelectedFont] = useState('Arial') // State for selected font
   const [images, setImages] = useState(Array(5).fill(null)) // Initialize array for 5 images
   const [videoURL, setVideoURL] = useState('') // State for video URL
 
@@ -139,6 +142,8 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
       onSelect(images.filter((image) => image)) // Pass the uploaded images back to parent
     } else if (templateName === 'Video') {
       onSelect(videoURL) // Pass video URL back to parent
+    } else if (templateName === 'Styled Signoff') {
+      onSelect({ selectedOption, customText, selectedFont }) // Pass selected option, custom text, and font back to parent
     } else {
       onSelect(selectedOption) // Pass selected content back to parent
     }
@@ -230,8 +235,47 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
               }}
             />
           </div>
+        ) : templateName === 'Styled Signoff' ? (
+          <div>
+            <label>Select a predefined option:</label>
+            <form>
+              {contentOptions.map((option, index) => (
+                <div key={index}>
+                  <input
+                    type="radio"
+                    id={option}
+                    name="contentOption"
+                    value={option}
+                    checked={selectedOption === option}
+                    onChange={(e) => setSelectedOption(e.target.value)}
+                  />
+                  <label htmlFor={option}>{option}</label>
+                </div>
+              ))}
+            </form>
+            <label>Enter Custom Text:</label>
+            <input
+              type="text"
+              value={customText}
+              onChange={(e) => setCustomText(e.target.value)}
+              placeholder="Enter your signoff"
+              style={{ width: '100%', padding: '8px', marginTop: '10px' }}
+            />
+            <label style={{ marginTop: '10px' }}>Select Font:</label>
+            <select
+              value={selectedFont}
+              onChange={(e) => setSelectedFont(e.target.value)}
+              style={{ width: '100%', padding: '8px', marginTop: '10px' }}
+            >
+              <option value="Arial">Arial</option>
+              <option value="Courier New">Courier New</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Verdana">Verdana</option>
+            </select>
+          </div>
         ) : (
-          <form>
+          <div>
             {contentOptions.map((option, index) => (
               <div key={index}>
                 <input
@@ -239,53 +283,28 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
                   id={option}
                   name="contentOption"
                   value={option}
-                  onChange={() => setSelectedOption(option)}
                   checked={selectedOption === option}
+                  onChange={(e) => setSelectedOption(e.target.value)}
                 />
-                <label htmlFor={option} style={{ marginLeft: '10px' }}>
-                  {option}
-                </label>
+                <label htmlFor={option}>{option}</label>
               </div>
             ))}
-          </form>
+          </div>
         )}
-        <button
-          onClick={handleSelect}
-          style={{
-            padding: '10px',
-            marginTop: '10px',
-            backgroundColor: 'lightblue',
-            borderRadius: '2px',
-            border: '2px solid white',
-          }}
-        >
-          Add
-        </button>
-        <button
-          onClick={onClose}
-          style={{
-            padding: '10px',
-            marginTop: '10px',
-            marginLeft: '5px',
-            backgroundColor: 'lightcoral',
-            borderRadius: '2px',
-            border: '2px solid white',
-          }}
-        >
-          Cancel
-        </button>
+        <button onClick={handleSelect}>Add</button>
+        <button onClick={onClose}>Cancel</button>
       </div>
     </div>
   )
 }
 
+// AppPageGroup1 component
 const AppPageGroup1 = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { selectedContent, handleModalSelect, setSelectedTemplate, selectedTemplate } =
-    useAppContext()
+  const { selectedContent, handleModalSelect, setSelectedTemplate, selectedTemplate } = useAppContext()
 
   const handleTemplateClick = (templateName) => {
-    setSelectedTemplate(templateName);
+    setSelectedTemplate(templateName)
     setIsModalOpen(true)
   }
 
@@ -293,44 +312,34 @@ const AppPageGroup1 = () => {
     setIsModalOpen(false)
   }
 
+  const handleModalContentSelect = (content) => { // Renamed function to avoid conflict
+    if (selectedTemplate === 'Styled Signoff') {
+      const signoff = `Styled Signoff: ${content.customText || content.selectedOption} (Font: ${content.selectedFont})`
+      // Process or display the styled signoff as needed
+      console.log(signoff)
+    } else {
+      // Handle other selections
+      console.log(`Selected ${selectedTemplate}: ${content}`)
+    }
+    handleModalClose(); // Close modal after selection
+  }
+
   return (
     <div>
       <h3>Enhance Signature Style</h3>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: '20px',
-          marginTop: '20px',
-        }}
-      >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px', marginTop: '20px' }}>
         {templateNames1.map((templateName, index) => (
-          <button
-            key={templateName}
-            style={{
-              padding: '5px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexDirection: 'column',
-              border: '1px solid gray',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              backgroundColor: 'transparent',
-            }}
-            onClick={() => handleTemplateClick(templateName)}
-          >
+          <button key={templateName} onClick={() => handleTemplateClick(templateName)}>
             {templateIcons1[index]}
             <p>{templateName}</p>
           </button>
         ))}
       </div>
 
-
       <SelectionModal
         isOpen={isModalOpen}
         onClose={handleModalClose}
-        onSelect={handleModalSelect}
+        onSelect={handleModalContentSelect} // Updated to new function name
         templateName={selectedTemplate}
         contentOptions={contentOptionsByTemplate[selectedTemplate]}
       />

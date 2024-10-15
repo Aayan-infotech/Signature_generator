@@ -134,26 +134,6 @@ const _nav = [
           name: 'template12',
           to: '/template6',
         },
-        {
-          component: CNavItem,
-          name: 'template13',
-          to: '/template13',
-        },
-        {
-          component: CNavItem,
-          name: 'template14',
-          to: '/template14',
-        },
-        {
-          component: CNavItem,
-          name: 'template15',
-          to: '/template15',
-        },
-        {
-          component: CNavItem,
-          name: 'template16',
-          to: '/template16',
-        },
       ]
     },
 

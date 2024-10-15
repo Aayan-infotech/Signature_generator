@@ -6,25 +6,23 @@ import DetailPage from './components/Pages/DetailPage';
 import ImageUploadPage from './components/Pages/ImageUploadPage';
 import SocialPage from './components/Pages/SocialPage';
 import DesignPage from './components/Pages/DesignPage';
+import TamplatesPreview from './components/Pages/Tamplate';
+import AppPages from './components/Pages/AppPage/AppPages';
 import { AppProvider } from './context/AppContext';
-import AppPage from './components/Pages/AppPage';
-import Tamplate from './components/Pages/Tamplate';
+
 const App = () => {
   return (
     <AppProvider>
       <Router>
         <Routes>
           <Route path="/" element={<MainPage />}>
-            <Route index element={<DetailPage />} />  
+            <Route index element={<DetailPage />} />
             <Route path="details" element={<DetailPage />} />
             <Route path="images" element={<ImageUploadPage />} />
             <Route path="social" element={<SocialPage />} />
             <Route path="design" element={<DesignPage />} />
-            <Route path="template" element={<Tamplate />} />
-
-            <Route path="app" element={<AppPage />} />
-            {/* <Route path="AppPages" element={<AppPages />} /> */}
-            {/* <Route path="template" element={<TamplatesPreview />} /> */}
+            <Route path="template" element={<TamplatesPreview />} />
+            <Route path="app" element={<AppPages />} />
           </Route>
         </Routes>
       </Router>
