@@ -13,6 +13,8 @@ import {
 } from 'react-icons/fa';
 import AppContent from './AppContent';
 import Parent from './Parent';
+import AppContent2 from './AppContent2'
+import AppContent3 from './AppContent3'
 
 const Template11 = ({ data, onSubmit }) => {
   const getFontSize = () => {
@@ -33,15 +35,15 @@ const Template11 = ({ data, onSubmit }) => {
     padding: '20px',
     borderRadius: '10px',
     marginTop: '20px',
-    color: data.stripTextColor || 'white' 
+    color: data.stripTextColor || 'white'
   };
 
-  const iconColor = data.stripTextColor || 'white';  
-  const fontColor = data.fontColor || 'black';      
+  const iconColor = data.stripTextColor || 'white';
+  const fontColor = data.fontColor || 'black';
 
   return (
-    <div style={{ fontFamily: data.font, color: data.color, fontSize: getFontSize(), lineHeight: getSpacing(), maxWidth: '800px', padding: '20px', borderRadius: '10px', backgroundColor: '#fff', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', textAlign: 'left' }}>
-      <Parent>
+    // <div style={{ fontFamily: data.font, color: data.color, fontSize: getFontSize(), lineHeight: getSpacing(), maxWidth: '800px', padding: '20px', borderRadius: '10px', backgroundColor: '#fff', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', textAlign: 'left' }}>
+    <Parent>
       <div style={{ textAlign: 'left', padding: '20px', }}>
         {/* Circular Image */}
         <div style={{ marginBottom: '20px', textAlign: 'left' }}>
@@ -84,8 +86,31 @@ const Template11 = ({ data, onSubmit }) => {
               })}
             </div>
           )}
-                    <AppContent />
+
         </div>
+
+        {/* Render Additional Fields */}
+        <div
+          style={{
+            marginTop: '20px',
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '10px',
+          }}
+        >
+          {data.additionalFields &&
+            data.additionalFields.map((field, index) => (
+              <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
+                <p style={{ margin: 0, fontSize: getFontSize(), color: data.fontColor }}>
+                  {field.label} {field.value} |
+                </p>
+              </div>
+            ))}
+        </div>
+
+        <AppContent />
+        <AppContent2 />
+        {/* <AppContent3 /> */}
       </div>
 
       {/* Submit Button
@@ -94,8 +119,8 @@ const Template11 = ({ data, onSubmit }) => {
           OK, I'm done
         </button>
       </div> */}
-      </Parent>
-    </div>
+    </Parent>
+    // </div>
   );
 };
 

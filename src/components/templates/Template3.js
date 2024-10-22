@@ -1,7 +1,9 @@
 import React from 'react';
 import { FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import Parent from './Parent';
-import AppContent from './AppContent';  
+import AppContent from './AppContent';
+import AppContent2 from './AppContent2'
+import AppContent3 from './AppContent3'
 
 const Template3 = ({ data, onSubmit }) => {
   const getFontSize = () => {
@@ -73,7 +75,29 @@ const Template3 = ({ data, onSubmit }) => {
 
           {/* Horizontal Line after Contact Information */}
           <hr style={{ margin: '20px 0', borderColor: data.fontColor || '#ddd', borderWidth: '2px' }} />
+
+          {/* Render Additional Fields */}
+          <div
+            style={{
+              marginTop: '20px',
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '10px',
+            }}
+          >
+            {data.additionalFields &&
+              data.additionalFields.map((field, index) => (
+                <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
+                  <p style={{ margin: 0, fontSize: getFontSize(), color: data.fontColor }}>
+                    {field.label} {field.value} |
+                  </p>
+                </div>
+              ))}
+          </div>
+
           <AppContent />
+          <AppContent2 />
+          {/* <AppContent3 /> */}
         </div>
       </div>
 

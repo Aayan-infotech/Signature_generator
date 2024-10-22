@@ -13,6 +13,8 @@ import {
 } from 'react-icons/fa';
 import AppContent from './AppContent'
 import Parent from './Parent'
+import AppContent2 from './AppContent2'
+import AppContent3 from './AppContent3'
 
 const Template12 = ({ data, onSubmit }) => {
   const getFontSize = () => {
@@ -33,16 +35,16 @@ const Template12 = ({ data, onSubmit }) => {
     padding: '20px',
     borderRadius: '10px',
     marginTop: '20px',
-    color: data.stripTextColor || 'white' 
+    color: data.stripTextColor || 'white'
   };
 
-  const iconColor = data.stripTextColor || 'white';  
-  const fontColor = data.fontColor || 'black';      
+  const iconColor = data.stripTextColor || 'white';
+  const fontColor = data.fontColor || 'black';
 
   return (
-   
-    <div style={{ fontFamily: data.font, color: data.color, fontSize: getFontSize(), lineHeight: getSpacing(), maxWidth: '800px', padding: '20px', borderRadius: '10px', backgroundColor: '#fff', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' }}>
-       <Parent>
+
+    // <div style={{ fontFamily: data.font, color: data.color, fontSize: getFontSize(), lineHeight: getSpacing(), maxWidth: '800px', padding: '20px', borderRadius: '10px', backgroundColor: '#fff', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' }}>
+    <Parent>
       <div style={{ textAlign: 'center', padding: '20px' }}>
         {/* Name, Title, and Company */}
         <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 'bold', color: fontColor }}>{data.name}</h2>
@@ -82,11 +84,33 @@ const Template12 = ({ data, onSubmit }) => {
             </div>
           )}
         </div>
-        
+        {/* Render Additional Fields */}
+        <div
+          style={{
+            marginTop: '20px',
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '10px',
+          }}
+        >
+          {data.additionalFields &&
+            data.additionalFields.map((field, index) => (
+              <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
+                <p style={{ margin: 0, fontSize: getFontSize(), color: data.fontColor }}>
+                  {field.label} {field.value} |
+                </p>
+              </div>
+            ))}
+        </div>
+
         <AppContent />
+        <AppContent2 />
+        {/* <AppContent3 /> */}
+
+
       </div>
-      </Parent>
-    </div>
+    </Parent>
+    // </div>
 
   );
 };

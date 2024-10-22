@@ -29,8 +29,8 @@ const DetailPage = () => {
       setData({
         ...data,
         additionalFields: [
-          { name: selectedField, value: '' },
           ...data.additionalFields,
+          { name: selectedField, value: '' },
         ],
       });
       setSelectedField('');

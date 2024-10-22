@@ -35,6 +35,7 @@ export const AppProvider = ({ children }) => {
   ]
 
   const handleModalSelect = (content) => {
+    console.log(content)
     setSelectedContent({ ...selectedContent, [selectedTemplate]: content })
   }
 

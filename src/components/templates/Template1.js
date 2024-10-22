@@ -3,6 +3,7 @@ import { FaEnvelope, FaGlobe, FaMapMarkerAlt, FaPhone } from 'react-icons/fa'
 import AppContent from './AppContent'
 import Parent from './Parent'
 import AppContent2 from './AppContent2'
+import AppContent3 from './AppContent3'
 
 const Template1 = ({ data, onSubmit }) => {
   const getFontSize = () => {
@@ -36,10 +37,10 @@ const Template1 = ({ data, onSubmit }) => {
       >
         <div
           style={{
-            width: '80%', 
-            paddingTop: '80%', 
+            width: '80%',
+            paddingTop: '80%',
             position: 'relative',
-            marginBottom: '20px', 
+            marginBottom: '20px',
           }}
         >
           <img
@@ -51,7 +52,7 @@ const Template1 = ({ data, onSubmit }) => {
               left: 0,
               width: '100%',
               height: '100%',
-              objectFit: 'cover', 
+              objectFit: 'cover',
               borderRadius: '5px',
             }}
           />
@@ -150,8 +151,28 @@ const Template1 = ({ data, onSubmit }) => {
             })}
         </div>
 
+        {/* Render Additional Fields */}
+        <div
+          style={{
+            marginTop: '20px',
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '10px',
+          }}
+        >
+          {data.additionalFields &&
+            data.additionalFields.map((field, index) => (
+              <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
+                <p style={{ margin: 0, fontSize: getFontSize(), color: data.fontColor }}>
+                  {field.label} {field.value} |
+                </p>
+              </div>
+            ))}
+        </div>
+
         <AppContent />
-        <AppContent2/>
+        <AppContent2 />
+        {/* <AppContent3 /> */}
       </div>
     </Parent>
   )

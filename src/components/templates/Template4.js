@@ -4,7 +4,10 @@ import {
   FaGithub, FaInstagram, FaLinkedin, FaAmazon, FaTwitter, FaWhatsapp
 } from 'react-icons/fa';
 import AppContent from './AppContent';
+import AppContent2 from './AppContent2'
+import AppContent3 from './AppContent3'
 import Parent from './Parent';
+
 
 const Template4 = ({ data, onSubmit }) => {
   const getFontSize = () => {
@@ -71,40 +74,61 @@ const Template4 = ({ data, onSubmit }) => {
 
   return (
     <Parent>
-        <div style={leftSectionStyle}>
-          <img src={data.image || 'avatar.jpg'} alt="Profile" style={imageStyle} />
+      <div style={leftSectionStyle}>
+        <img src={data.image || 'avatar.jpg'} alt="Profile" style={imageStyle} />
+      </div>
+      <div style={rightSectionStyle}>
+        <div>
+          <h2 style={{ color: data.fontColor || '#4A4A4A', marginBottom: '10px' }}>{data.name}</h2>
+          <p style={{ margin: '0 0 5px', fontWeight: 'bold' }}>{data.title}</p>
+          <p style={{ margin: '0 0 10px', fontWeight: 'bold' }}>{data.company}</p>
+          <p style={{ margin: '10px 0' }}>
+            <FaMobileAlt style={{ ...iconStyle, color: data.fontColor || '#4A4A4A' }} /> {data.phone}
+          </p>
+          <p style={{ margin: '10px 0' }}>
+            <FaGlobe style={{ ...iconStyle, color: data.fontColor || '#4A4A4A' }} /> {data.website}
+          </p>
+          <p style={{ margin: '10px 0' }}>
+            <FaEnvelope style={{ ...iconStyle, color: data.fontColor || '#4A4A4A' }} /> {data.email}
+          </p>
+          <p style={{ margin: '10px 0' }}>
+            <FaMapMarkerAlt style={{ ...iconStyle, color: data.fontColor || '#4A4A4A' }} /> {data.address}
+          </p>
         </div>
-        <div style={rightSectionStyle}>
-          <div>
-            <h2 style={{ color: data.fontColor || '#4A4A4A', marginBottom: '10px' }}>{data.name}</h2>
-            <p style={{ margin: '0 0 5px', fontWeight: 'bold' }}>{data.title}</p>
-            <p style={{ margin: '0 0 10px', fontWeight: 'bold' }}>{data.company}</p>
-            <p style={{ margin: '10px 0' }}>
-              <FaMobileAlt style={{ ...iconStyle, color: data.fontColor || '#4A4A4A' }} /> {data.phone}
-            </p>
-            <p style={{ margin: '10px 0' }}>
-              <FaGlobe style={{ ...iconStyle, color: data.fontColor || '#4A4A4A' }} /> {data.website}
-            </p>
-            <p style={{ margin: '10px 0' }}>
-              <FaEnvelope style={{ ...iconStyle, color: data.fontColor || '#4A4A4A' }} /> {data.email}
-            </p>
-            <p style={{ margin: '10px 0' }}>
-              <FaMapMarkerAlt style={{ ...iconStyle, color: data.fontColor || '#4A4A4A' }} /> {data.address}
-            </p>
-          </div>
-          <div style={socialIconsContainerStyle}>
-            {data.socialLinks && data.socialLinks.map((social) => {
-              const Icon = social.icon;
-              return (
-                <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: social.color }}>
-                  <Icon size={30} />
-                </a>
-              );
-            })}
-          </div>
-          <AppContent />
+        <div style={socialIconsContainerStyle}>
+          {data.socialLinks && data.socialLinks.map((social) => {
+            const Icon = social.icon;
+            return (
+              <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: social.color }}>
+                <Icon size={30} />
+              </a>
+            );
+          })}
+        </div>
 
+        {/* Render Additional Fields */}
+        <div
+          style={{
+            marginTop: '20px',
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '10px',
+          }}
+        >
+          {data.additionalFields &&
+            data.additionalFields.map((field, index) => (
+              <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
+                <p style={{ margin: 0, fontSize: getFontSize(), color: data.fontColor }}>
+                  {field.label} {field.value} |
+                </p>
+              </div>
+            ))}
         </div>
+
+        <AppContent />
+        <AppContent2 />
+        {/* <AppContent3 /> */}
+      </div>
     </Parent>
   );
 };

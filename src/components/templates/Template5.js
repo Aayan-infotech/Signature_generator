@@ -4,8 +4,10 @@ import {
 } from 'react-icons/fa';
 import Parent from './Parent'; // Importing Parent component
 import AppContent from './AppContent'; // Importing AppContent component
+import AppContent2 from './AppContent2';
+import AppContent3 from './AppContent3';
 
-const Template5 = ({ data, onSubmit }) => {
+const Template5 = ({ data }) => {
   // Function to determine font size
   const getFontSize = () => {
     switch (data.size) {
@@ -22,22 +24,19 @@ const Template5 = ({ data, onSubmit }) => {
   };
 
   // Container style
-  const containerStyle = {
-    fontFamily: data.font || 'Arial, sans-serif',
-    color: data.color || '#4A4A4A',
-    fontSize: getFontSize(),
-    lineHeight: getSpacing(),
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: '900px',
-    margin: '20px auto',
-    padding: '20px',
-    backgroundColor: data.backgroundColor || '#FFFFFF',
-    borderRadius: '10px',
-    boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-    width: '100%',
-    boxSizing: 'border-box',
-  };
+  // const containerStyle = {
+  //   fontFamily: data.font || 'Arial, sans-serif',
+  //   color: '#333',
+  //   fontSize: getFontSize(),
+  //   lineHeight: getSpacing(),
+  //   maxWidth: '700px',
+  //   margin: '20px auto',
+  //   padding: '20px',
+  //   border: `1px solid ${data.borderColor || '#ddd'}`,
+  //   borderRadius: '10px',
+  //   backgroundColor: data.backgroundColor || '#f9f9f9',
+  //   textAlign: 'center', // Centering text
+  // };
 
   // Image style
   const imageStyle = {
@@ -50,23 +49,20 @@ const Template5 = ({ data, onSubmit }) => {
 
   // Content style
   const contentStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
+    display: 'block',
+    margin: '0 auto',
   };
 
-  // Contact style for aligning phone and website in one row, and email and address in another
+  // Contact style for stacking all the contact info
   const contactStyle = {
-    display: 'flex',
-    flexDirection: 'row',
-    gap: '20px',
+    display: 'block',
     marginTop: '10px',
-    flexWrap: 'wrap',
   };
 
   // Social icons style
   const socialIconsStyle = {
     display: 'flex',
+    justifyContent: 'center',
     gap: '10px',
     marginTop: '20px',
   };
@@ -77,9 +73,9 @@ const Template5 = ({ data, onSubmit }) => {
   };
 
   return (
-    
-      <div style={containerStyle}>
-        <Parent>
+    <Parent>
+      {/* Container */}
+      <div>
         {/* Image */}
         <img src={data.image || '/path/to/default/image.jpg'} alt="Profile" style={imageStyle} />
 
@@ -92,13 +88,10 @@ const Template5 = ({ data, onSubmit }) => {
 
         {/* Contact Information */}
         <div style={contactStyle}>
-          <p style={{ margin: '0' }}><FaPhone style={iconStyle} /> {data.phone}</p>
-          <p style={{ margin: '0' }}><FaGlobe style={iconStyle} /> <a href={`http://${data.website}`} style={{ color: data.fontColor, textDecoration: 'none' }}>{data.website}</a></p>
-        </div>
-
-        <div style={contactStyle}>
-          <p style={{ margin: '0' }}><FaEnvelope style={iconStyle} /> {data.email}</p>
-          <p style={{ margin: '0' }}><FaMapMarkerAlt style={iconStyle} /> {data.address}</p>
+          <p style={{ margin: '10px 0' }}><FaPhone style={iconStyle} /> {data.phone}</p>
+          <p style={{ margin: '10px 0' }}><FaGlobe style={iconStyle} /> <a href={`http://${data.website}`} style={{ color: data.fontColor, textDecoration: 'none' }}>{data.website}</a></p>
+          <p style={{ margin: '10px 0' }}><FaEnvelope style={iconStyle} /> {data.email}</p>
+          <p style={{ margin: '10px 0' }}><FaMapMarkerAlt style={iconStyle} /> {data.address}</p>
         </div>
 
         {/* Social Media Icons */}
@@ -112,10 +105,32 @@ const Template5 = ({ data, onSubmit }) => {
             );
           })}
         </div>
+        {/* Render Additional Fields */}
+        <div
+          style={{
+            marginTop: '20px',
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '10px',
+          }}
+        >
+          {data.additionalFields &&
+            data.additionalFields.map((field, index) => (
+              <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
+                <p style={{ margin: 0, fontSize: getFontSize(), color: data.fontColor }}>
+                  {field.label} {field.value} |
+                </p>
+              </div>
+            ))}
+        </div>
+
+
+        {/* Additional Content */}
         <AppContent />
-        </Parent>
+        <AppContent2 />
+        {/* <AppContent3 /> */}
       </div>
-    
+    </Parent>
   );
 };
 

@@ -2,6 +2,8 @@ import React from 'react';
 import { FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaAmazon, FaWhatsapp, FaTiktok } from 'react-icons/fa';
 import AppContent from './AppContent';
 import Parent from './Parent';
+import AppContent2 from './AppContent2'
+import AppContent3 from './AppContent3'
 
 const Template10 = ({ data, onSubmit }) => {
   // Function to determine font size
@@ -20,19 +22,19 @@ const Template10 = ({ data, onSubmit }) => {
   };
 
   // Main container style with color, font, and font size
-  const containerStyle = {
-    fontFamily: data.font,
-    color: data.color,
-    fontSize: getFontSize(),
-    lineHeight: getSpacing(),
-    maxWidth: '800px',
-    padding: '20px',
-    borderRadius: '10px',
-    backgroundColor: '#fff',
-    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-    display: 'flex',
-    alignItems: 'flex-start',
-  };
+  // const containerStyle = {
+  //   fontFamily: data.font,
+  //   color: data.color,
+  //   fontSize: getFontSize(),
+  //   lineHeight: getSpacing(),
+  //   maxWidth: '800px',
+  //   padding: '20px',
+  //   borderRadius: '10px',
+  //   backgroundColor: '#fff',
+  //   boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+  //   display: 'flex',
+  //   alignItems: 'flex-start',
+  // };
 
   // Left section style (40%)
   const leftSectionStyle = {
@@ -58,10 +60,10 @@ const Template10 = ({ data, onSubmit }) => {
   // Social media icons container
   const socialIconsContainerStyle = {
     display: 'flex',
-    flexDirection: 'row-reverse', 
+    flexDirection: 'row-reverse',
     gap: '10px',
     marginBottom: '20px',
-    justifyContent: 'flex-start', 
+    justifyContent: 'flex-start',
   };
 
   // Icon style with dynamic color handling
@@ -75,7 +77,7 @@ const Template10 = ({ data, onSubmit }) => {
 
   return (
     <Parent>
-    <div style={containerStyle}>
+      {/* <div style={containerStyle}> */}
       {/* Left Section */}
       <div style={leftSectionStyle}>
         <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 'bold', color: socialIconColor }}>{data.name}</h2>
@@ -108,18 +110,31 @@ const Template10 = ({ data, onSubmit }) => {
 
       {/* Submit Button */}
       <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '20px' }}>
-        {/* <button onClick={() => onSubmit(data)} style={{
-          padding: '10px 20px',
-          backgroundColor: '#007bff',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '5px',
-        }}>
-          OK, I'm done
-        </button> */}
-         <AppContent/>
+
+        {/* Render Additional Fields */}
+        <div
+          style={{
+            marginTop: '20px',
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '10px',
+          }}
+        >
+          {data.additionalFields &&
+            data.additionalFields.map((field, index) => (
+              <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
+                <p style={{ margin: 0, fontSize: getFontSize(), color: data.fontColor }}>
+                  {field.label} {field.value} |
+                </p>
+              </div>
+            ))}
+        </div>
+
+        <AppContent />
+        <AppContent2 />
+        {/* <AppContent3 /> */}
       </div>
-    </div>
+      {/* </div> */}
     </Parent>
   );
 };

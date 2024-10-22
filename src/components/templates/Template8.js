@@ -5,6 +5,8 @@ import {
 } from 'react-icons/fa';
 import AppContent from './AppContent';
 import Parent from './Parent';
+import AppContent2 from './AppContent2'
+import AppContent3 from './AppContent3'
 
 const Template8 = ({ data, onSubmit }) => {
   const getFontSize = () => {
@@ -20,19 +22,19 @@ const Template8 = ({ data, onSubmit }) => {
     return data.spacing === 'wide' ? '1.5em' : '1em';
   };
 
-  const containerStyle = {
-    display: 'flex',
-    fontFamily: data.font,
-    color: data.color || '#000', // default to black if no color
-    fontSize: getFontSize(),
-    lineHeight: getSpacing(),
-    maxWidth: '900px',
-    padding: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '10px',
-    backgroundColor: '#f9f9f9',
-    margin: '0 auto',
-  };
+  // const containerStyle = {
+  //   display: 'flex',
+  //   fontFamily: data.font,
+  //   color: data.color || '#000', // default to black if no color
+  //   fontSize: getFontSize(),
+  //   lineHeight: getSpacing(),
+  //   maxWidth: '900px',
+  //   padding: '20px',
+  //   border: '1px solid #ddd',
+  //   borderRadius: '10px',
+  //   backgroundColor: '#f9f9f9',
+  //   margin: '0 auto',
+  // };
 
   const leftSectionStyle = {
     display: 'flex',
@@ -95,7 +97,7 @@ const Template8 = ({ data, onSubmit }) => {
 
   return (
     <Parent>
-    <div style={containerStyle}>
+      {/* <div style={containerStyle}> */}
       {/* Left section for square image */}
       <div style={leftSectionStyle}>
         <img src={data.image || 'avatar.jpg'} alt="Profile" style={imageStyle} />
@@ -127,13 +129,33 @@ const Template8 = ({ data, onSubmit }) => {
             );
           })}
         </div>
+        {/* Render Additional Fields */}
+        <div
+          style={{
+            marginTop: '20px',
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '10px',
+          }}
+        >
+          {data.additionalFields &&
+            data.additionalFields.map((field, index) => (
+              <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
+                <p style={{ margin: 0, fontSize: getFontSize(), color: data.fontColor }}>
+                  {field.label} {field.value} |
+                </p>
+              </div>
+            ))}
+        </div>
         <AppContent />
+        <AppContent2 />
+        {/* <AppContent3 /> */}
         {/* <button onClick={() => onSubmit(data)} style={buttonStyle}>
           OK, I'm done
         </button> */}
       </div>
 
-    </div>
+      {/* </div> */}
     </Parent>
   );
 };

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaTiktok } from 'react-icons/fa';
 import AppContent from './AppContent';
 import Parent from './Parent';
+import AppContent2 from './AppContent2'
+import AppContent3 from './AppContent3'
 
 const Template9 = ({ data, onSubmit }) => {
   // State to manage active social media icon
@@ -23,16 +25,16 @@ const Template9 = ({ data, onSubmit }) => {
   };
 
   // Main container style
-  const containerStyle = {
-    display: 'flex',
-    maxWidth: '1200px',
-    margin: '0 auto',
-    padding: '20px',
-    borderRadius: '10px',
-    backgroundColor: '#fff',
-    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-    position: 'relative',
-  };
+  // const containerStyle = {
+  //   display: 'flex',
+  //   maxWidth: '1200px',
+  //   margin: '0 auto',
+  //   padding: '20px',
+  //   borderRadius: '10px',
+  //   backgroundColor: '#fff',
+  //   boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+  //   position: 'relative',
+  // };
 
   // Left section style (image and content)
   const leftSectionStyle = {
@@ -82,7 +84,7 @@ const Template9 = ({ data, onSubmit }) => {
 
   return (
     <Parent>
-    <div style={containerStyle}>
+      {/* <div style={containerStyle}> */}
       {/* Left Section for image and content */}
       <div style={leftSectionStyle}>
         <img src={data.image} alt="Profile" style={imageStyle} />
@@ -100,30 +102,59 @@ const Template9 = ({ data, onSubmit }) => {
           </p>
           <p style={{ margin: `5px 0 ${getSpacing()}` }}><FaEnvelope style={{ color: data.fontColor }} /> {data.email}</p>
           <p style={{ margin: `5px 0 ${getSpacing()}` }}><FaMapMarkerAlt style={{ color: data.fontColor }} /> {data.address}</p>
+
+
+
+          {/* Render Additional Fields */}
+          <div
+            style={{
+              marginTop: '20px',
+              display: 'flex',
+              flexDirection: 'row',
+              gap: '10px',
+            }}
+          >
+            {data.additionalFields &&
+              data.additionalFields.map((field, index) => (
+                <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
+                  <p style={{ margin: 0, fontSize: getFontSize(), color: data.fontColor }}>
+                    {field.label} {field.value} |
+                  </p>
+                </div>
+              ))}
+          </div>
+
+
+
+
+          <AppContent />
+          <AppContent2 />
+          {/* <AppContent3 /> */}
+
         </div>
-      </div>
+        {/* </div> */}
 
-      {/* Social Media Icons */}
-      <div style={{ ...socialIconsContainerStyle, ...mediaQueryStyle }}>
-        {data.socialLinks && data.socialLinks.map((social) => {
-          const Icon = social.icon;
-          return (
-            <div
-              key={social.name}
-              onClick={() => setActiveIcon(social.name)}
-              style={{ ...iconStyle, color: activeIcon === social.name ? '#007bff' : iconStyle.color }}
-            >
-              <a href={social.url} target="_blank" rel="noopener noreferrer">
-                <Icon size={24} />
-              </a>
-            </div>
-          );
-        })}
-      </div>
+        {/* Social Media Icons */}
+        <div style={{ ...socialIconsContainerStyle, ...mediaQueryStyle }}>
+          {data.socialLinks && data.socialLinks.map((social) => {
+            const Icon = social.icon;
+            return (
+              <div
+                key={social.name}
+                onClick={() => setActiveIcon(social.name)}
+                style={{ ...iconStyle, color: activeIcon === social.name ? '#007bff' : iconStyle.color }}
+              >
+                <a href={social.url} target="_blank" rel="noopener noreferrer">
+                  <Icon size={24} />
+                </a>
+              </div>
+            );
+          })}
+        </div>
 
-      {/* Submit Button */}
-      <div style={{ position: 'absolute', bottom: '20px', right: '20px' }}>
-        {/* <button onClick={() => onSubmit(data)} style={{
+        {/* Submit Button */}
+        <div style={{ position: 'absolute', bottom: '20px', right: '20px' }}>
+          {/* <button onClick={() => onSubmit(data)} style={{
           padding: '10px 20px',
           backgroundColor: '#007bff',
           color: '#fff',
@@ -133,9 +164,9 @@ const Template9 = ({ data, onSubmit }) => {
         }}>
           OK, I'm done
         </button> */}
-        <AppContent />
+
+        </div>
       </div>
-    </div>
     </Parent>
   );
 };

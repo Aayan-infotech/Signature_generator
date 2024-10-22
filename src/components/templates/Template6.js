@@ -5,6 +5,8 @@ import {
 } from 'react-icons/fa';
 import Parent from './Parent';
 import AppContent from './AppContent';
+import AppContent2 from './AppContent2'
+import AppContent3 from './AppContent3'
 
 const Template6 = ({ data, onSubmit }) => {
   // Function to determine font size
@@ -23,17 +25,17 @@ const Template6 = ({ data, onSubmit }) => {
   };
 
   // Main container style with color, font, and font size
-  const containerStyle = {
-    fontFamily: data.font,
-    color: data.color || '#000000',
-    fontSize: getFontSize(),
-    lineHeight: getSpacing(),
-    maxWidth: '600px',
-    padding: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '10px',
-    backgroundColor: '#f9f9f9',
-  };
+  // const containerStyle = {
+  //   fontFamily: data.font,
+  //   color: data.color || '#000000',
+  //   fontSize: getFontSize(),
+  //   lineHeight: getSpacing(),
+  //   maxWidth: '600px',
+  //   padding: '20px',
+  //   border: '1px solid #ddd',
+  //   borderRadius: '10px',
+  //   backgroundColor: '#f9f9f9',
+  // };
 
   // Image style (square)
   const imageStyle = {
@@ -62,7 +64,7 @@ const Template6 = ({ data, onSubmit }) => {
 
   return (
     <Parent>
-      <div style={containerStyle}>
+      <div>
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
           <img src={data.image || 'default.jpg'} alt="Profile" style={imageStyle} />
           <div>
@@ -100,8 +102,28 @@ const Template6 = ({ data, onSubmit }) => {
             );
           })}
         </div>
+        {/* Render Additional Fields */}
+        <div
+          style={{
+            marginTop: '20px',
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '10px',
+          }}
+        >
+          {data.additionalFields &&
+            data.additionalFields.map((field, index) => (
+              <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
+                <p style={{ margin: 0, fontSize: getFontSize(), color: data.fontColor }}>
+                  {field.label} {field.value} |
+                </p>
+              </div>
+            ))}
+        </div>
 
         <AppContent />
+        <AppContent2 />
+        {/* <AppContent3 /> */}
       </div>
     </Parent>
   );
