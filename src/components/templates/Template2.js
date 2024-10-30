@@ -157,11 +157,7 @@ const Template2 = ({ data, onSubmit }) => {
           OK, I'm done
         </button> */}
         <AppContent2 />
-<<<<<<< HEAD
-        <AppContent3 /> 
-=======
         <AppContent3 />
->>>>>>> e36583e (updating CTA of appcontent3)
       </div>
     </Parent>
   );

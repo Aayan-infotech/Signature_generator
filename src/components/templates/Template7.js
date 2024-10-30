@@ -138,11 +138,7 @@ const Template7 = ({ data, onSubmit }) => {
         </div>
         <AppContent />
         <AppContent2 />
-<<<<<<< HEAD
-        <AppContent3 /> 
-=======
         <AppContent3 />
->>>>>>> e36583e (updating CTA of appcontent3)
       </div>
 
       <img src={data.image} alt="Profile" style={imageStyle} />
