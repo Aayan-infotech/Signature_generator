@@ -149,7 +149,7 @@ const Template8 = ({ data, onSubmit }) => {
         </div>
         <AppContent />
         <AppContent2 />
-        {/* <AppContent3 /> */}
+        <AppContent3 />
         {/* <button onClick={() => onSubmit(data)} style={buttonStyle}>
           OK, I'm done
         </button> */}
