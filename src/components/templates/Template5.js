@@ -128,7 +128,7 @@ const Template5 = ({ data }) => {
         {/* Additional Content */}
         <AppContent />
         <AppContent2 />
-        {/* <AppContent3 /> */}
+        <AppContent3 />
       </div>
     </Parent>
   );
