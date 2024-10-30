@@ -127,7 +127,7 @@ const Template4 = ({ data, onSubmit }) => {
 
         <AppContent />
         <AppContent2 />
-        {/* <AppContent3 /> */}
+        <AppContent3 />
       </div>
     </Parent>
   );
