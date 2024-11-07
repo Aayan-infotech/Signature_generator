@@ -1,4 +1,3 @@
-# Step 1: Use the official Node.js image as the base image for building
 FROM node:18 as build
 
 # Set the working directory
