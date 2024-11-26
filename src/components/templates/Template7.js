@@ -138,7 +138,7 @@ const Template7 = ({ data, onSubmit }) => {
         </div>
         <AppContent />
         <AppContent2 />
-        <AppContent3 /> 
+        <AppContent3 />
       </div>
 
       <img src={data.image} alt="Profile" style={imageStyle} />

@@ -1,8 +1,14 @@
 import React from 'react'
 import { useAppContext } from '../../context/AppContext'
+import axios from 'axios'
+import Cookies from 'js-cookie'; // Import Cookies
 
 const Parent = ({ children }) => {
-  const { data } = useAppContext()
+  const { data, selectedContent } = useAppContext()
+
+  // Get the token from cookies
+  const token = localStorage.getItem('token2');  // Retrieve token from cookies
+
   const getFontSize = () => {
     switch (data.size) {
       case 'small':
@@ -19,6 +25,27 @@ const Parent = ({ children }) => {
   const getSpacing = () => {
     return data.spacing === 'wide' ? '1.5em' : '1em'
   }
+
+  const onSubmit = async () => {
+    const data123 = { selectedContent, data }
+
+    try {
+      const response = await axios.post(
+        'http://18.209.197.35:9006/api/user-data',
+        { data: data123 },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,  // Add token in the header
+          },
+        },
+      )
+      console.log({ response })
+    } catch (error) {
+      console.warn(error)
+    }
+  }
+
   return (
     <>
       <div
@@ -28,7 +55,7 @@ const Parent = ({ children }) => {
           color: 'inherit',
           fontSize: getFontSize(),
           lineHeight: getSpacing(),
-          maxWidth: "700px",
+          maxWidth: '700px',
           padding: '20px',
           border: '1px solid #ddd',
           borderRadius: '10px',
@@ -39,7 +66,7 @@ const Parent = ({ children }) => {
       </div>
       {/* Submit Button */}
       <button
-        onClick={() => onSubmit(data)}
+        onClick={() => onSubmit()}
         style={{
           marginTop: '20px',
           padding: '10px 20px',

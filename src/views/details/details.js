@@ -30,7 +30,7 @@ const Details = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:9006/api/signature/signature_details', formData);
+      const response = await axios.post('http://18.209.197.35:9006/api/signature/signature_details', formData);
       console.log('Signature details saved:', response.data);
 
       // Reset the form data
