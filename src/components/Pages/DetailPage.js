@@ -16,11 +16,52 @@ const additionalFieldsOptions = [
 const DetailPage = () => {
   const { data, setData } = useAppContext();
   const [selectedField, setSelectedField] = useState('');
+  const [errors, setErrors] = useState({});
+
+  const validateField = (name, value) => {
+    let error = '';
+    if (value.trim()) {
+      switch (name) {
+        case 'phone':
+          if (!/^\d+$/.test(value)) {
+            error = 'Phone number must contain only numbers';
+          }
+          break;
+        case 'email':
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+            error = 'Invalid email address';
+          }
+          break;
+        case 'website':
+          if (!/^https?:\/\/[^\s$.?#].[^\s]*$/.test(value)) {
+            error = 'Invalid website URL';
+          }
+          break;
+        case 'title':
+        case 'company':
+          if (!/^[a-zA-Z\s]+$/.test(value)) {
+            error = `${name.charAt(0).toUpperCase() + name.slice(1)} must contain only letters`;
+          }
+          break;
+        default:
+          break;
+      }
+    }
+    return error;
+  };
+  
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    const error = validateField(name, value);
+    setErrors({
+      ...errors,
+      [name]: error,
+    });
+
     setData({
       ...data,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
@@ -53,9 +94,27 @@ const DetailPage = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newErrors = {};
+    Object.keys(data).forEach((field) => {
+      const error = validateField(field, data[field]);
+      if (error) {
+        newErrors[field] = error;
+      }
+    });
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      console.log('Form submitted successfully:', data);
+      // Proceed with form submission (e.g., API call)
+    }
+  };
+
   return (
     <div className="detail-page">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label>Name:</label>
           <input
@@ -65,6 +124,7 @@ const DetailPage = () => {
             value={data.name || ''}
             onChange={handleChange}
           />
+          {errors.name && <span className="error-message">{errors.name}</span>}
         </div>
         <div>
           <label>Title:</label>
@@ -75,16 +135,18 @@ const DetailPage = () => {
             value={data.title || ''}
             onChange={handleChange}
           />
+          {errors.title && <span className="error-message">{errors.title}</span>}
         </div>
         <div>
           <label>Company:</label>
           <input
             type="text"
             name="company"
-            placeholder="Text"
+            placeholder="Company"
             value={data.company || ''}
             onChange={handleChange}
           />
+          {errors.company && <span className="error-message">{errors.company}</span>}
         </div>
         <div>
           <label>Phone:</label>
@@ -95,6 +157,7 @@ const DetailPage = () => {
             value={data.phone || ''}
             onChange={handleChange}
           />
+          {errors.phone && <span className="error-message">{errors.phone}</span>}
         </div>
         <div>
           <label>Website:</label>
@@ -105,6 +168,7 @@ const DetailPage = () => {
             value={data.website || ''}
             onChange={handleChange}
           />
+          {errors.website && <span className="error-message">{errors.website}</span>}
         </div>
         <div>
           <label>Email:</label>
@@ -115,6 +179,7 @@ const DetailPage = () => {
             value={data.email || ''}
             onChange={handleChange}
           />
+          {errors.email && <span className="error-message">{errors.email}</span>}
         </div>
         <div>
           <label>Address:</label>
@@ -125,6 +190,7 @@ const DetailPage = () => {
             value={data.address || ''}
             onChange={handleChange}
           />
+          {errors.address && <span className="error-message">{errors.address}</span>}
         </div>
 
         {/* Render Additional Fields */}
@@ -155,9 +221,13 @@ const DetailPage = () => {
             ))}
           </select>
           <div>
-          <span className="add-icon" onClick={addField}>+</span>
-             </div>
+            <span className="add-icon" onClick={addField}>+</span>
+          </div>
         </div>
+
+        {/* <button type="submit" className="submit-button">
+          Submit
+        </button> */}
       </form>
     </div>
   );

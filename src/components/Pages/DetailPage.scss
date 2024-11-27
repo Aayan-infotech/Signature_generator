@@ -4,6 +4,12 @@
   padding: 20px;
   border-radius: 8px;
 
+  .error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+
   form {
     display: grid;
     gap: 15px;

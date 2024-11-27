@@ -110,7 +110,7 @@ const DesignPage = () => {
         </div>
         
         {/* Shape */}
-        <div>
+        {/* <div>
           <label>Shape:</label>
           <select
             name="shape"
@@ -121,7 +121,7 @@ const DesignPage = () => {
             <option value="square">Square</option>
             <option value="rounded-square">Rounded Square</option>
           </select>
-        </div>
+        </div> */}
         
         {/* Background Color */}
         {/* <div>
