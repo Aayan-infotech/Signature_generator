@@ -31,7 +31,7 @@ const Parent = ({ children }) => {
 
     try {
       const response = await axios.post(
-        'http://18.209.197.35:9006/api/user-data',
+        'http://44.196.64.110:9006/api/user-data',
         { data: data123 },
         {
           headers: {
