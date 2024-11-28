@@ -1,50 +1,57 @@
-import React from 'react'
-import { useAppContext } from '../../context/AppContext'
-import axios from 'axios'
-import Cookies from 'js-cookie'; // Import Cookies
+import React, { useState } from 'react';
+import { useAppContext } from '../../context/AppContext';
+import axios from 'axios';
 
 const Parent = ({ children }) => {
-  const { data, selectedContent } = useAppContext()
+  const { data, selectedContent } = useAppContext();
+  const [successMessage, setSuccessMessage] = useState(''); // State for success message
+  const [errorMessage, setErrorMessage] = useState(''); // State for error message
 
-  // Get the token from cookies
-  const token = localStorage.getItem('token2');  // Retrieve token from cookies
+  // Get the token from local storage
+  const token = localStorage.getItem('token2'); 
 
   const getFontSize = () => {
     switch (data.size) {
       case 'small':
-        return '12px'
+        return '12px';
       case 'medium':
-        return '16px'
+        return '16px';
       case 'large':
-        return '20px'
+        return '20px';
       default:
-        return '16px'
+        return '16px';
     }
-  }
+  };
 
   const getSpacing = () => {
-    return data.spacing === 'wide' ? '1.5em' : '1em'
-  }
+    return data.spacing === 'wide' ? '1.5em' : '1em';
+  };
 
   const onSubmit = async () => {
-    const data123 = { selectedContent, data }
+    const data123 = { selectedContent, data };
 
     try {
       const response = await axios.post(
-        'http://18.209.197.35:9006/api/user-data',
+        'http://44.196.64.110:9006/api/user-data',
         { data: data123 },
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,  // Add token in the header
+            Authorization: `Bearer ${token}`, 
           },
-        },
-      )
-      console.log({ response })
+        }
+      );
+
+      if (response.status === 200) {
+        setSuccessMessage('Data submitted successfully!');
+        setErrorMessage(''); 
+      }
     } catch (error) {
-      console.warn(error)
+      console.warn(error);
+      setSuccessMessage(''); 
+      setErrorMessage('Failed to submit data. Please try again.');
     }
-  }
+  };
 
   return (
     <>
@@ -64,6 +71,11 @@ const Parent = ({ children }) => {
       >
         {children}
       </div>
+
+      {/* Success and Error Messages */}
+      {successMessage && <p style={{ color: 'green', marginTop: '10px' }}>{successMessage}</p>}
+      {errorMessage && <p style={{ color: 'red', marginTop: '10px' }}>{errorMessage}</p>}
+
       {/* Submit Button */}
       <button
         onClick={() => onSubmit()}
@@ -80,7 +92,7 @@ const Parent = ({ children }) => {
         OK, I'm done
       </button>
     </>
-  )
-}
+  );
+};
 
-export default Parent
+export default Parent;
