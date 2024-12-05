@@ -1,6 +1,6 @@
 FROM node:18 as build
 
-# Set the working directory
+# Set the working dir
 WORKDIR /app
 
 # Copy the package.json and package-lock.json files to install dependencies
