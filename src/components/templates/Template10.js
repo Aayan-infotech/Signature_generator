@@ -54,7 +54,7 @@ const Template10 = ({ data, onSubmit }) => {
 
   // Right section style (50%)
   const rightSectionStyle = {
-    flex: '0 0 50%',
+    flex: '0 0 47%',
   };
 
   // Social media icons container
@@ -109,7 +109,7 @@ const Template10 = ({ data, onSubmit }) => {
       </div>
 
       {/* Submit Button */}
-      <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '20px' }}>
+      <div className='flex-column' style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: '20px' }}>
 
         {/* Render Additional Fields */}
         <div

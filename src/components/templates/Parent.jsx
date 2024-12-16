@@ -62,6 +62,7 @@ const Parent = ({ children }) => {
           border: '1px solid #ddd',
           borderRadius: '10px',
           backgroundColor: '#f9f9f9',
+          width: '100%',
         }}
       >
         {children}

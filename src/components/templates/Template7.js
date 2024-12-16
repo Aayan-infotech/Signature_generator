@@ -58,8 +58,8 @@ const Template7 = ({ data, onSubmit }) => {
 
   const socialIconStyle = {
     color: data.color,
-    fontSize: '24px',
-    padding: '10px',
+    fontSize: '40px',
+    // padding: '10px',
     border: `2px solid ${data.color}`,
     borderRadius: '50%'
   };

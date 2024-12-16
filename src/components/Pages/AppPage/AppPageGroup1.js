@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { MdDesignServices, MdUpload } from 'react-icons/md'
 import { FaFileAlt, FaUser, FaBullhorn, FaVideo } from 'react-icons/fa'
 import { useAppContext } from '../../../context/AppContext'
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
 // Group 1 templates and icons
 export const templateNames1 = [
@@ -133,6 +134,10 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
   const [selectedOption, setSelectedOption] = useState('')
   const [images, setImages] = useState(Array(5).fill(null)) // Initialize array for 5 images
   const [videoURL, setVideoURL] = useState('') // State for video URL
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleSelect = () => {
     if (templateName === 'Image gallery') {
@@ -166,6 +171,7 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex:"1",
       }}
     >
       <div
@@ -206,6 +212,7 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
                       accept="image/*"
                       onChange={handleImageChange(index)}
                       style={{ display: 'none' }}
+                      className="form-control"
                     />
                     <div style={{ fontSize: '24px' }}>+</div>
                   </label>
@@ -219,6 +226,7 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
             <input
               type="text"
               value={videoURL}
+               className="form-control"
               onChange={(e) => setVideoURL(e.target.value)}
               placeholder="Paste YouTube link here"
               style={{
@@ -236,6 +244,7 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
               <div key={index}>
                 <input
                   type="radio"
+                  
                   id={option}
                   name="contentOption"
                   value={option}
@@ -281,11 +290,13 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
 
 const AppPageGroup1 = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+    const [selectedCard, setSelectedCard] = useState(null); 
   const { selectedContent, handleModalSelect, setSelectedTemplate, selectedTemplate } =
     useAppContext()
 
   const handleTemplateClick = (templateName) => {
     setSelectedTemplate(templateName);
+    setSelectedCard(templateName)
     setIsModalOpen(true)
   }
 
@@ -297,6 +308,7 @@ const AppPageGroup1 = () => {
     <div>
       <h3>Enhance Signature Style</h3>
       <div
+      className='mb-4'
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, 1fr)',
@@ -307,16 +319,17 @@ const AppPageGroup1 = () => {
         {templateNames1.map((templateName, index) => (
           <button
             key={templateName}
+            className={`template-item ${selectedCard === templateName ? 'active' : ''}`}
             style={{
               padding: '15px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexDirection: 'column',
-              border: '1px solid gray',
               borderRadius: '8px',
               cursor: 'pointer',
               backgroundColor: 'transparent',
+              border: selectedCard === templateName ? '1px solid blue' : '1px solid gray',
             }}
             onClick={() => handleTemplateClick(templateName)}
           >

@@ -63,7 +63,7 @@ const Template9 = ({ data, onSubmit }) => {
   const socialIconsContainerStyle = {
     position: 'absolute',
     right: '200px',
-    top: '20px',
+    // top: '20px',
     display: 'flex',
     flexDirection: 'column',
     gap: '10px',

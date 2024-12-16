@@ -44,7 +44,7 @@ const Template11 = ({ data, onSubmit }) => {
   return (
     // <div style={{ fontFamily: data.font, color: data.color, fontSize: getFontSize(), lineHeight: getSpacing(), maxWidth: '800px', padding: '20px', borderRadius: '10px', backgroundColor: '#fff', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', textAlign: 'left' }}>
     <Parent>
-      <div style={{ textAlign: 'left', padding: '20px', }}>
+      <div className='w-100' style={{ textAlign: 'left', padding: '20px', }}>
         {/* Circular Image */}
         <div style={{ marginBottom: '20px', textAlign: 'left' }}>
           <img src={data.image} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }} />

@@ -111,90 +111,103 @@ const AppPageGroup21 = () => {
         <div
           style={{
             position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            padding: '20px',
-            backgroundColor: 'white',
-            border: '1px solid gray',
-            borderRadius: '8px',
-            width: '400px',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: '1',
           }}
         >
-          <h4>{selectedTemplate}</h4>
+          <div
+            style={{
+              backgroundColor: 'white',
+              padding: '20px',
+              borderRadius: '5px',
+              maxWidth: '400px',
+              width: '50%',
+            }}
+          >
+            <h4>{selectedTemplate}</h4>
 
-          {selectedTemplate === 'Upload my banner' ? (
-            <>
-              <input type="file" onChange={handleBannerChange} accept="image/*" />
-            </>
-          ) : (
-            <>
-              {selectedTemplate === 'Video conferencing' && (
-                <>
-                  <label>Choose Platform:</label>
-                  <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
-                    {callLinks.map((i, ind) => (
-                      <img
-                        src={i}
-                        height={40}
-                        alt=""
-                        style={{
-                          border: `1px solid ${videoConfPlatform === ind ? 'darkblue' : '#e7e7e7'}`,
-                          padding: '5px',
-                          borderRadius: '10px',
-                        }}
-                        onClick={() => setVideoConfPlatform(ind)}
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
-
+            {selectedTemplate === 'Upload my banner' ? (
               <>
-                <label>Description:</label>
-                <input
-                  type="text"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Enter button text"
-                  style={{ width: '100%', marginBottom: '10px' }}
-                />
-                <label>URL:</label>
-                <input
-                  type="text"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                  placeholder="Enter URL"
-                  style={{ width: '100%', marginBottom: '10px' }}
-                />
+                <input type="file" onChange={handleBannerChange} accept="image/*"   className="form-control"/>
               </>
-            </>
-          )}
-          <button
-            onClick={handleSubmit}
-            style={{
-              padding: '10px',
-              marginTop: '10px',
-              backgroundColor: 'lightblue',
-              borderRadius: '2px',
-              border: '2px solid white',
-            }}
-          >
-            Add
-          </button>
-          <button
-            onClick={handleCancel}
-            style={{
-              padding: '10px',
-              marginTop: '10px',
-              marginLeft: '5px',
-              backgroundColor: 'lightcoral',
-              borderRadius: '2px',
-              border: '2px solid white',
-            }}
-          >
-            Cancel
-          </button>
+            ) : (
+              <>
+                {selectedTemplate === 'Video conferencing' && (
+                  <>
+                    <label>Choose Platform:</label>
+                    <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+                      {callLinks.map((i, ind) => (
+                        <img
+                          src={i}
+                          height={40}
+                          alt=""
+                          style={{
+                            border: `1px solid ${videoConfPlatform === ind ? 'darkblue' : '#e7e7e7'}`,
+                            padding: '5px',
+                            borderRadius: '10px',
+                          }}
+                          onClick={() => setVideoConfPlatform(ind)}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                <>
+                  <label>Description:</label>
+                  <input
+                    type="text"
+                    value={description}
+                     className="form-control"
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Enter button text"
+                    style={{ width: '100%', marginBottom: '10px' }}
+                  />
+                  <label>URL:</label>
+                  <input
+                    type="text"
+                    value={url}
+                     className="form-control"
+                    onChange={(e) => setUrl(e.target.value)}
+                    placeholder="Enter URL"
+                    style={{ width: '100%', marginBottom: '10px' }}
+                  />
+                </>
+              </>
+            )}
+            <button
+              onClick={handleSubmit}
+              style={{
+                padding: '10px',
+                marginTop: '10px',
+                backgroundColor: 'lightblue',
+                borderRadius: '2px',
+                border: '2px solid white',
+              }}
+            >
+              Add
+            </button>
+            <button
+              onClick={handleCancel}
+              style={{
+                padding: '10px',
+                marginTop: '10px',
+                marginLeft: '5px',
+                backgroundColor: 'lightcoral',
+                borderRadius: '2px',
+                border: '2px solid white',
+              }}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       )}
     </div>

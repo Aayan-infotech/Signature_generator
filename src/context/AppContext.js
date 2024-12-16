@@ -20,7 +20,7 @@ const initialsData = {
 export const AppProvider = ({ children }) => {
   const [data, setData] = useState(initialsData);
   const [selectedContent, setSelectedContent] = useState({});
-  const [selectedTemplate, setSelectedTemplate] = useState('');
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token')); // Fetch token from localStorage
 
   const availableTemplates = [

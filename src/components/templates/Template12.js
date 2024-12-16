@@ -45,7 +45,7 @@ const Template12 = ({ data, onSubmit }) => {
 
     // <div style={{ fontFamily: data.font, color: data.color, fontSize: getFontSize(), lineHeight: getSpacing(), maxWidth: '800px', padding: '20px', borderRadius: '10px', backgroundColor: '#fff', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' }}>
     <Parent>
-      <div style={{ textAlign: 'center', padding: '20px' }}>
+      <div style={{ textAlign: 'center', padding: '20px' }} className='w-100'>
         {/* Name, Title, and Company */}
         <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 'bold', color: fontColor }}>{data.name}</h2>
         <p style={{ margin: '5px 0', fontWeight: 'bold' }}>{data.title}</p>

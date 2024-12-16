@@ -35,6 +35,8 @@ const AppPageGroup2 = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalData, setModalData] = useState({});
   const [description, setDescription] = useState('');
+  const [selectedCard, setSelectedCard] = useState(null); 
+
   const [url, setUrl] = useState('');
   const { setSelectedTemplate, selectedTemplate, handleModalSelect, selectedContent } = useAppContext(); // Updated to use selectedContent for rendering buttons
   const [extra, setExtra] = useState(null);
@@ -46,6 +48,7 @@ const AppPageGroup2 = () => {
     setModalOpen(true);
     setSelectedTemplate(template.name);
     setModalData({ templateName: template.name });
+    setSelectedCard(templateName)
   };
 
   const handleCancel = () => {
@@ -85,11 +88,12 @@ const AppPageGroup2 = () => {
               alignItems: 'center',
               justifyContent: 'center',
               flexDirection: 'column',
-              border: '1px solid gray',
+              border: selectedCard === templateData ? '1px solid blue' : '1px solid gray',
               borderRadius: '8px',
               cursor: 'pointer',
               backgroundColor: 'transparent',
             }}
+            className={`template-item ${selectedCard === templateData ? 'active' : ''}`}
             onClick={() => handleTemplateClick(template)}
           >
             {template.icon}
@@ -158,19 +162,31 @@ const AppPageGroup2 = () => {
 
       {/* Modal for content submission */}
       {isModalOpen && (
-        <div
+          <div
           style={{
             position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            padding: '20px',
-            backgroundColor: 'white',
-            border: '1px solid gray',
-            borderRadius: '8px',
-            width: '400px',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex:"1",
           }}
         >
+              <div
+        style={{
+          backgroundColor: 'white',
+          padding: '20px',
+          borderRadius: '5px',
+          maxWidth: '400px',
+          width: '50%',
+        }}
+      >
+
+          
           <h4>{modalData.templateName}</h4>
 
           <label>Description:</label>
@@ -179,11 +195,13 @@ const AppPageGroup2 = () => {
             placeholder="Enter description"
             style={{ width: '100%', marginBottom: '10px', padding: '5px' }}
             value={description}
+             className="form-control"
           />
           <label>URL:</label>
           <input
             type="text"
             value={url}
+             className="form-control"
             onChange={(e) => setUrl(e.target.value)}
             placeholder="Enter URL"
             style={{ width: '100%', marginBottom: '10px', padding: '5px' }}
@@ -192,6 +210,7 @@ const AppPageGroup2 = () => {
             <>
           <label>Tagline:</label>
           <select
+           className="form-control"
             value={selectedTagline}
             onChange={(e) => setSelectedTagline(e.target.value)}
             style={{ width: '100%', marginBottom: '10px', padding: '5px' }}
@@ -228,6 +247,7 @@ const AppPageGroup2 = () => {
           >
             Cancel
           </button>
+        </div>
         </div>
       )}
     </div>
