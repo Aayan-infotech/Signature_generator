@@ -49,9 +49,10 @@ const Parent = ({ children }) => {
   return (
     <>
       <div
+     className={`${data.font}`  || Arimo}
         style={{
           display: 'flex',
-          fontFamily: data.font,
+          // fontFamily: data.font , 
           color: 'inherit',
           fontSize: getFontSize(),
           lineHeight: getSpacing(),

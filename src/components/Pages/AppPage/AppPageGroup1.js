@@ -16,12 +16,14 @@ export const templateNames1 = [
 ]
 
 export const templateIcons1 = [
-  <MdDesignServices />,
-  <FaFileAlt />,
-  <FaUser />,
-  <FaBullhorn />,
-  <FaVideo />,
-  <MdUpload />,
+
+  <MdDesignServices style={{ color: 'blue' }} />,
+    <FaFileAlt style={{ color: '#4CAF50' }} />,
+    <FaUser style={{ color: 'red' }} />,
+    <FaBullhorn style={{ color: '#9C27B0' }} />,
+    <FaBullhorn style={{ color: '#FFC107' }} />,
+    <FaVideo style={{ color: '#4CAF50' }} />,
+    <MdUpload style={{ color: '#4CAF50' }} />,
 ]
 
 // Content options for each template
@@ -179,7 +181,7 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
           backgroundColor: 'white',
           padding: '20px',
           borderRadius: '5px',
-          maxWidth: '400px',
+          maxWidth: '500px',
           width: '50%',
         }}
       >
@@ -239,7 +241,7 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
             />
           </div>
         ) : (
-          <form>
+          <form className='my-4'>
             {contentOptions.map((option, index) => (
               <div key={index}>
                 <input
@@ -261,11 +263,14 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
         <button
           onClick={handleSelect}
           style={{
-            padding: '10px',
+           
             marginTop: '10px',
             backgroundColor: 'lightblue',
             borderRadius: '2px',
             border: '2px solid white',
+            color: 'white',
+            borderRadius: '8px',
+            padding: '10px 18px',
           }}
         >
           Add
@@ -273,12 +278,14 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
         <button
           onClick={onClose}
           style={{
-            padding: '10px',
+            padding: '10px 18px',
             marginTop: '10px',
             marginLeft: '5px',
             backgroundColor: 'lightcoral',
             borderRadius: '2px',
             border: '2px solid white',
+            color: 'white',
+            borderRadius: '8px',
           }}
         >
           Cancel

@@ -75,7 +75,7 @@ const MainPage = () => {
       <div style={{ width: '30%', padding: '20px' }}>
         <Outlet />
       </div>
-      <div style={{ width: '66%', padding: '20px' }}>
+      <div style={{ width: '66%', padding: '20px' }}  className='fontchanger'>
         {renderTemplate()}
       </div>
     </div>

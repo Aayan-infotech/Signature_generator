@@ -12,11 +12,11 @@ import { useAppContext } from '../../../context/AppContext';
 
 // Group 2 templates and icons
 const templateData = [
-  { name: 'Give feedback', icon: <FaMoneyBill /> },
-  { name: 'Join a webinar', icon: <FaRegAddressCard /> },
-  { name: 'Join newsletter', icon: <FaHandPointUp /> },
-  { name: 'Download app', icon: <FaBlogger /> },
-  { name: 'Post a job offer', icon: <FaShoppingCart /> },
+  { name: 'Give feedback', icon: <FaMoneyBill style={{ color: 'blue' }} /> },
+  { name: 'Join a webinar', icon: <FaRegAddressCard style={{ color: '#4CAF50' }}/> },
+  { name: 'Join newsletter', icon: <FaHandPointUp style={{ color: 'red' }} /> },
+  { name: 'Download app', icon: <FaBlogger style={{ color: '#9C27B0' }} /> },
+  { name: 'Post a job offer', icon: <FaShoppingCart style={{ color: '#FFC107' }}/> },
 ];
 
 // AppContent3
@@ -225,11 +225,14 @@ const AppPageGroup2 = () => {
           <button
             onClick={handleSubmit}
             style={{
-              padding: '10px',
+              
               marginTop: '10px',
               backgroundColor: 'lightblue',
-              borderRadius: '2px',
+             
               border: '2px solid white',
+              color: 'white',
+              borderRadius: '8px',
+              padding: '10px 18px',
             }}
           >
             Add
@@ -237,12 +240,15 @@ const AppPageGroup2 = () => {
           <button
             onClick={handleCancel}
             style={{
-              padding: '10px',
+       
               marginTop: '10px',
               marginLeft: '5px',
               backgroundColor: 'lightcoral',
-              borderRadius: '2px',
+            
               border: '2px solid white',
+              color: 'white',
+              borderRadius: '8px',
+              padding: '10px 18px',
             }}
           >
             Cancel

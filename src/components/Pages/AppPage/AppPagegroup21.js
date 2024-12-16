@@ -24,14 +24,15 @@ export const templateNames21 = [
 ]
 
 export const templateIcons21 = [
-  <FaMoneyBill />,
-  <FaRegAddressCard />,
-  <FaHandPointUp />,
-  <FaShoppingCart />,
-  <FaBriefcase />,
-  <FaVideo />,
-  <FaMicrosoft />,
+  <FaMoneyBill style={{ color: 'blue' }} />,
+  <FaRegAddressCard style={{ color: '#4CAF50' }} />,
+  <FaHandPointUp style={{ color: 'red' }} />,
+  <FaVideo style={{ color: '#9C27B0' }} />,
+  <FaBriefcase style={{ color: '#FFC107' }} />,
+  <FaVideo style={{ color: '#4CAF50' }} />,
+  <FaMicrosoft style={{ color: '#4CAF50' }} />,
 ]
+
 
 const AppPageGroup21 = () => {
   // const [selectedContent, setSelectedContent] = useState({})
@@ -185,11 +186,14 @@ const AppPageGroup21 = () => {
             <button
               onClick={handleSubmit}
               style={{
-                padding: '10px',
+              
                 marginTop: '10px',
                 backgroundColor: 'lightblue',
-                borderRadius: '2px',
+              
                 border: '2px solid white',
+                color: 'white',
+                borderRadius: '8px',
+                padding: '10px 18px',
               }}
             >
               Add
@@ -197,12 +201,15 @@ const AppPageGroup21 = () => {
             <button
               onClick={handleCancel}
               style={{
-                padding: '10px',
+              
                 marginTop: '10px',
                 marginLeft: '5px',
                 backgroundColor: 'lightcoral',
-                borderRadius: '2px',
+                
                 border: '2px solid white',
+                color: 'white',
+                borderRadius: '8px',
+                padding: '10px 18px',
               }}
             >
               Cancel

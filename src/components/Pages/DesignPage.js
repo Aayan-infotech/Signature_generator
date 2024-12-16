@@ -1,46 +1,46 @@
-import React from 'react';
-import { useAppContext } from '../../context/AppContext';
-import './DesignPage.scss'; // Import the SCSS file
+import React from 'react'
+import { useAppContext } from '../../context/AppContext'
+import './DesignPage.scss' // Import the SCSS file
 
 const DesignPage = () => {
-  const { data, setData } = useAppContext();
+  const { data, setData } = useAppContext()
 
   const handleChange = (e) => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
-    });
-  };
+    })
+  }
 
   const handleColorChange = (color) => {
     setData({
       ...data,
-      fontColor: color, 
-    });
-  };
+      fontColor: color,
+    })
+  }
 
   return (
     <div className="detail-page">
-      {/* <h2>Design Page</h2> */}
       <form>
         {/* Font Selection */}
         <div>
           <label>Font:</label>
           <select
             name="font"
-            value={data.font || 'Arial'}
+            value={data.font || 'Arimo'}
             onChange={handleChange}
-            className='form-control'
+            className="form-control"
           >
-            <option value="Arial">Arial</option>
-            <option value="Verdana">Verdana</option>
-            <option value="Times New Roman">Times New Roman</option>
-            <option value="Georgia">Georgia</option>
-            <option value="Courier New">Courier New</option>
+            <option value="Arimo">Arimo</option>
+            <option value="Montserrat">Montserrat</option>
+            <option value="Lato">Lato</option>
+            <option value="Georgia">Oswald</option>
+            <option value="NotoSans">Noto Sans</option>
+            <option value="Ubuntu">Ubuntu</option>
           </select>
         </div>
-        
-        {/* Text Color with Palette and Customization */}
+
+        {/* Text Color */}
         <div>
           <label>Text Color:</label>
           <div className="color-picker-container">
@@ -90,7 +90,7 @@ const DesignPage = () => {
             name="spacing"
             value={data.spacing || 'normal'}
             onChange={handleChange}
-            className='form-control'
+            className="form-control"
           >
             <option value="normal">Normal</option>
             <option value="wide">Wide</option>
@@ -104,41 +104,16 @@ const DesignPage = () => {
             name="size"
             value={data.size || 'medium'}
             onChange={handleChange}
-            className='form-control'
+            className="form-control"
           >
             <option value="small">Small</option>
             <option value="medium">Medium</option>
             <option value="large">Large</option>
           </select>
         </div>
-        
-        {/* Shape */}
-        {/* <div>
-          <label>Shape:</label>
-          <select
-            name="shape"
-            value={data.shape || 'square'}
-            onChange={handleChange}
-          >
-            <option value="circle">Circle</option>
-            <option value="square">Square</option>
-            <option value="rounded-square">Rounded Square</option>
-          </select>
-        </div> */}
-        
-        {/* Background Color */}
-        {/* <div>
-          <label>Background Color:</label>
-          <input
-            type="color"
-            name="backgroundColor"
-            value={data.backgroundColor || '#ffffff'}
-            onChange={handleChange}
-          />
-        </div> */}
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default DesignPage;
+export default DesignPage
