@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt, FaMobileAlt } from 'react-icons/fa';
+import { FaPhoneAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt, FaMobileAlt } from 'react-icons/fa';
 import Parent from './Parent'; // Assuming the correct path
 import AppContent from './AppContent'; // Assuming the correct path
 import AppContent2 from './AppContent2'
@@ -90,7 +90,7 @@ const Template7 = ({ data, onSubmit }) => {
         <p style={{ margin: 0, color: data.color }}>{data.title}</p>
         <p style={{ margin: 0, color: data.color }}>{data.company}</p>
         <div style={{ marginTop: '10px' }}>
-          <p><FaPhone style={iconStyle} /> {data.phone}</p>
+          <p><FaPhoneAlt style={iconStyle} /> {data.phone}</p>
           <p><FaGlobe style={iconStyle} />
             <a
               href={`http://${data.website}`}

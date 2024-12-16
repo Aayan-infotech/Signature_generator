@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt,
+  FaPhoneAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt,
 } from 'react-icons/fa';
 import AppContent from './AppContent';
 import Parent from './Parent';
@@ -84,7 +84,7 @@ const Template2 = ({ data, onSubmit }) => {
         <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
           {/* Phone */}
           <p style={{ margin: 0 }}>
-            <FaPhone style={{ color: data.fontColor }} /> {data.phone}
+            <FaPhoneAlt style={{ color: data.fontColor }} /> {data.phone}
           </p>
           <span style={separatorStyle}>|</span>
 

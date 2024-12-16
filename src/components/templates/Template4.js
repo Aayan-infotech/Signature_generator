@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  FaPhone, FaMobileAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt,
+  FaPhoneAlt, FaMobileAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt,
   FaGithub, FaInstagram, FaLinkedin, FaAmazon, FaTwitter, FaWhatsapp
 } from 'react-icons/fa';
 import AppContent from './AppContent';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaPhoneAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import Parent from './Parent';
 import AppContent from './AppContent';
 import AppContent2 from './AppContent2'
@@ -67,7 +67,7 @@ const Template3 = ({ data, onSubmit }) => {
 
           {/* Contact Information */}
           <div>
-            <p><FaPhone style={{ color: data.fontColor }} /> {data.phone}</p>
+            <p><FaPhoneAlt style={{ color: data.fontColor }} /> {data.phone}</p>
             <p><FaGlobe style={{ color: data.fontColor }} /> <a href={`http://${data.website}`} style={{ color: 'black', textDecoration: 'none' }}>{data.website}</a></p>
             <p><FaEnvelope style={{ color: data.fontColor }} /> {data.email}</p>
             <p><FaMapMarkerAlt style={{ color: data.fontColor }} /> {data.address}</p>

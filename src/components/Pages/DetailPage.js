@@ -123,6 +123,7 @@ const DetailPage = () => {
             placeholder="Name"
             value={data.name || ''}
             onChange={handleChange}
+            className="form-control"
           />
           {errors.name && <span className="error-message">{errors.name}</span>}
         </div>
@@ -134,6 +135,7 @@ const DetailPage = () => {
             placeholder="Title"
             value={data.title || ''}
             onChange={handleChange}
+             className="form-control"
           />
           {errors.title && <span className="error-message">{errors.title}</span>}
         </div>
@@ -145,6 +147,7 @@ const DetailPage = () => {
             placeholder="Company"
             value={data.company || ''}
             onChange={handleChange}
+             className="form-control"
           />
           {errors.company && <span className="error-message">{errors.company}</span>}
         </div>
@@ -156,6 +159,7 @@ const DetailPage = () => {
             placeholder="Phone"
             value={data.phone || ''}
             onChange={handleChange}
+             className="form-control"
           />
           {errors.phone && <span className="error-message">{errors.phone}</span>}
         </div>
@@ -167,6 +171,7 @@ const DetailPage = () => {
             placeholder="Website"
             value={data.website || ''}
             onChange={handleChange}
+             className="form-control"
           />
           {errors.website && <span className="error-message">{errors.website}</span>}
         </div>
@@ -178,6 +183,7 @@ const DetailPage = () => {
             placeholder="Email"
             value={data.email || ''}
             onChange={handleChange}
+             className="form-control"
           />
           {errors.email && <span className="error-message">{errors.email}</span>}
         </div>
@@ -189,6 +195,7 @@ const DetailPage = () => {
             placeholder="Address"
             value={data.address || ''}
             onChange={handleChange}
+             className="form-control"
           />
           {errors.address && <span className="error-message">{errors.address}</span>}
         </div>
@@ -199,6 +206,7 @@ const DetailPage = () => {
             <label>{field.name}:</label>
             <input
               type="text"
+               className="form-control"
               placeholder={`${field.name}`}
               value={field.value || ''}
               onChange={(e) => handleAdditionalFieldChange(field.name, e.target.value)}
@@ -211,6 +219,7 @@ const DetailPage = () => {
         <div className="field-select">
           <select
             value={selectedField}
+             className="form-control"
             onChange={(e) => setSelectedField(e.target.value)}
           >
             <option value="">Add Field</option>

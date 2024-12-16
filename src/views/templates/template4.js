@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaFacebook, FaTwitter, FaLinkedin, FaGithub, FaEnvelope, FaPhone, FaGlobe, FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaLinkedin, FaGithub, FaEnvelope, FaPhoneAlt, FaGlobe, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 import { CCard, CCardBody, CRow, CCol } from '@coreui/react';
 import avatar from '../templates/avatar.png';
 import './template4.scss'; // Import the SCSS file
@@ -22,7 +22,7 @@ const SignatureTemplate4 = ({ handleSubmit }) => {
               <CCol md="6" className="right-column">
                 <div className='contact-info'>
                   <p><FaEnvelope /> user@example.com</p>
-                  <p><FaPhone /> (123) 456-7890</p>
+                  <p><FaPhoneAlt /> (123) 456-7890</p>
                   <p><FaGlobe /> www.example.com</p>
                 </div>
                 <div className='social-icons'>

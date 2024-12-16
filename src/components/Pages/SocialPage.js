@@ -86,6 +86,7 @@ const SocialPage = () => {
               type="text"
               placeholder={`${social.name} URL`}
               value={social.url}
+              className='form-control'
               onChange={(e) => handleUrlChange(social.name, e.target.value)}
             />
             <FaTrash onClick={() => removeSocialLink(social.name)} className="remove-icon" />
@@ -96,6 +97,7 @@ const SocialPage = () => {
         <select
           value={selectedSocial}
           onChange={(e) => setSelectedSocial(e.target.value)}
+          className='form-control'
         >
           <option value="">Select Social Media</option>
           {socialMediaOptions.map((option) => (

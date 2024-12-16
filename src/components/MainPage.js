@@ -14,6 +14,7 @@ import Template9 from './templates/Template9';
 import Template10 from './templates/Template10';
 import Template11 from './templates/Template11';
 import Template12 from './templates/Template12';
+import Header from './header/header';
 
 
 const MainPage = () => {
@@ -67,15 +68,18 @@ const MainPage = () => {
   };
 
   return (
-    <div style={{ display: 'flex', width: '100vw', height: '100vh' }}>
+    <>
+    <Header/>
+    <div className ='container-fluid px-0 d-flex'>
       <Sidebar />
-      <div style={{ width: '35%', padding: '20px' }}>
+      <div style={{ width: '30%', padding: '20px' }}>
         <Outlet />
       </div>
-      <div style={{ width: '80%', padding: '20px' }}>
+      <div style={{ width: '66%', padding: '20px' }}>
         {renderTemplate()}
       </div>
     </div>
+    </>
   );
 };
 

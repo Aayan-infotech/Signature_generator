@@ -1,7 +1,7 @@
 import React from 'react';
 import { CCard, CCardBody, CCardHeader, CRow, CCol } from '@coreui/react';
 import './social.scss';
-import { FaFacebook, FaEnvelope, FaPhone, FaGlobe, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaGithub, FaUserAlt } from 'react-icons/fa';
+import { FaFacebook, FaEnvelope, FaPhoneAlt, FaGlobe, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaGithub, FaUserAlt } from 'react-icons/fa';
 import '../dashboard/dashboard.scss';
 import avatar from './avatar.png';
 
@@ -65,7 +65,7 @@ const Social = () => {
                           </CCol>
                           <CCol md="5" className="contact-info">
                             <p><FaEnvelope />    user@example.com</p>
-                            <p><FaPhone />  (123) 456-7890</p>
+                            <p><FaPhoneAlt />  (123) 456-7890</p>
                             <p><FaGlobe />   www.example.com</p>
                             <p><FaMapMarkerAlt />  123 Main St, City, Country</p>
                           </CCol>

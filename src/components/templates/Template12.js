@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  FaPhone,
+  FaPhoneAlt,
   FaGlobe,
   FaEnvelope,
   FaMapMarkerAlt,
@@ -60,7 +60,7 @@ const Template12 = ({ data, onSubmit }) => {
         <div style={stripStyle} >
           {/* Phone and Website in one line */}
           <p style={{ margin: '5px 0' }}>
-            <FaPhone style={{ color: iconColor }} /> <span style={{ color: iconColor }}>{data.phone}</span> &nbsp;&nbsp;   &nbsp;&nbsp;
+            <FaPhoneAlt style={{ color: iconColor }} /> <span style={{ color: iconColor }}>{data.phone}</span> &nbsp;&nbsp;   &nbsp;&nbsp;
             <FaGlobe style={{ color: iconColor }} /> <a href={`http://${data.website}`} style={{ textDecoration: 'none', color: iconColor }}>{data.website}</a>
           </p>
 

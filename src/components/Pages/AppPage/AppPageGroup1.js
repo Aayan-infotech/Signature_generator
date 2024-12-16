@@ -308,7 +308,7 @@ const AppPageGroup1 = () => {
           <button
             key={templateName}
             style={{
-              padding: '5px',
+              padding: '15px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -321,7 +321,7 @@ const AppPageGroup1 = () => {
             onClick={() => handleTemplateClick(templateName)}
           >
             {templateIcons1[index]}
-            <p>{templateName}</p>
+            <p className='mb-0'>{templateName}</p>
           </button>
         ))}
       </div>

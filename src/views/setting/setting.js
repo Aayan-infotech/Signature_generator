@@ -2,7 +2,7 @@ import React from 'react';
 import { CCard, CCardBody, CCardHeader, CRow, CCol } from '@coreui/react';
 import './setting.scss';
 import '../dashboard/dashboard.scss';
-import { FaFacebook, FaEnvelope, FaPhone, FaGlobe, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaGithub, FaUserAlt } from 'react-icons/fa';
+import { FaFacebook, FaEnvelope, FaPhoneAlt, FaGlobe, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaGithub, FaUserAlt } from 'react-icons/fa';
 
 
 const Setting = () => {

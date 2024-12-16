@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  FaPhone, FaMobileAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt,
+  FaPhoneAlt, FaMobileAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt,
   FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaAmazon, FaWhatsapp
 } from 'react-icons/fa';
 import AppContent from './AppContent';
@@ -68,8 +68,7 @@ const Template8 = ({ data, onSubmit }) => {
 
   const iconStyle = (color) => ({
     color: color || data.iconColor || data.fontColor || '#000',
-    padding: '5px',
-    borderRadius: '50%'
+
   });
 
   const socialMediaStyle = {
@@ -112,7 +111,7 @@ const Template8 = ({ data, onSubmit }) => {
         </div>
         <div>
           {/* Dynamic icon color for each */}
-          <p><FaPhone style={iconStyle(data.iconColor)} /> {data.phone}</p>
+          <p><FaPhoneAlt style={iconStyle(data.iconColor)} /> {data.phone}</p>
           <p><FaGlobe style={iconStyle(data.iconColor)} /> <a href={`http://${data.website}`} style={websiteLinkStyle}>{data.website}</a></p>
           <p><FaEnvelope style={iconStyle(data.iconColor)} /> {data.email}</p>
           <p><FaMapMarkerAlt style={iconStyle(data.iconColor)} /> {data.address}</p>

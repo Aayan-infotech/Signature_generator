@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt,
+  FaPhoneAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt,
   FaFacebook, FaInstagram, FaLinkedin, FaTiktok
 } from 'react-icons/fa';
 import Parent from './Parent';
@@ -75,7 +75,7 @@ const Template6 = ({ data, onSubmit }) => {
 
         {/* Contact Info */}
         <div>
-          <p><FaPhone style={iconStyle} /> {data.phone}</p>
+          <p><FaPhoneAlt style={iconStyle} /> {data.phone}</p>
           <p><FaGlobe style={iconStyle} />
             <a
               href={`http://${data.website}`}

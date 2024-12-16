@@ -83,6 +83,7 @@ const FormComponent = () => {
         onChange={handleChange}
         placeholder="Name"
         style={inputStyle}
+        className="form-control"
       />
       <input
         name="address"

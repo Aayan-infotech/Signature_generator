@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaFacebook, FaTwitter, FaLinkedin, FaGithub, FaEnvelope, FaPhone, FaGlobe, FaMapMarkerAlt, FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaLinkedin, FaGithub, FaEnvelope, FaPhoneAlt, FaGlobe, FaMapMarkerAlt, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 import { CCard, CCardBody, CRow, CCol } from '@coreui/react';
 import avatar from '../templates/avatar.png';
 
@@ -56,7 +56,7 @@ const SignatureTemplate15 = ({ handleSubmit }) => {
               <p className='caddress'>123 Main St, City, Country</p>
               <p>
                 <FaEnvelope /> user@example.com<br />
-                <FaPhone /> (123) 456-7890<br />
+                <FaPhoneAlt /> (123) 456-7890<br />
                 <FaGlobe /> www.example.com<br />
                 <FaMapMarkerAlt /> 123 Main St, City, Country
               </p>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaFacebook, FaTwitter, FaLinkedin, FaGithub, FaEnvelope, FaPhone, FaGlobe, FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaLinkedin, FaGithub, FaEnvelope, FaPhoneAlt, FaGlobe, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 import avatar from '../templates/avatar.png';
 import './template1.scss'; // Import the SCSS file
 
@@ -20,7 +20,7 @@ const SignatureTemplate1 = ({ handleSubmit }) => {
           <div className="signature-contact">
             <div className="contact-info">
               <p><FaEnvelope className="icon" /> user@example.com</p>
-              <p><FaPhone className="icon" /> (123) 456-7890</p>
+              <p><FaPhoneAlt className="icon" /> (123) 456-7890</p>
               <p><FaGlobe className="icon" /> www.example.com</p>
             </div>
             <div className="social-icons">

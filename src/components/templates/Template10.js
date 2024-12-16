@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaAmazon, FaWhatsapp, FaTiktok } from 'react-icons/fa';
+import { FaPhoneAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaAmazon, FaWhatsapp, FaTiktok } from 'react-icons/fa';
 import AppContent from './AppContent';
 import Parent from './Parent';
 import AppContent2 from './AppContent2'
@@ -39,7 +39,7 @@ const Template10 = ({ data, onSubmit }) => {
   // Left section style (40%)
   const leftSectionStyle = {
     flex: '0 0 40%',
-    marginRight: '20px',
+    paddingRight: '20px',
     textAlign: 'right',
   };
 
@@ -49,7 +49,7 @@ const Template10 = ({ data, onSubmit }) => {
     width: '100px',
     height: '100px',
     objectFit: 'cover',
-    marginRight: '20px',
+    paddingRight: '20px',
   };
 
   // Right section style (50%)
@@ -102,7 +102,7 @@ const Template10 = ({ data, onSubmit }) => {
 
       {/* Right Section */}
       <div style={rightSectionStyle}>
-        <p style={{ margin: '5px 0' }}><FaPhone style={{ color: socialIconColor }} /> {data.phone}</p>
+        <p style={{ margin: '5px 0' }}><FaPhoneAlt style={{ color: socialIconColor }} /> {data.phone}</p>
         <p style={{ margin: '5px 0' }}><FaGlobe style={{ color: socialIconColor }} /> <a href={`http://${data.website}`} style={{ color: socialIconColor, textDecoration: 'none' }}>{data.website}</a></p>
         <p style={{ margin: '5px 0' }}><FaEnvelope style={{ color: socialIconColor }} /> {data.email}</p>
         <p style={{ margin: '5px 0' }}><FaMapMarkerAlt style={{ color: socialIconColor }} /> {data.address}</p>

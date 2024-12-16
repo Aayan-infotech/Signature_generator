@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaEnvelope, FaGlobe, FaMapMarkerAlt, FaPhone } from 'react-icons/fa'
+import { FaEnvelope, FaGlobe, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa'
 import AppContent from './AppContent'
 import Parent from './Parent'
 import AppContent2 from './AppContent2'
@@ -85,7 +85,7 @@ const Template1 = ({ data, onSubmit }) => {
         >
           <h2 style={{ margin: 0, color: data.fontColor }}>{data.name}</h2>
           <p style={{ margin: 0, fontStyle: 'italic', color: '#555' }}>
-            {data.title}, {data.company}
+            {data.title} {data.company}
           </p>
         </div>
 
@@ -101,7 +101,7 @@ const Template1 = ({ data, onSubmit }) => {
         >
           {/* Phone */}
           <p style={{ margin: 0 }}>
-            <FaPhone style={{ color: data.fontColor }} /> {data.phone}
+            <FaPhoneAlt style={{ color: data.fontColor }} /> {data.phone}
           </p>
           <span style={{ margin: '0 5px' }}>|</span>
 

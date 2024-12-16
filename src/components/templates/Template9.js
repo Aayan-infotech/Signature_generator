@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaPhone, FaGlobe, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaTiktok } from 'react-icons/fa';
+import { FaPhoneAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaTiktok } from 'react-icons/fa';
 import AppContent from './AppContent';
 import Parent from './Parent';
 import AppContent2 from './AppContent2'
@@ -92,7 +92,7 @@ const Template9 = ({ data, onSubmit }) => {
           <h2 style={{ margin: '0', fontSize: '1.5rem', fontWeight: 'bold', color: data.fontColor }}>{data.name}</h2>
           <p style={{ margin: `5px 0 ${getSpacing()}`, fontWeight: 'bold' }}>{data.title}</p>
           <p style={{ margin: `5px 0 ${getSpacing()}` }}>{data.company}</p>
-          <p style={{ margin: `5px 0 ${getSpacing()}` }}><FaPhone style={{ color: data.fontColor }} /> {data.phone}</p>
+          <p style={{ margin: `5px 0 ${getSpacing()}` }}><FaPhoneAlt style={{ color: data.fontColor }} /> {data.phone}</p>
           <p style={{ margin: `5px 0 ${getSpacing()}` }}>
             <FaGlobe style={{ color: data.fontColor }} />
             <a href={`http://${data.website}`}

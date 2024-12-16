@@ -1,7 +1,7 @@
 import React from 'react';
 import { CCard, CCardBody, CCardHeader, CRow, CCol, CButton } from '@coreui/react';
 import './images.scss';
-import { FaPlus, FaEnvelope, FaPhone, FaGlobe, FaMapMarkerAlt, FaFacebook, FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { FaPlus, FaEnvelope, FaPhoneAlt, FaGlobe, FaMapMarkerAlt, FaFacebook, FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
 import '../dashboard/dashboard.scss'
 import avatar from './avatar.png'; // Replace with the actual path to the profile picture
 
@@ -52,7 +52,7 @@ const images = () => {
                           </CCol>
                           <CCol md="5" className="contact-info">
                             <p><FaEnvelope />    user@example.com</p>
-                            <p><FaPhone />  (123) 456-7890</p>
+                            <p><FaPhoneAlt />  (123) 456-7890</p>
                             <p><FaGlobe />   www.example.com</p>
                             <p><FaMapMarkerAlt />  123 Main St, City, Country</p>
                           </CCol>

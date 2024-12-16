@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  FaPhone,
+  FaPhoneAlt,
   FaGlobe,
   FaEnvelope,
   FaMapMarkerAlt,
@@ -60,7 +60,7 @@ const Template11 = ({ data, onSubmit }) => {
           {/* Phone, Email, Website, and Address in a column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <p style={{ margin: 0, display: 'flex', alignItems: 'center' }}>
-              <FaPhone style={{ color: iconColor, marginRight: '5px' }} /> <span style={{ color: iconColor }}>{data.phone}</span>
+              <FaPhoneAlt style={{ color: iconColor, marginRight: '5px' }} /> <span style={{ color: iconColor }}>{data.phone}</span>
             </p>
             <p style={{ margin: 0, display: 'flex', alignItems: 'center' }}>
               <FaEnvelope style={{ color: iconColor, marginRight: '5px' }} /> <span style={{ color: iconColor }}>{data.email}</span>

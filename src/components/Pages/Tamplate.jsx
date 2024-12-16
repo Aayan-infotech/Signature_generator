@@ -1,5 +1,6 @@
 import React from 'react'
 import { useAppContext } from '../../context/AppContext'
+import "./Tamplate.css"
 
 const TamplatesPreview = () => {
   const { handleTamplate, selectedTamplate } = useAppContext()
@@ -11,11 +12,12 @@ const TamplatesPreview = () => {
     <div>
       <h3>Templates</h3>
       <div
+      className='pe-2'
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, 1fr)', // 2 columns layout
           gap: '20px', // Space between the buttons
-          maxWidth: '600px', // Optional: max-width to control overall width
+        
           margin: '0 auto', // Center the grid container
           height:"calc(100vh - 100px )",
           overflowY:"auto",

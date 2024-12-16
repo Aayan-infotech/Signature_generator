@@ -30,6 +30,7 @@ const DesignPage = () => {
             name="font"
             value={data.font || 'Arial'}
             onChange={handleChange}
+            className='form-control'
           >
             <option value="Arial">Arial</option>
             <option value="Verdana">Verdana</option>
@@ -89,6 +90,7 @@ const DesignPage = () => {
             name="spacing"
             value={data.spacing || 'normal'}
             onChange={handleChange}
+            className='form-control'
           >
             <option value="normal">Normal</option>
             <option value="wide">Wide</option>
@@ -102,6 +104,7 @@ const DesignPage = () => {
             name="size"
             value={data.size || 'medium'}
             onChange={handleChange}
+            className='form-control'
           >
             <option value="small">Small</option>
             <option value="medium">Medium</option>
