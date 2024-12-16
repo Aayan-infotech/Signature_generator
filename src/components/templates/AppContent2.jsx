@@ -13,6 +13,7 @@ const AppContent2 = () => {
       {/* 1111111111111111111111111111111111111111111111111111 */}
       <div>
         <ul
+        className='ps-0'
           style={{
             listStyle: 'none',
           }}
