@@ -17,7 +17,7 @@ const Options = {
 const Parent = ({ children }) => {
   const { data, selectedContent } = useAppContext()
   const pdfExportComponent = useRef(null) // Reference for PDF component
-  const token = localStorage.getItem('token2') // Retrieve token from cookies
+  const token = localStorage.getItem('token') // Retrieve token from cookies
   const [imageData, setImageData] = useState(null)
   const [show, setShow] = useState(false)
   const [pdfStore, setPdfStore] = useState(null)
@@ -132,7 +132,7 @@ const Parent = ({ children }) => {
       const response = await axios.post('http://localhost:9006/api/create/signature', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token2}`,
+          Authorization: `Bearer ${token}`,
         },
       })
 

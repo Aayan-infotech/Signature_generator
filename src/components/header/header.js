@@ -12,21 +12,22 @@ import { useLocation } from 'react-router-dom'
 function Header() {
   const [show, setShow] = useState(false)
   const [signature, setSignature] = useState(null)
+  const [user, setUser] = useState(null)
   const location = useLocation()
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const token = params.get('token');
+    const params = new URLSearchParams(location.search)
+    const token = params.get('token')
     if (token) {
-      localStorage.setItem('token2', token);
+      localStorage.setItem('token2', token)
     }
-  }, [location]);
+  }, [location])
 
   const handleSignature = async () => {
     try {
-      const token2 = localStorage.getItem('token2');
+      const token2 = localStorage.getItem('token2')
       const response = await axios.get('http://localhost:9006/api/get/signature', {
         headers: {
           'Content-Type': 'application/json',
@@ -39,6 +40,36 @@ function Header() {
       console.warn('Error fetching signature:', error)
       alert('Failed to fetch signature. Please try again.')
     }
+  }
+
+  const handleCurrentUser = async () => {
+    const token2 = localStorage.getItem('token2')
+    console.log(token2)
+    const response = await axios.get('http://localhost:9006/api/user/', {
+      headers: {
+        Authorization: `Bearer ${token2}`,
+      },
+    })
+    setUser(response?.data)
+  }
+
+  useEffect(() => {
+    handleCurrentUser()
+  }, [])
+
+  const handleLogout = async () => {
+    const token2 = localStorage.getItem('token2')
+    const response = await axios.post(
+      'http://localhost:9006/api/user/logout',
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token2}`,
+        },
+      },
+      localStorage.removeItem('token2'),
+      window.location.replace(`http://localhost:5173/`),
+    )
   }
 
   console.log(signature)
@@ -64,7 +95,7 @@ function Header() {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu style={{ left: '-50px' }}>
-                  <a href="http://44.196.64.110:2222/" className="text-decoration-none ps-3">
+                  <a onClick={handleLogout} className="text-decoration-none ps-3">
                     Logout
                   </a>
                 </Dropdown.Menu>
