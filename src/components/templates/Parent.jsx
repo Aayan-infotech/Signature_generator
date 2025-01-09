@@ -64,7 +64,7 @@ const Parent = ({ children }) => {
     try {
       // Sending POST request to the server with the token
       const response = await axios.post(
-        'http://44.196.64.110:9006/api/user',
+        'http://localhost:9006/api/user',
         {
           token: token2, // Pass token directly in the body
         },
@@ -144,7 +144,7 @@ const Parent = ({ children }) => {
     const data123 = { selectedContent, data }
     try {
       const response = await axios.post(
-        'http://44.196.64.110:9006/api/user-data',
+        'http://localhost:9006/api/user-data',
         { data: data123 },
         {
           headers: {
@@ -182,17 +182,16 @@ const Parent = ({ children }) => {
       }
 
       const blob = new Blob(byteArrays, { type: 'image/png' })
-
+      const token = localStorage.getItem("token2");
       const formData = new FormData()
       formData.append('images', blob, 'signature.png')
-
       const response = await axios.post(
         'http://44.196.64.110:9006/api/create/signature',
         formData,
-        userId,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
           },
         },
       )
