@@ -108,8 +108,7 @@ const Parent = ({ children }) => {
     }
 
     try {
-      // Convert base64 string to Blob
-      const base64Data = dataURL.split(',')[1] // Remove the 'data:image/png;base64,' part
+      const base64Data = dataURL.split(',')[1]
       const byteCharacters = atob(base64Data)
       const byteArrays = []
 
@@ -125,11 +124,10 @@ const Parent = ({ children }) => {
 
       const blob = new Blob(byteArrays, { type: 'image/png' })
 
-      // Create FormData and append the Blob
       const formData = new FormData()
-      formData.append('images', blob, 'signature.png') // Add the image Blob to FormData
+      formData.append('images', blob, 'signature.png')
 
-      const response = await axios.post('http://localhost:9006/api/create/signature', formData, {
+      const response = await axios.post('http://44.196.64.110:9006/api/create/signature', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
