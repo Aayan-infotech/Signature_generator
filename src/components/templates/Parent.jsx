@@ -64,7 +64,7 @@ const Parent = ({ children }) => {
     try {
       // Sending POST request to the server with the token
       const response = await axios.post(
-        'http://localhost:9006/api/user',
+        'http://44.196.64.110:9006/api/user',
         {
           token: token2, // Pass token directly in the body
         },
