@@ -26,21 +26,29 @@ function Header() {
   }, [location])
 
   const handleSignature = async () => {
+    const token2 = localStorage.getItem('token2');
+    
+    if (!token2) {
+      alert('Token not found. Please log in again.');
+      return;
+    }
+  
     try {
-      const token2 = localStorage.getItem('token2')
       const response = await axios.get('http://localhost:9006/api/get/signature', {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token2}`,
+          Authorization: `Bearer ${token2}`, // Ensure proper format
         },
-      })
-      setSignature(response.data)
-      handleShow()
+      });
+      setSignature(response.data);
+      handleShow();
     } catch (error) {
-      console.warn('Error fetching signature:', error)
-      alert('Failed to fetch signature. Please try again.')
+      console.warn('Error fetching signature:', error);
+      alert('Failed to fetch signature. Please try again.');
     }
-  }
+  };
+  
+  
 
   const handleCurrentUser = async () => {
     const token2 = localStorage.getItem('token2')

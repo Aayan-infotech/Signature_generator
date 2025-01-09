@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState , useEffect } from 'react'
 import { useAppContext } from '../../context/AppContext'
 import axios from 'axios'
 import Cookies from 'js-cookie' // Import Cookies
@@ -18,6 +18,7 @@ const Parent = ({ children }) => {
   const { data, selectedContent } = useAppContext()
   const pdfExportComponent = useRef(null) // Reference for PDF component
   const token = localStorage.getItem('token') // Retrieve token from cookies
+  const [userId, setUserId] = useState()
   const [imageData, setImageData] = useState(null)
   const [show, setShow] = useState(false)
   const [pdfStore, setPdfStore] = useState(null)
@@ -34,6 +35,64 @@ const Parent = ({ children }) => {
       console.error('PDF component not found')
     }
   }
+
+  const getCurrentUser = async () => {
+    try {
+      if (!token2) {
+        console.error('No token found in localStorage')
+        return
+      }
+      console.log(token2)
+
+      // Make a POST request to the server to send the token and retrieve the user
+      const response = await axios.get('http://localhost:9006/api/user', { token: token2 })
+
+      // Handle successful response
+      if (response.status === 200) {
+        console.log('User retrieved:', response.data)
+      } else {
+        console.error('Failed to retrieve user:', response.data.message)
+      }
+    } catch (error) {
+      console.error('An error occurred while fetching the user:', error)
+    }
+  }
+
+  async function getUser() {
+    console.log('token2', token2)
+
+    try {
+      // Sending POST request to the server with the token
+      const response = await axios.post(
+        'http://localhost:9006/api/user',
+        {
+          token: token2, // Pass token directly in the body
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+
+      // Handling the response
+      if (response.status === 200) {
+        // User retrieved successfully
+        console.log('User retrieved:', response.data)
+        setUserId(response.data._id)
+        return response.data
+      } else {
+        // Handling error responses
+        console.error('Error:', response.data.message)
+      }
+    } catch (error) {
+      console.error('Fetch error:', error)
+    }
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [userId])
 
   console.log(pdfStore)
 
@@ -127,12 +186,15 @@ const Parent = ({ children }) => {
       const formData = new FormData()
       formData.append('images', blob, 'signature.png')
 
-      const response = await axios.post('http://44.196.64.110:9006/api/create/signature', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`,
+      const response = await axios.post(
+        'http://44.196.64.110:9006/api/create/signature',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
         },
-      })
+      )
 
       console.log('Image sent successfully:', response)
     } catch (error) {
