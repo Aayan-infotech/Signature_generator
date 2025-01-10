@@ -25,9 +25,9 @@ const Parent = ({ children }) => {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
   const location = useLocation()
-  const params = new URLSearchParams(location.search)
 
   useEffect(() => {
+    const params = new URLSearchParams(location.search)
     const token = params.get('token')
     if (token) {
       localStorage.setItem('token2', token)
