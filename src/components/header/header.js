@@ -41,27 +41,27 @@ function Header() {
   }, [])
 
   const handleSignature = async () => {
-    const token2 = localStorage.getItem('token2');
-    
+    const token2 = localStorage.getItem('token2')
+
     if (!token2) {
-      alert('Token not found. Please log in again.');
-      return;
+      alert('Token not found. Please log in again.')
+      return
     }
-  
+
     try {
       const response = await axios.get('http://44.196.64.110:9006/api/get/signature', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token2}`, // Ensure proper format
         },
-      });
-      setSignature(response?.data?.signature);
-      handleShow();
+      })
+      setSignature(response?.data?.signature)
+      handleShow()
     } catch (error) {
-      console.warn('Error fetching signature:', error);
-      alert('Failed to fetch signature. Please try again.');
+      console.warn('Error fetching signature:', error)
+      alert('Failed to fetch signature. Please try again.')
     }
-  };
+  }
 
   const handleLogout = async () => {
     const token2 = localStorage.getItem('token2')
@@ -117,18 +117,14 @@ function Header() {
           <Modal.Title>Your Signature</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {signature ? (
-            <div className="row">
-              <div className="col-lg-3">
-                <img
-                  src={signature.signature} // Accessing the `signature` property from the object
-                  alt="User Signature"
-                  style={{ width: '100%', height: 'auto' }}
-                />
-              </div>
+          {signature.length !== 0 && (
+            <div className="row gy-4">
+              {signature.map((item, index) => (
+                <div className="col-lg-3">
+                  <img key={index} src={item} alt="signature" className="w-100" />
+                </div>
+              ))}
             </div>
-          ) : (
-            'Loading...'
           )}
         </Modal.Body>
         <Modal.Footer className="border-0 d-flex justify-content-center">
