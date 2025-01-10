@@ -44,6 +44,11 @@ function Header() {
     }
   }, [location])
 
+
+  const handleModalSignature = () => {
+    handleSignature()
+    handleShow()
+  }
   const handleSignature = async () => {
     if (!token2) {
       alert('Token not found. Please log in again.')
@@ -93,7 +98,7 @@ function Header() {
           </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-between">
-            <Nav.Link onClick={handleSignature}>My Signature</Nav.Link>
+            <Nav.Link onClick={handleModalSignature}>My Signature</Nav.Link>
             <Navbar.Text className="d-flex flex-row align-items-center">
               <Dropdown>
                 <Dropdown.Toggle
