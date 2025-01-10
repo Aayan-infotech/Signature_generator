@@ -1,4 +1,4 @@
-import React, { useRef, useState , useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { useAppContext } from '../../context/AppContext'
 import axios from 'axios'
 import Cookies from 'js-cookie' // Import Cookies
@@ -78,11 +78,10 @@ const Parent = ({ children }) => {
       // Handling the response
       if (response.status === 200) {
         // User retrieved successfully
-        console.log('User retrieved:', response.data)
+        // console.log('User retrieved:', response.data)
         setUserId(response.data._id)
         return response.data
       } else {
-        // Handling error responses
         console.error('Error:', response.data.message)
       }
     } catch (error) {
@@ -181,7 +180,7 @@ const Parent = ({ children }) => {
       }
 
       const blob = new Blob(byteArrays, { type: 'image/png' })
-      const token = localStorage.getItem("token2");
+      const token = localStorage.getItem('token2')
       const formData = new FormData()
       formData.append('images', blob, 'signature.png')
       const response = await axios.post(
