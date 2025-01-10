@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom'
 
 function Header() {
   const [show, setShow] = useState(false)
-  const [signature, setSignature] = useState(null)
+  const [signature, setSignature] = useState([])
   const [user, setUser] = useState(null)
   const location = useLocation()
   const handleClose = () => setShow(false)
@@ -24,6 +24,21 @@ function Header() {
       localStorage.setItem('token2', token)
     }
   }, [location])
+
+  const handleCurrentUser = async () => {
+    const token2 = localStorage.getItem('token2')
+    console.log(token2)
+    const response = await axios.get('http://44.196.64.110:9006/api/user/', {
+      headers: {
+        Authorization: `Bearer ${token2}`,
+      },
+    })
+    setUser(response?.data)
+  }
+
+  useEffect(() => {
+    handleCurrentUser()
+  }, [])
 
   const handleSignature = async () => {
     const token2 = localStorage.getItem('token2');
@@ -40,30 +55,13 @@ function Header() {
           Authorization: `Bearer ${token2}`, // Ensure proper format
         },
       });
-      setSignature(response.data);
+      setSignature(response?.data?.signature);
       handleShow();
     } catch (error) {
       console.warn('Error fetching signature:', error);
       alert('Failed to fetch signature. Please try again.');
     }
   };
-  
-  
-
-  const handleCurrentUser = async () => {
-    const token2 = localStorage.getItem('token2')
-    console.log(token2)
-    const response = await axios.get('http://44.196.64.110:9006/api/user/', {
-      headers: {
-        Authorization: `Bearer ${token2}`,
-      },
-    })
-    setUser(response?.data)
-  }
-
-  useEffect(() => {
-    handleCurrentUser()
-  }, [])
 
   const handleLogout = async () => {
     const token2 = localStorage.getItem('token2')
