@@ -45,7 +45,7 @@ const Parent = ({ children }) => {
       console.log(token2)
 
       // Make a POST request to the server to send the token and retrieve the user
-      const response = await axios.get('http://localhost:9006/api/user', { token: token2 })
+      const response = await axios.get('http://44.196.64.110:9006/api/user', { token: token2 })
 
       // Handle successful response
       if (response.status === 200) {
@@ -64,7 +64,7 @@ const Parent = ({ children }) => {
     try {
       // Sending POST request to the server with the token
       const response = await axios.post(
-        'http://localhost:9006/api/user',
+        'http://44.196.64.110:9006/api/user',
         {
           token: token2, // Pass token directly in the body
         },
@@ -98,7 +98,7 @@ const Parent = ({ children }) => {
 
   const handlegmail = async () => {
     try {
-      const response = await axios.post('http://localhost:9006/api/email/send-email', pdfStore)
+      const response = await axios.post('http://44.196.64.110:9006/api/email/send-email', pdfStore)
       console.log(response)
     } catch (error) {
       console.warn(error)
@@ -144,7 +144,7 @@ const Parent = ({ children }) => {
     const data123 = { selectedContent, data }
     try {
       const response = await axios.post(
-        'http://localhost:9006/api/user-data',
+        'http://44.196.64.110:9006/api/user-data',
         { data: data123 },
         {
           headers: {
@@ -160,7 +160,6 @@ const Parent = ({ children }) => {
   }
 
   const sendImage = async (dataURL) => {
-    console.log(dataURL, 'abinash')
     if (!dataURL) {
       console.error('No image data available')
       return
@@ -195,8 +194,6 @@ const Parent = ({ children }) => {
           },
         },
       )
-
-      console.log('Image sent successfully:', response)
     } catch (error) {
       console.error('Error sending image:', error)
     }

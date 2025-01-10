@@ -34,7 +34,7 @@ function Header() {
     }
   
     try {
-      const response = await axios.get('http://localhost:9006/api/get/signature', {
+      const response = await axios.get('http://44.196.64.110:9006/api/get/signature', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token2}`, // Ensure proper format
@@ -53,7 +53,7 @@ function Header() {
   const handleCurrentUser = async () => {
     const token2 = localStorage.getItem('token2')
     console.log(token2)
-    const response = await axios.get('http://localhost:9006/api/user/', {
+    const response = await axios.get('http://44.196.64.110:9006/api/user/', {
       headers: {
         Authorization: `Bearer ${token2}`,
       },
@@ -68,7 +68,7 @@ function Header() {
   const handleLogout = async () => {
     const token2 = localStorage.getItem('token2')
     const response = await axios.post(
-      'http://localhost:9006/api/user/logout',
+      'http://44.196.64.110:9006/api/user/logout',
       {},
       {
         headers: {
@@ -76,7 +76,7 @@ function Header() {
         },
       },
       localStorage.removeItem('token2'),
-      window.location.replace(`http://localhost:5173/`),
+      window.location.replace(`http://44.196.64.110:2222/`),
     )
   }
 
