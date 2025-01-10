@@ -7,17 +7,18 @@ import Nav from 'react-bootstrap/Nav'
 import Modal from 'react-bootstrap/Modal'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { MySignature } from '../mySignature'
 
 function Header() {
   const [show, setShow] = useState(false)
   const [signature, setSignature] = useState([])
   const [user, setUser] = useState(null)
-  const handleClose = () => setShow(false)
+  const navigate = useNavigate()
   const handleShow = () => setShow(true)
-
-  const token2 = localStorage.getItem('token2');
-
+  const [selectedImage, setSelectedImage] = useState(null)
+  const token2 = localStorage.getItem('token2')
+  const location = useLocation()
   const handleCurrentUser = async () => {
     const response = await axios.get('http://44.196.64.110:9006/api/user/', {
       headers: {
@@ -30,6 +31,18 @@ function Header() {
   useEffect(() => {
     handleCurrentUser()
   }, [])
+
+  const handleClose = () => {
+    setShow(false)
+    navigate('/')
+  }
+
+  useEffect(() => {
+    if (location.pathname === '/signature') {
+      handleSignature()
+      handleShow()
+    }
+  }, [location])
 
   const handleSignature = async () => {
     if (!token2) {
@@ -45,7 +58,8 @@ function Header() {
         },
       })
       setSignature(response?.data?.signature)
-      handleShow()
+      // handleShow()
+      // handleClose()
     } catch (error) {
       console.warn('Error fetching signature:', error)
       alert('Failed to fetch signature. Please try again.')
@@ -64,6 +78,10 @@ function Header() {
       localStorage.removeItem('token2'),
       window.location.replace(`http://44.196.64.110:2222/`),
     )
+  }
+
+  const handleSelect = (image) => {
+    setSelectedImage(image) // Set the selected image in state
   }
 
   return (
@@ -97,28 +115,13 @@ function Header() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
-      <Modal show={show} onHide={handleClose} size="xl">
-        <Modal.Header closeButton className="border-0">
-          <Modal.Title>Your Signature</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {signature.length !== 0 && (
-            <div className="row gy-4">
-              {signature.map((item, index) => (
-                <div className="col-lg-3">
-                  <img key={index} src={item} alt="signature" className="w-100" />
-                </div>
-              ))}
-            </div>
-          )}
-        </Modal.Body>
-        <Modal.Footer className="border-0 d-flex justify-content-center">
-          <button className="btn btn-primary" onClick={handleClose}>
-            Use This Signature
-          </button>
-        </Modal.Footer>
-      </Modal>
+      <MySignature
+        show={show}
+        handleClose={handleClose}
+        signature={signature}
+        selectedImage={selectedImage}
+        handleSelect={handleSelect}
+      />
     </>
   )
 }

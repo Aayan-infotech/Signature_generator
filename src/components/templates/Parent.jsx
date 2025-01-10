@@ -1,10 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { useAppContext } from '../../context/AppContext'
 import axios from 'axios'
+import '../mainpage.css'
 import Cookies from 'js-cookie' // Import Cookies
 import Modal from 'react-bootstrap/Modal'
 import html2canvas from 'html2canvas'
-import { useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { SuccessShow } from '../mySignature'
 import { PDFExport } from '@progress/kendo-react-pdf' // Assuming using kendo-react-pdf or similar for PDF generation
 
 const Options = {
@@ -16,14 +18,18 @@ const Options = {
 
 const Parent = ({ children }) => {
   const { data, selectedContent } = useAppContext()
+  const navigate = useNavigate()
   const pdfExportComponent = useRef(null) // Reference for PDF component
   const token = localStorage.getItem('token') // Retrieve token from cookies
   const [userId, setUserId] = useState()
   const [imageData, setImageData] = useState(null)
   const [show, setShow] = useState(false)
+  const [successShow, setSuccessShow] = useState(false)
   const [pdfStore, setPdfStore] = useState(null)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
+  const handleSuccessShow = () => setSuccessShow(true)
+
   const location = useLocation()
 
   useEffect(() => {
@@ -35,8 +41,6 @@ const Parent = ({ children }) => {
 
     getUser()
   }, [userId])
-
-  
 
   const token2 = localStorage.getItem('token2')
   const downloadPdf = () => {
@@ -189,6 +193,9 @@ const Parent = ({ children }) => {
           },
         },
       )
+      if (response.status === 200) {
+        setSuccessShow(true)
+      }
     } catch (error) {
       console.error('Error sending image:', error)
     }
@@ -203,6 +210,11 @@ const Parent = ({ children }) => {
     // })
   }
 
+
+  const handleSuccessClose = () => {
+    setSuccessShow(false)
+    navigate("/signature")
+  }
   return (
     <>
       <button
@@ -256,6 +268,8 @@ const Parent = ({ children }) => {
           </button>
         </Modal.Footer>
       </Modal>
+
+      <SuccessShow successShow={successShow} handleSuccessClose={handleSuccessClose} />
     </>
   )
 }
