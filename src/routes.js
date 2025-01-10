@@ -82,7 +82,7 @@ const routes = [
   { path: '/social', element: Social },
   { path: '/design', element: Design},
   { path: '/setting', element: Setting},
-  { path: '/test', element: test},
+  { path: '/sucess', element: test},
   { path: '/template1', element: template1},
   { path: '/template2', element: template2},
   { path: '/template3', element: template3},

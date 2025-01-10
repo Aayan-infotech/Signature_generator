@@ -9,6 +9,7 @@ import DesignPage from './components/Pages/DesignPage';
 import TamplatesPreview from './components/Pages/Tamplate';
 import AppPages from './components/Pages/AppPage/AppPages';
 import { AppProvider } from './context/AppContext';
+import { MySignature } from './components/mySignature';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="design" element={<DesignPage />} />
             <Route path="template" element={<TamplatesPreview />} />
             <Route path="app" element={<AppPages />} />
+            <Route path="signature" element={<MySignature />} />
           </Route>
         </Routes>
       </Router>
