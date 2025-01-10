@@ -19,19 +19,7 @@ import Header from './header/header';
 
 const MainPage = () => {
   const { data, setData } = useAppContext();
-
-  const getTokenFromURL = () => {
-    const params = new URLSearchParams(window.location.search); // Parse the query string
-    return params.get('token'); // Get the value of 'token'
-  };
-  
-  const token = getTokenFromURL();
-  localStorage.setItem('token2' , token)
-  console.log('Extracted Token:', token);  
-
-
   const handleSubmit = (templateData) => {
-    // Handle the final submission or processing of the template data
     console.log('Template Data:', templateData);
   };
 
