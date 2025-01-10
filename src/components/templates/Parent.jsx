@@ -4,7 +4,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie' // Import Cookies
 import Modal from 'react-bootstrap/Modal'
 import html2canvas from 'html2canvas'
-
+import { useLocation } from 'react-router-dom'
 import { PDFExport } from '@progress/kendo-react-pdf' // Assuming using kendo-react-pdf or similar for PDF generation
 
 const Options = {
@@ -24,6 +24,19 @@ const Parent = ({ children }) => {
   const [pdfStore, setPdfStore] = useState(null)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
+  const location = useLocation()
+  const params = new URLSearchParams(location.search)
+
+  useEffect(() => {
+    const token = params.get('token')
+    if (token) {
+      localStorage.setItem('token2', token)
+    }
+
+    getUser()
+  }, [userId])
+
+  
 
   const token2 = localStorage.getItem('token2')
   const downloadPdf = () => {
@@ -42,12 +55,8 @@ const Parent = ({ children }) => {
         console.error('No token found in localStorage')
         return
       }
-      console.log(token2)
-
-      // Make a POST request to the server to send the token and retrieve the user
       const response = await axios.get('http://44.196.64.110:9006/api/user', { token: token2 })
 
-      // Handle successful response
       if (response.status === 200) {
         console.log('User retrieved:', response.data)
       } else {
@@ -59,14 +68,11 @@ const Parent = ({ children }) => {
   }
 
   async function getUser() {
-    console.log('token2', token2)
-
     try {
-      // Sending POST request to the server with the token
       const response = await axios.post(
         'http://44.196.64.110:9006/api/user',
         {
-          token: token2, // Pass token directly in the body
+          token: token2,
         },
         {
           headers: {
@@ -75,10 +81,7 @@ const Parent = ({ children }) => {
         },
       )
 
-      // Handling the response
       if (response.status === 200) {
-        // User retrieved successfully
-        // console.log('User retrieved:', response.data)
         setUserId(response.data._id)
         return response.data
       } else {
@@ -88,12 +91,6 @@ const Parent = ({ children }) => {
       console.error('Fetch error:', error)
     }
   }
-
-  useEffect(() => {
-    getUser()
-  }, [userId])
-
-  console.log(pdfStore)
 
   const handlegmail = async () => {
     try {
@@ -152,7 +149,6 @@ const Parent = ({ children }) => {
           },
         },
       )
-      console.log({ response })
     } catch (error) {
       console.warn(error)
     }

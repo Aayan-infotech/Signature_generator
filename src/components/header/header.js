@@ -13,21 +13,12 @@ function Header() {
   const [show, setShow] = useState(false)
   const [signature, setSignature] = useState([])
   const [user, setUser] = useState(null)
-  const location = useLocation()
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
-  useEffect(() => {
-    const params = new URLSearchParams(location.search)
-    const token = params.get('token')
-    if (token) {
-      localStorage.setItem('token2', token)
-    }
-  }, [location])
+  const token2 = localStorage.getItem('token2');
 
   const handleCurrentUser = async () => {
-    const token2 = localStorage.getItem('token2')
-    console.log(token2)
     const response = await axios.get('http://44.196.64.110:9006/api/user/', {
       headers: {
         Authorization: `Bearer ${token2}`,
@@ -41,8 +32,6 @@ function Header() {
   }, [])
 
   const handleSignature = async () => {
-    const token2 = localStorage.getItem('token2')
-
     if (!token2) {
       alert('Token not found. Please log in again.')
       return
@@ -64,7 +53,6 @@ function Header() {
   }
 
   const handleLogout = async () => {
-    const token2 = localStorage.getItem('token2')
     const response = await axios.post(
       'http://44.196.64.110:9006/api/user/logout',
       {},
@@ -77,8 +65,6 @@ function Header() {
       window.location.replace(`http://44.196.64.110:2222/`),
     )
   }
-
-  console.log(signature)
 
   return (
     <>
