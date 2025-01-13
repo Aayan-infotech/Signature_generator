@@ -182,7 +182,7 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
           padding: '20px',
           borderRadius: '5px',
           maxWidth: '500px',
-          width: '50%',
+          width: '100%',
         }}
       >
         <h3>Select Content for {templateName}</h3>

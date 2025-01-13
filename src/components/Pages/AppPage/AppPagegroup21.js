@@ -129,7 +129,7 @@ const AppPageGroup21 = () => {
               padding: '20px',
               borderRadius: '5px',
               maxWidth: '400px',
-              width: '50%',
+              width: '100%',
             }}
           >
             <h4>{selectedTemplate}</h4>
