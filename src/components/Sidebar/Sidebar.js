@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { FaPencilAlt, FaImage, FaShareAlt, FaLayerGroup, FaPaintBrush, FaThLarge } from 'react-icons/fa';
 import './Sidebar.scss';
 
-const Sidebar = () => {
+const Sidebar = ({handleShow}) => {
   const [activeLink, setActiveLink] = useState('/details');
 
   const handleClick = (path) => {
     setActiveLink(path);
+    handleShow()
   };
 
   return (

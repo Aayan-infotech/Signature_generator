@@ -9,8 +9,13 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { MySignature } from '../mySignature'
+import Offcanvas from 'react-bootstrap/Offcanvas'
 
 function Header() {
+  const [showSide, setShowSide] = useState(false)
+
+  const handleSideClose = () => setShowSide(false)
+  const handleSideShow = () => setShowSide(true)
   const [show, setShow] = useState(false)
   const [signature, setSignature] = useState([])
   const [user, setUser] = useState(null)
@@ -19,13 +24,14 @@ function Header() {
   const [selectedImage, setSelectedImage] = useState(null)
   const token2 = localStorage.getItem('token2')
   const location = useLocation()
+
   const handleCurrentUser = async () => {
     const response = await axios.get('http://44.196.64.110:9006/api/user/', {
       headers: {
         Authorization: `Bearer ${token2}`,
       },
     })
-    setUser(response?.data)
+    setUser(response?.data?.data?.email)
   }
 
   useEffect(() => {
@@ -44,11 +50,11 @@ function Header() {
     }
   }, [location])
 
-
   const handleModalSignature = () => {
     handleSignature()
     handleShow()
   }
+
   const handleSignature = async () => {
     if (!token2) {
       alert('Token not found. Please log in again.')
@@ -59,12 +65,10 @@ function Header() {
       const response = await axios.get('http://44.196.64.110:9006/api/get/signature', {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token2}`, // Ensure proper format
+          Authorization: `Bearer ${token2}`,
         },
       })
       setSignature(response?.data?.signature)
-      // handleShow()
-      // handleClose()
     } catch (error) {
       console.warn('Error fetching signature:', error)
       alert('Failed to fetch signature. Please try again.')
@@ -72,7 +76,7 @@ function Header() {
   }
 
   const handleLogout = async () => {
-    const response = await axios.post(
+    await axios.post(
       'http://44.196.64.110:9006/api/user/logout',
       {},
       {
@@ -80,18 +84,18 @@ function Header() {
           Authorization: `Bearer ${token2}`,
         },
       },
-      localStorage.removeItem('token2'),
-      window.location.replace(`http://44.196.64.110:2222/`),
     )
+    localStorage.removeItem('token2')
+    window.location.replace(`http://44.196.64.110:2222/`)
   }
 
   const handleSelect = (image) => {
-    setSelectedImage(image) // Set the selected image in state
+    setSelectedImage(image)
   }
 
   return (
     <>
-      <Navbar className="py-0">
+      <Navbar className="py-0 d-none d-lg-block">
         <Container fluid>
           <Navbar.Brand href="#home">
             <img src={logo} alt="logo" className="w-100" style={{ maxWidth: '110px' }} />
@@ -115,9 +119,42 @@ function Header() {
                   </a>
                 </Dropdown.Menu>
               </Dropdown>
-              <span>Hello User</span>
+              <span className="fs-6">{user}</span>
             </Navbar.Text>
           </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <Navbar className="py-0 d-block d-lg-none navbar-unexpand">
+        <Container fluid>
+          <Navbar.Brand href="#home">
+            <img src={logo} alt="logo" className="w-100" style={{ maxWidth: '110px' }} />
+          </Navbar.Brand>
+          <div className='d-flex justify-content-end flex-row gap-2 align-items-center'>
+            <Nav.Link onClick={handleModalSignature}>My Signature</Nav.Link>
+            <Navbar.Toggle
+              className="d-block border-0 ms-2"
+              aria-controls="basic-navbar-nav"
+              onClick={handleSideShow}
+            />
+            <Offcanvas show={showSide} onHide={handleSideClose} placement="end">
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title>SignaTouch</Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                <span className="fs-6">
+                  Logged in as <br />
+                  {user}
+                </span>
+                <div className="position-relative h-25">
+                  <div className="position-absolute bottom-0 left-0">
+                    <button onClick={handleLogout} className="text-decoration-none ps-3 btn btn-danger">
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              </Offcanvas.Body>
+            </Offcanvas>
+          </div>
         </Container>
       </Navbar>
       <MySignature

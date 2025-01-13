@@ -210,10 +210,9 @@ const Parent = ({ children }) => {
     // })
   }
 
-
   const handleSuccessClose = () => {
     setSuccessShow(false)
-    navigate("/signature")
+    navigate('/signature')
   }
   return (
     <>
@@ -234,21 +233,12 @@ const Parent = ({ children }) => {
       </button>
       {/* <PDFExport ref={pdfExportComponent} fileName={Options.filename}> */}
       <div
-        className={`${data.font}` || 'Arimo'}
+        className={`card-signature ${data.font}` || 'Arimo'}
         // id="pdfsignature"
         ref={ToCaptureRef}
         style={{
-          display: 'flex',
-          color: 'inherit',
           fontSize: getFontSize(),
           lineHeight: getSpacing(),
-          maxWidth: '50vw',
-          flexWrap: 'wrap',
-          padding: '20px',
-          border: '1px solid #ddd',
-          borderRadius: '10px',
-          backgroundColor: '#f9f9f9',
-          width: '100%',
         }}
       >
         {children}

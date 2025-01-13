@@ -42,7 +42,7 @@ function MySignature({ show, handleClose, signature, selectedImage, handleSelect
             <div className="col-lg-6">
               <div className="row gy-4 mh-300">
                 {signature?.map((item, index) => (
-                  <div className="col-lg-6" key={index}>
+                  <div className="col-6" key={index}>
                     <img
                       src={item}
                       alt="signature"
