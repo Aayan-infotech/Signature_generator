@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaPencilAlt, FaImage, FaShareAlt, FaLayerGroup, FaPaintBrush, FaThLarge } from 'react-icons/fa';
 import './Sidebar.scss';
@@ -6,9 +6,26 @@ import './Sidebar.scss';
 const Sidebar = ({handleShow}) => {
   const [activeLink, setActiveLink] = useState('/details');
 
+  const handleResize = () => {
+    if (window.innerWidth < 768) {
+      handleShow();
+    } else {
+      
+    }
+  };
+  useEffect(() => {
+  
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Call it initially to set the correct state based on current window size.
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   const handleClick = (path) => {
     setActiveLink(path);
-    handleShow()
+    handleResize()
   };
 
   return (
