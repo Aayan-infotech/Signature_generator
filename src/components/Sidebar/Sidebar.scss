@@ -7,7 +7,9 @@
   align-items: center;
   min-height:100vh
 }
-
+.navbar-unexpand .collapse:not(.show) {
+  display: none !important;
+}
 .sidebar-link {
   text-decoration: none;
   padding: 10px 10px;
@@ -40,5 +42,56 @@
   height: 1.5rem;
   width: 1.5rem;
 }
+.sideData{
+  width: 30%;
+   padding: 20px
+}
+.fontchanger{
+  width: 66%;
+   padding: 20px;
+}
+.card-signature{
+  display: flex;
+  color: inherit;
+  max-width: calc(100vw - 40vw);
+  flex-wrap: wrap;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: 100%;
+  min-width: calc(100vw - 60vw);
+}
+@media screen and (max-width: 768px) {
+  .card-signature {
+    min-width: 100%;
+}
+  .fontchanger{
+    width: 100%;
+     padding: 20px;
+  }
+  .sideData{
+    width: 80%;
+     padding: 20px
+  }
 
+  .sidebar {
+   
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      min-height:auto;
+      flex-direction: row;
+      overflow: auto;
+      gap: 20px;
+  }
 
+  .sidebar::-webkit-scrollbar {
+   
+   display: none;
+}
+.mh-300 {
+  max-height: 155px !important;
+}
+}
