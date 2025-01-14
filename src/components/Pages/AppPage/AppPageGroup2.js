@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
   FaBlogger,
   FaHandPointUp,
@@ -7,17 +7,17 @@ import {
   FaShoppingCart,
   FaApple,
   FaGooglePlay,
-} from 'react-icons/fa';
-import { useAppContext } from '../../../context/AppContext';
+} from 'react-icons/fa'
+import { useAppContext } from '../../../context/AppContext'
 
 // Group 2 templates and icons
 const templateData = [
   { name: 'Give feedback', icon: <FaMoneyBill style={{ color: 'blue' }} /> },
-  { name: 'Join a webinar', icon: <FaRegAddressCard style={{ color: '#4CAF50' }}/> },
+  { name: 'Join a webinar', icon: <FaRegAddressCard style={{ color: '#4CAF50' }} /> },
   { name: 'Join newsletter', icon: <FaHandPointUp style={{ color: 'red' }} /> },
   { name: 'Download app', icon: <FaBlogger style={{ color: '#9C27B0' }} /> },
-  { name: 'Post a job offer', icon: <FaShoppingCart style={{ color: '#FFC107' }}/> },
-];
+  { name: 'Post a job offer', icon: <FaShoppingCart style={{ color: '#FFC107' }} /> },
+]
 
 // AppContent3
 export const templateNames3 = [
@@ -26,47 +26,48 @@ export const templateNames3 = [
   'Join newsletter',
   'Download app',
   'Post a job offer',
-];
+]
 
-const taglines = ['Open position', 'Join our team', 'We are hiring', 'Click to join', 'Job opening'];
+const taglines = ['Open position', 'Join our team', 'We are hiring', 'Click to join', 'Job opening']
 
 // Main component for handling templates and modal for Group 2
 const AppPageGroup2 = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [modalData, setModalData] = useState({});
-  const [description, setDescription] = useState('');
-  const [selectedCard, setSelectedCard] = useState(null); 
+  const [isModalOpen, setModalOpen] = useState(false)
+  const [modalData, setModalData] = useState({})
+  const [description, setDescription] = useState('')
+  const [selectedCard, setSelectedCard] = useState(null)
 
-  const [url, setUrl] = useState('');
-  const { setSelectedTemplate, selectedTemplate, handleModalSelect, selectedContent } = useAppContext(); // Updated to use selectedContent for rendering buttons
-  const [extra, setExtra] = useState(null);
-    const [selectedTagline, setSelectedTagline] = useState(taglines[0]); // Store selected tagline
-    const [appStoreLink, setAppStoreLink] = useState(''); // Store App Store download link
-    const [googlePlayLink, setGooglePlayLink] = useState(''); // Store Google Play download link
+  const [url, setUrl] = useState('')
+  const { setSelectedTemplate, selectedTemplate, handleModalSelect, selectedContent } =
+    useAppContext() // Updated to use selectedContent for rendering buttons
+  const [extra, setExtra] = useState(null)
+  const [selectedTagline, setSelectedTagline] = useState(taglines[0]) // Store selected tagline
+  const [appStoreLink, setAppStoreLink] = useState('') // Store App Store download link
+  const [googlePlayLink, setGooglePlayLink] = useState('') // Store Google Play download link
 
   const handleTemplateClick = (template) => {
-    setModalOpen(true);
-    setSelectedTemplate(template.name);
-    setModalData({ templateName: template.name });
+    setModalOpen(true)
+    setSelectedTemplate(template.name)
+    setModalData({ templateName: template.name })
     setSelectedCard(templateName)
-  };
+  }
 
   const handleCancel = () => {
-    setModalOpen(false);
-    setDescription('');
-    setUrl('');
-    setExtra(null);
-  };
+    setModalOpen(false)
+    setDescription('')
+    setUrl('')
+    setExtra(null)
+  }
 
   const handleSubmit = () => {
-    let content = { description, url, extra };
-    handleModalSelect(content);
-    handleCancel();
-  };
+    let content = { description, url, extra }
+    handleModalSelect(content)
+    handleCancel()
+  }
 
   const handleDownloadClick = (downloadUrl) => {
-    window.open(downloadUrl, '_blank');
-  };
+    window.open(downloadUrl, '_blank')
+  }
 
   return (
     <div>
@@ -93,11 +94,23 @@ const AppPageGroup2 = () => {
               cursor: 'pointer',
               backgroundColor: 'transparent',
             }}
-            className={`template-item ${selectedCard === templateData ? 'active' : ''}`}
+            className={`position-relative template-item ${selectedCard === templateData ? 'active' : ''}`}
             onClick={() => handleTemplateClick(template)}
           >
             {template.icon}
             {template.name}
+            <div className="position-absolute start-0 ps-2 pt-1 top-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="#ffc107"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+              </svg>
+            </div>
           </button>
         ))}
       </div>
@@ -114,8 +127,7 @@ const AppPageGroup2 = () => {
               backgroundColor: 'transparent',
             }}
             onClick={() => window.open(selectedContent[selectedTemplate].url, '_blank')} // Add redirection on click
-          >
-          </span>
+          ></span>
         </>
       )}
 
@@ -162,7 +174,7 @@ const AppPageGroup2 = () => {
 
       {/* Modal for content submission */}
       {isModalOpen && (
-          <div
+        <div
           style={{
             position: 'fixed',
             top: 0,
@@ -173,91 +185,89 @@ const AppPageGroup2 = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            zIndex:"1",
+            zIndex: '1',
           }}
         >
-              <div
-        style={{
-          backgroundColor: 'white',
-          padding: '20px',
-          borderRadius: '5px',
-          maxWidth: '400px',
-          width: '100%',
-        }}
-      >
-
-          
-          <h4>{modalData.templateName}</h4>
-
-          <label>Description:</label>
-          <textarea
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Enter description"
-            style={{ width: '100%', marginBottom: '10px', padding: '5px' }}
-            value={description}
-             className="form-control"
-          />
-          <label>URL:</label>
-          <input
-            type="text"
-            value={url}
-             className="form-control"
-            onChange={(e) => setUrl(e.target.value)}
-            placeholder="Enter URL"
-            style={{ width: '100%', marginBottom: '10px', padding: '5px' }}
-          />
-          {modalData.templateName === 'Post a job offer' && (
-            <>
-          <label>Tagline:</label>
-          <select
-           className="form-control"
-            value={selectedTagline}
-            onChange={(e) => setSelectedTagline(e.target.value)}
-            style={{ width: '100%', marginBottom: '10px', padding: '5px' }}
-          >
-            {taglines.map((tagline, index) => (
-              <option key={index} value={tagline}>{tagline}</option>
-            ))}
-          </select>
-            </>
-          )}
-
-          <button
-            onClick={handleSubmit}
+          <div
             style={{
-              
-              marginTop: '10px',
-              backgroundColor: 'lightblue',
-             
-              border: '2px solid white',
-              color: 'white',
-              borderRadius: '8px',
-              padding: '10px 18px',
+              backgroundColor: 'white',
+              padding: '20px',
+              borderRadius: '5px',
+              maxWidth: '400px',
+              width: '100%',
             }}
           >
-            Add
-          </button>
-          <button
-            onClick={handleCancel}
-            style={{
-       
-              marginTop: '10px',
-              marginLeft: '5px',
-              backgroundColor: 'lightcoral',
-            
-              border: '2px solid white',
-              color: 'white',
-              borderRadius: '8px',
-              padding: '10px 18px',
-            }}
-          >
-            Cancel
-          </button>
-        </div>
+            <h4>{modalData.templateName}</h4>
+
+            <label>Description:</label>
+            <textarea
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Enter description"
+              style={{ width: '100%', marginBottom: '10px', padding: '5px' }}
+              value={description}
+              className="form-control"
+            />
+            <label>URL:</label>
+            <input
+              type="text"
+              value={url}
+              className="form-control"
+              onChange={(e) => setUrl(e.target.value)}
+              placeholder="Enter URL"
+              style={{ width: '100%', marginBottom: '10px', padding: '5px' }}
+            />
+            {modalData.templateName === 'Post a job offer' && (
+              <>
+                <label>Tagline:</label>
+                <select
+                  className="form-control"
+                  value={selectedTagline}
+                  onChange={(e) => setSelectedTagline(e.target.value)}
+                  style={{ width: '100%', marginBottom: '10px', padding: '5px' }}
+                >
+                  {taglines.map((tagline, index) => (
+                    <option key={index} value={tagline}>
+                      {tagline}
+                    </option>
+                  ))}
+                </select>
+              </>
+            )}
+
+            <button
+              onClick={handleSubmit}
+              style={{
+                marginTop: '10px',
+                backgroundColor: 'lightblue',
+
+                border: '2px solid white',
+                color: 'white',
+                borderRadius: '8px',
+                padding: '10px 18px',
+              }}
+            >
+              Add
+            </button>
+            <button
+              onClick={handleCancel}
+              style={{
+                marginTop: '10px',
+                marginLeft: '5px',
+                backgroundColor: 'lightcoral',
+
+                border: '2px solid white',
+                color: 'white',
+                borderRadius: '8px',
+                padding: '10px 18px',
+              }}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default AppPageGroup2;
+export default AppPageGroup2
