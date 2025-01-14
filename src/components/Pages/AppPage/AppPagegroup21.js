@@ -33,7 +33,6 @@ export const templateIcons21 = [
   <FaMicrosoft style={{ color: '#4CAF50' }} />,
 ]
 
-
 const AppPageGroup21 = () => {
   // const [selectedContent, setSelectedContent] = useState({})
   // model controls
@@ -42,11 +41,13 @@ const AppPageGroup21 = () => {
   const [videoConfPlatform, setVideoConfPlatform] = useState(0)
   const [isModalOpen, setModalOpen] = useState(false)
   const { setSelectedTemplate, selectedTemplate, handleModalSelect } = useAppContext()
+  const [selectedCard, setSelectedCard] = useState(null)
 
   const handleTemplateClick = (templateName) => {
     console.log({ templateName })
     setModalOpen(true)
     setSelectedTemplate(templateName)
+    setSelectedCard(templateName)
   }
 
   const handleBannerChange = (e) => {
@@ -94,15 +95,28 @@ const AppPageGroup21 = () => {
               alignItems: 'center',
               justifyContent: 'center',
               flexDirection: 'column',
-              border: '1px solid gray',
+              border: selectedCard === templateNames21 ? '1px solid blue' : '1px solid gray',
               borderRadius: '8px',
               cursor: 'pointer',
               backgroundColor: 'transparent',
             }}
             onClick={() => handleTemplateClick(template)}
+            className={`position-relative template-item ${selectedCard === templateNames21 ? 'active' : ''}`}
           >
             {templateIcons21[index]}
             {template}
+            <div className="position-absolute start-0 ps-2 pt-1 top-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="#ffc107"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+              </svg>
+            </div>
           </button>
         ))}
       </div>
@@ -136,7 +150,12 @@ const AppPageGroup21 = () => {
 
             {selectedTemplate === 'Upload my banner' ? (
               <>
-                <input type="file" onChange={handleBannerChange} accept="image/*"   className="form-control"/>
+                <input
+                  type="file"
+                  onChange={handleBannerChange}
+                  accept="image/*"
+                  className="form-control"
+                />
               </>
             ) : (
               <>
@@ -166,7 +185,7 @@ const AppPageGroup21 = () => {
                   <input
                     type="text"
                     value={description}
-                     className="form-control"
+                    className="form-control"
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Enter button text"
                     style={{ width: '100%', marginBottom: '10px' }}
@@ -175,7 +194,7 @@ const AppPageGroup21 = () => {
                   <input
                     type="text"
                     value={url}
-                     className="form-control"
+                    className="form-control"
                     onChange={(e) => setUrl(e.target.value)}
                     placeholder="Enter URL"
                     style={{ width: '100%', marginBottom: '10px' }}
@@ -186,10 +205,9 @@ const AppPageGroup21 = () => {
             <button
               onClick={handleSubmit}
               style={{
-              
                 marginTop: '10px',
                 backgroundColor: 'lightblue',
-              
+
                 border: '2px solid white',
                 color: 'white',
                 borderRadius: '8px',
@@ -201,11 +219,10 @@ const AppPageGroup21 = () => {
             <button
               onClick={handleCancel}
               style={{
-              
                 marginTop: '10px',
                 marginLeft: '5px',
                 backgroundColor: 'lightcoral',
-                
+
                 border: '2px solid white',
                 color: 'white',
                 borderRadius: '8px',

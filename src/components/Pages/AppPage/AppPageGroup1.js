@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { MdDesignServices, MdUpload } from 'react-icons/md'
 import { FaFileAlt, FaUser, FaBullhorn, FaVideo } from 'react-icons/fa'
 import { useAppContext } from '../../../context/AppContext'
-import Offcanvas from 'react-bootstrap/Offcanvas';
+import Offcanvas from 'react-bootstrap/Offcanvas'
 
 // Group 1 templates and icons
 export const templateNames1 = [
@@ -16,14 +16,13 @@ export const templateNames1 = [
 ]
 
 export const templateIcons1 = [
-
   <MdDesignServices style={{ color: 'blue' }} />,
-    <FaFileAlt style={{ color: '#4CAF50' }} />,
-    <FaUser style={{ color: 'red' }} />,
-    <FaBullhorn style={{ color: '#9C27B0' }} />,
-    <FaBullhorn style={{ color: '#FFC107' }} />,
-    <FaVideo style={{ color: '#4CAF50' }} />,
-    <MdUpload style={{ color: '#4CAF50' }} />,
+  <FaFileAlt style={{ color: '#4CAF50' }} />,
+  <FaUser style={{ color: 'red' }} />,
+  <FaBullhorn style={{ color: '#9C27B0' }} />,
+  <FaBullhorn style={{ color: '#FFC107' }} />,
+  <FaVideo style={{ color: '#4CAF50' }} />,
+  <MdUpload style={{ color: '#4CAF50' }} />,
 ]
 
 // Content options for each template
@@ -36,7 +35,8 @@ export const contentOptionsByTemplate = {
     'Thanks',
     'Happy new year',
     'Merry Xmas',
-    'Happy Holidays!'],
+    'Happy Holidays!',
+  ],
 
   Disclaimer: [
     'Confidentiality',
@@ -136,10 +136,10 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
   const [selectedOption, setSelectedOption] = useState('')
   const [images, setImages] = useState(Array(5).fill(null)) // Initialize array for 5 images
   const [videoURL, setVideoURL] = useState('') // State for video URL
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   const handleSelect = () => {
     if (templateName === 'Image gallery') {
@@ -173,7 +173,7 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        zIndex:"1",
+        zIndex: '1',
       }}
     >
       <div
@@ -228,7 +228,7 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
             <input
               type="text"
               value={videoURL}
-               className="form-control"
+              className="form-control"
               onChange={(e) => setVideoURL(e.target.value)}
               placeholder="Paste YouTube link here"
               style={{
@@ -241,12 +241,11 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
             />
           </div>
         ) : (
-          <form className='my-4'>
+          <form className="my-4">
             {contentOptions.map((option, index) => (
               <div key={index}>
                 <input
                   type="radio"
-                  
                   id={option}
                   name="contentOption"
                   value={option}
@@ -263,7 +262,6 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
         <button
           onClick={handleSelect}
           style={{
-           
             marginTop: '10px',
             backgroundColor: 'lightblue',
             borderRadius: '2px',
@@ -297,12 +295,12 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
 
 const AppPageGroup1 = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-    const [selectedCard, setSelectedCard] = useState(null); 
+  const [selectedCard, setSelectedCard] = useState(null)
   const { selectedContent, handleModalSelect, setSelectedTemplate, selectedTemplate } =
     useAppContext()
 
   const handleTemplateClick = (templateName) => {
-    setSelectedTemplate(templateName);
+    setSelectedTemplate(templateName)
     setSelectedCard(templateName)
     setIsModalOpen(true)
   }
@@ -315,7 +313,7 @@ const AppPageGroup1 = () => {
     <div>
       <h3>Enhance Signature Style</h3>
       <div
-      className='mb-4'
+        className="mb-4"
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, 1fr)',
@@ -326,7 +324,7 @@ const AppPageGroup1 = () => {
         {templateNames1.map((templateName, index) => (
           <button
             key={templateName}
-            className={`template-item ${selectedCard === templateName ? 'active' : ''}`}
+            className={`position-relative template-item ${selectedCard === templateName ? 'active' : ''}`}
             style={{
               padding: '15px',
               display: 'flex',
@@ -341,11 +339,24 @@ const AppPageGroup1 = () => {
             onClick={() => handleTemplateClick(templateName)}
           >
             {templateIcons1[index]}
-            <p className='mb-0'>{templateName}</p>
+            <p className="mb-0">{templateName}</p>
+            {['Green footer', 'Video', 'Image gallery'].includes(templateName) && (
+              <div className="position-absolute start-0 ps-2 pt-1 top-0">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="#ffc107"
+                  class="bi bi-star-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                </svg>
+              </div>
+            )}
           </button>
         ))}
       </div>
-
 
       <SelectionModal
         isOpen={isModalOpen}
