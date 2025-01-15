@@ -4,8 +4,8 @@ import {
   disclaimerContent,
   greenFooterContent,
   quoteContent,
-  templateNames1
-} from '../Pages/AppPage/AppPageGroup1' 
+  templateNames1,
+} from '../Pages/AppPage/AppPageGroup1'
 
 const AppContent = () => {
   const { selectedContent } = useAppContext()
@@ -15,9 +15,9 @@ const AppContent = () => {
   return (
     <>
       {/* 1111111111111111111111111111111111111111111111111111 */}
-      <div className='mt-4'>
+      <div className="mt-4">
         <ul
-        className='ps-0'
+          className="ps-0"
           style={{
             listStyle: 'none',
           }}
@@ -55,7 +55,7 @@ const AppContent = () => {
                         ))}
                       </div>
                     ) : (
-                      content
+                      <div className="content">{content}</div>
                     )}
                   </li>
                 </>
