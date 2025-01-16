@@ -158,48 +158,96 @@ const Parent = ({ children }) => {
     }
   }
 
-  const sendImage = async (dataURL) => {
-    if (!dataURL) {
-      console.error('No image data available')
-      return
-    }
+  // const sendImage = async (dataURL) => {
+  //   if (!dataURL) {
+  //     console.error('No image data available')
+  //     return
+  //   }
 
-    try {
-      const base64Data = dataURL.split(',')[1]
-      const byteCharacters = atob(base64Data)
-      const byteArrays = []
+  //   try {
+  //     const base64Data = dataURL.split(',')[1]
+  //     const byteCharacters = atob(base64Data)
+  //     const byteArrays = []
 
-      for (let offset = 0; offset < byteCharacters.length; offset += 512) {
-        const slice = byteCharacters.slice(offset, offset + 512)
-        const byteNumbers = new Array(slice.length)
-        for (let i = 0; i < slice.length; i++) {
-          byteNumbers[i] = slice.charCodeAt(i)
-        }
-        const byteArray = new Uint8Array(byteNumbers)
-        byteArrays.push(byteArray)
-      }
+  //     for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+  //       const slice = byteCharacters.slice(offset, offset + 512)
+  //       const byteNumbers = new Array(slice.length)
+  //       for (let i = 0; i < slice.length; i++) {
+  //         byteNumbers[i] = slice.charCodeAt(i)
+  //       }
+  //       const byteArray = new Uint8Array(byteNumbers)
+  //       byteArrays.push(byteArray)
+  //     }
 
-      const blob = new Blob(byteArrays, { type: 'image/png' })
-      const token = localStorage.getItem('token2')
-      const formData = new FormData()
-      formData.append('images', blob, 'signature.png')
-      const response = await axios.post(
-        'http://44.196.64.110:9006/api/create/signature',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
-      if (response.status === 200) {
-        setSuccessShow(true)
-      }
-    } catch (error) {
-      console.error('Error sending image:', error)
-    }
+  //     const blob = new Blob(byteArrays, { type: 'image/png' })
+  //     const token = localStorage.getItem('token2')
+  //     const formData = new FormData()
+  //     formData.append('images', blob, 'signature.png')
+  //     const response = await axios.post(
+  //       'http://44.196.64.110:9006/api/create/signature',
+  //       formData,
+  //       {
+  //         headers: {
+  //           'Content-Type': 'multipart/form-data',
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       },
+  //     )
+  //     if (response.status === 200) {
+  //       setSuccessShow(true)
+  //     }
+  //   } catch (error) {
+  //     console.error('Error sending image:', error)
+  //   }
+  // }
+
+  // Update sendImage function to include id and url for each signature item
+const sendImage = async (dataURL) => {
+  if (!dataURL) {
+    console.error('No image data available');
+    return;
   }
+
+  try {
+    const base64Data = dataURL.split(',')[1];
+    const byteCharacters = atob(base64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+      const slice = byteCharacters.slice(offset, offset + 512);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, { type: 'image/png' });
+    const token = localStorage.getItem('token2');
+    const formData = new FormData();
+    const signatureId = crypto.randomUUID(); // Generate a unique id for the signature
+    formData.append('images', blob, 'signature.png');
+    formData.append('signature', JSON.stringify({ id: signatureId, url: 'signature.png' })); // Add id and url
+
+    const response = await axios.post(
+      'http://44.196.64.110:9006/api/create/signature',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (response.status === 200) {
+      setSuccessShow(true);
+    }
+  } catch (error) {
+    console.error('Error sending image:', error);
+  }
+};
+
 
   const doubleAction = () => {
     captureScreenshot()
