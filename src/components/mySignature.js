@@ -44,7 +44,7 @@ function MySignature({ show, handleClose, signature, selectedImage, handleSelect
                 {signature?.map((item, index) => (
                   <div className="col-6 position-relative" key={index}>
                     <img
-                      src={item}
+                      src={item?.url}
                       alt="signature"
                       className={`w-100 h-100 ${selectedImage === item ? 'selected border border-success' : ''}`}
                       onClick={() => handleSelect(item)}
