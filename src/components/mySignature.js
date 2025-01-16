@@ -1,22 +1,7 @@
 import Modal from 'react-bootstrap/Modal'
 import axios from 'axios'
+import { useState } from 'react'
 
-const token2 = localStorage.getItem('token2')
-const deleteSignature = async (id) => {
-  try {
-    const response = await axios.delete(`http://44.196.64.110:9006/api/delete/signature/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token2}`,
-      },
-    })
-
-    if (response.status === 200) {
-      console.log('Signature deleted successfully')
-    }
-  } catch (error) {
-    console.error('Error deleting signature:', error)
-  }
-}
 
 function SuccessShow({ successShow, handleSuccessClose }) {
   return (
@@ -46,60 +31,95 @@ function SuccessShow({ successShow, handleSuccessClose }) {
   )
 }
 function MySignature({ show, handleClose, signature, selectedImage, handleSelect }) {
-  console.log(signature)
+  const [deleteshow, setDeleteShow] = useState(false);
+  const token2 = localStorage.getItem('token2');
+
+  const handleDeleteClose = () => setDeleteShow(false);
+
+  const deleteSignature = async (id) => {
+    try {
+      const response = await axios.delete(`http://localhost:9006/api/delete/signature/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token2}`,
+        },
+      });
+
+      if (response.status === 200) {
+        console.log('Signature deleted successfully');
+        handleClose()
+        setDeleteShow(true); // Trigger the modal to show
+      }
+    } catch (error) {
+      console.error('Error deleting signature:', error);
+    }
+  };
 
   return (
-    <Modal show={show} size="xl">
-      <Modal.Header className="border-0">
-        <Modal.Title>Your Signature</Modal.Title>
-        <button className="btn-close" onClick={handleClose}></button>
-      </Modal.Header>
-      <Modal.Body>
-        {signature?.length !== 0 && (
-          <div className="row gy-4 align-items-center">
-            <div className="col-lg-6">
-              <div className="row gy-4 mh-300">
-                {signature?.map((item, index) => (
-                  <div className="col-6 position-relative" key={index}>
-                    <img
-                      src={item?.url}
-                      alt="signature"
-                      className={`w-100 h-100 ${selectedImage === item ? 'selected border border-success' : ''}`}
-                      onClick={() => handleSelect(item)}
-                    />
-                    <div className="position-absolute start-0 ps-4 pt-2 top-0">
-                      <svg
-                        onClick={deleteSignature(item?.id)}
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="#dc3545"
-                        class="bi bi-trash3-fill"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
-                      </svg>
+    <>
+      <Modal show={show} size="xl">
+        <Modal.Header className="border-0">
+          <Modal.Title>Your Signature</Modal.Title>
+          <button className="btn-close" onClick={handleClose}></button>
+        </Modal.Header>
+        <Modal.Body>
+          {signature?.length !== 0 && (
+            <div className="row gy-4 align-items-center">
+              <div className="col-lg-6">
+                <div className="row gy-4 mh-300">
+                  {signature?.map((item, index) => (
+                    <div className="col-6 position-relative" key={index}>
+                      <img
+                        src={item?.url}
+                        alt="signature"
+                        className={`w-100 h-100 ${selectedImage === item ? 'selected border border-success' : ''}`}
+                        onClick={() => handleSelect(item)}
+                      />
+                      <div className="position-absolute start-0 ps-4 pt-2 top-0">
+                        <svg
+                          onClick={() => deleteSignature(item?.id)}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="#dc3545"
+                          className="bi bi-trash3-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+                        </svg>
+                      </div>
                     </div>
+                  ))}
+                </div>
+              </div>
+              <div className="col-lg-6">
+                {selectedImage && (
+                  <div className="selected-image text-center">
+                    <h5 className="text-center">Your Selected Signature</h5>
+                    <img src={selectedImage} alt="Selected" className="w-100 h-100" />
+                    <button className="btn btn-primary mt-4" onClick={handleClose}>
+                      Use This Signature
+                    </button>
                   </div>
-                ))}
+                )}
               </div>
             </div>
-            <div className="col-lg-6">
-              {selectedImage && (
-                <div className="selected-image text-center">
-                  <h5 className="text-center">Your Selected Signature</h5>
-                  <img src={selectedImage} alt="Selected" className="w-100 h-100" />
-                  <button className="btn btn-primary mt-4" onClick={handleClose}>
-                    Use This Signature
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-      </Modal.Body>
+          )}
+        </Modal.Body>
+      </Modal>
+
+      <DeleteShow show={deleteshow} handleClose={handleDeleteClose} />
+    </>
+  );
+}
+
+function DeleteShow({ show, handleClose }) {
+  return (
+    <Modal show={show} onHide={handleClose} centered>
+      <Modal.Header className="border-0" closeButton>
+        <Modal.Title><h4 className="text-danger mb-0">Signature Deleted Successfully!</h4></Modal.Title>
+      </Modal.Header>
     </Modal>
-  )
+  );
 }
 
 export { SuccessShow, MySignature }
