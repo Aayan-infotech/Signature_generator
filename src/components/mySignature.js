@@ -1,4 +1,17 @@
 import Modal from 'react-bootstrap/Modal'
+import axios from 'axios'
+
+const deleteSignature = async (id) => {
+  try {
+    const response = await axios.delete(`http://44.196.64.110:9006/api/delete/signature/${id}`)
+
+    if (response.status === 200) {
+      console.log('Signature deleted successfully')
+    }
+  } catch (error) {
+    console.error('Error deleting signature:', error)
+  }
+}
 
 function SuccessShow({ successShow, handleSuccessClose }) {
   return (
@@ -51,6 +64,7 @@ function MySignature({ show, handleClose, signature, selectedImage, handleSelect
                     />
                     <div className="position-absolute start-0 ps-4 pt-2 top-0">
                       <svg
+                        onClick={deleteSignature(item?.id)}
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
                         height="16"
