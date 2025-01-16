@@ -226,9 +226,9 @@ const sendImage = async (dataURL) => {
     const blob = new Blob(byteArrays, { type: 'image/png' });
     const token = localStorage.getItem('token2');
     const formData = new FormData();
-    const signatureId = crypto.randomUUID(); // Generate a unique id for the signature
+    // const signatureId = crypto.randomUUID(); // Generate a unique id for the signature
     formData.append('images', blob, 'signature.png');
-    formData.append('signature', JSON.stringify({ id: signatureId, url: 'signature.png' })); // Add id and url
+    formData.append('signature', JSON.stringify({  url: 'signature.png' })); // Add id and url
 
     const response = await axios.post(
       'http://44.196.64.110:9006/api/create/signature',
