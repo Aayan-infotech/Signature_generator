@@ -75,6 +75,9 @@ function Header() {
     }
   }
 
+  console.log(signature);
+  
+
   const handleLogout = async () => {
     await axios.post(
       'http://44.196.64.110:9006/api/user/logout',
@@ -129,7 +132,7 @@ function Header() {
           <Navbar.Brand href="#home">
             <img src={logo} alt="logo" className="w-100" style={{ maxWidth: '110px' }} />
           </Navbar.Brand>
-          <div className='d-flex justify-content-end flex-row gap-2 align-items-center'>
+          <div className="d-flex justify-content-end flex-row gap-2 align-items-center">
             <Nav.Link onClick={handleModalSignature}>My Signature</Nav.Link>
             <Navbar.Toggle
               className="d-block border-0 ms-2"
@@ -147,7 +150,10 @@ function Header() {
                 </span>
                 <div className="position-relative h-25">
                   <div className="position-absolute bottom-0 left-0">
-                    <button onClick={handleLogout} className="text-decoration-none ps-3 btn btn-danger">
+                    <button
+                      onClick={handleLogout}
+                      className="text-decoration-none ps-3 btn btn-danger"
+                    >
                       Logout
                     </button>
                   </div>
