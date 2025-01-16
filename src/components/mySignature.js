@@ -38,7 +38,7 @@ function MySignature({ show, handleClose, signature, selectedImage, handleSelect
 
   const deleteSignature = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:9006/api/delete/signature/${id}`, {
+      const response = await axios.delete(`http://44.196.64.110:9006/api/delete/signature/${id}`, {
         headers: {
           Authorization: `Bearer ${token2}`,
         },
