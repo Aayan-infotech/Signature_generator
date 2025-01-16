@@ -2,7 +2,6 @@ import Modal from 'react-bootstrap/Modal'
 import axios from 'axios'
 import { useState } from 'react'
 
-
 function SuccessShow({ successShow, handleSuccessClose }) {
   return (
     <Modal show={successShow} onHide={handleSuccessClose} centered>
@@ -31,28 +30,50 @@ function SuccessShow({ successShow, handleSuccessClose }) {
   )
 }
 function MySignature({ show, handleClose, signature, selectedImage, handleSelect }) {
-  const [deleteshow, setDeleteShow] = useState(false);
-  const token2 = localStorage.getItem('token2');
+  const [deleteshow, setDeleteShow] = useState(false)
+  const token2 = localStorage.getItem('token2')
 
-  const handleDeleteClose = () => setDeleteShow(false);
-
+  const handleDeleteClose = () => setDeleteShow(false)
+  console.log(selectedImage)
   const deleteSignature = async (id) => {
     try {
       const response = await axios.delete(`http://44.196.64.110:9006/api/delete/signature/${id}`, {
         headers: {
           Authorization: `Bearer ${token2}`,
         },
-      });
+      })
 
       if (response.status === 200) {
-        console.log('Signature deleted successfully');
+        console.log('Signature deleted successfully')
         handleClose()
-        setDeleteShow(true); // Trigger the modal to show
+        setDeleteShow(true) // Trigger the modal to show
       }
     } catch (error) {
-      console.error('Error deleting signature:', error);
+      console.error('Error deleting signature:', error)
     }
-  };
+  }
+
+  const updateSignature = async (signature, imageUrl) => {
+    const token2 = localStorage.getItem('token2')
+    try {
+      const response = await axios.post(
+        'http://44.196.64.110:9006/update-signature',
+        { signature, imageUrl },
+        {
+          headers: {
+            Authorization: `Bearer ${token2}`, // Pass token in Authorization header
+          },
+        },
+      )
+      if (response.status === 200) {
+        handleClose()
+        window.location.replace(response?.data);
+      }
+      console.log(response?.data)
+    } catch (error) {
+      console.error('Error updating signature:', error)
+    }
+  }
 
   return (
     <>
@@ -95,8 +116,13 @@ function MySignature({ show, handleClose, signature, selectedImage, handleSelect
                 {selectedImage && (
                   <div className="selected-image text-center">
                     <h5 className="text-center">Your Selected Signature</h5>
-                    <img src={selectedImage} alt="Selected" className="w-100 h-100" />
-                    <button className="btn btn-primary mt-4" onClick={handleClose}>
+                    <img src={selectedImage?.url} alt="Selected" className="w-100 h-100" />
+                    <button
+                      className="btn btn-primary mt-4"
+                      onClick={() =>
+                        updateSignature({ signature: '', imageUrl: selectedImage?.url })
+                      }
+                    >
                       Use This Signature
                     </button>
                   </div>
@@ -109,17 +135,19 @@ function MySignature({ show, handleClose, signature, selectedImage, handleSelect
 
       <DeleteShow show={deleteshow} handleClose={handleDeleteClose} />
     </>
-  );
+  )
 }
 
 function DeleteShow({ show, handleClose }) {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header className="border-0" closeButton>
-        <Modal.Title><h4 className="text-danger mb-0">Signature Deleted Successfully!</h4></Modal.Title>
+        <Modal.Title>
+          <h4 className="text-danger mb-0">Signature Deleted Successfully!</h4>
+        </Modal.Title>
       </Modal.Header>
     </Modal>
-  );
+  )
 }
 
 export { SuccessShow, MySignature }
