@@ -1,4 +1,5 @@
 import React from 'react'
+import DataForm from './components/dataForm'
 
 // const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Details = React.lazy(() => import('./views/details/details'))
@@ -83,6 +84,7 @@ const routes = [
   { path: '/design', element: Design},
   { path: '/setting', element: Setting},
   { path: '/sucess', element: test},
+  { path: '/dataForm', element: DataForm},
   { path: '/template1', element: template1},
   { path: '/template2', element: template2},
   { path: '/template3', element: template3},
