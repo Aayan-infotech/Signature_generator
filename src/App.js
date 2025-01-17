@@ -25,6 +25,7 @@ const App = () => {
             <Route path="template" element={<TamplatesPreview />} />
             <Route path="app" element={<AppPages />} />
             <Route path="signature" element={<MySignature />} />
+            <Route path="signature-added" element={<MySignature />} />
           </Route>
         </Routes>
       </Router>
