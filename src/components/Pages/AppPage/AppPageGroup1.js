@@ -4,6 +4,8 @@ import { MdDesignServices, MdUpload } from 'react-icons/md'
 import { FaFileAlt, FaUser, FaBullhorn, FaVideo } from 'react-icons/fa'
 import { useAppContext } from '../../../context/AppContext'
 import Offcanvas from 'react-bootstrap/Offcanvas'
+import Modal from 'react-bootstrap/Modal'
+import PremiumModal from '../../PremiumModal'
 
 // Group 1 templates and icons
 export const templateNames1 = [
@@ -296,6 +298,8 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
 const AppPageGroup1 = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedCard, setSelectedCard] = useState(null)
+  const [premiumModal, setPremiumModal] = useState(false)
+  const [pricingModal, setPricingModal] = useState(false)
   const { selectedContent, handleModalSelect, setSelectedTemplate, selectedTemplate } =
     useAppContext()
 
@@ -307,6 +311,22 @@ const AppPageGroup1 = () => {
 
   const handleModalClose = () => {
     setIsModalOpen(false)
+  }
+  const handlePremiumFeatureClick = (templateName) => {
+    setSelectedTemplate(templateName)
+    setPremiumModal(true)
+  }
+
+  const handlePremiumModalClose = () => {
+    setPremiumModal(false)
+  }
+
+  const handlePremiumPricingModal = () => {
+    setPremiumModal(false)
+    setPricingModal(true)
+  }
+  const handlePricingModalClose = () => {
+    setPricingModal(false)
   }
 
   return (
@@ -336,7 +356,13 @@ const AppPageGroup1 = () => {
               backgroundColor: 'transparent',
               border: selectedCard === templateName ? '1px solid blue' : '1px solid gray',
             }}
-            onClick={() => handleTemplateClick(templateName)}
+            onClick={() => {
+              if (['Green footer', 'Video', 'Image gallery'].includes(templateName)) {
+                handlePremiumFeatureClick(templateName)
+              } else {
+                handleTemplateClick(templateName)
+              }
+            }}
           >
             {templateIcons1[index]}
             <p className="mb-0">{templateName}</p>
@@ -357,6 +383,30 @@ const AppPageGroup1 = () => {
           </button>
         ))}
       </div>
+
+      {premiumModal && (
+        <Modal show={premiumModal} onHide={handlePremiumModalClose} centered>
+          <Modal.Header className="border-0" closeButton>
+            <Modal.Title>{selectedTemplate}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="text-center">
+              <h3>Premium Feature is here</h3>
+              <p>Please add subscription to avail this feature</p>
+              <button className="btn btn-primary" onClick={handlePremiumPricingModal}>
+                See Pricing
+              </button>
+            </div>
+          </Modal.Body>
+        </Modal>
+      )}
+
+      {pricingModal && (
+        <PremiumModal
+          pricingModal={pricingModal}
+          handlePricingModalClose={handlePricingModalClose}
+        />
+      )}
 
       <SelectionModal
         isOpen={isModalOpen}
