@@ -34,17 +34,35 @@ function Header() {
   }
 
   const handlePlanChecker = async () => {
-    const response = await axios.get('http://44.196.64.110:9006/api/user/planChecker', {
-      headers: {
-        Authorization: `Bearer ${token2}`,
-      },
-    })
-   
-  }
-
+    try {
+      if (!token2) {
+        console.error("Token is missing");
+        return;
+      }
+  
+      const response = await axios.get(
+        'http://44.196.64.110:9006/api/user/planChecker',
+        {
+          headers: {
+            Authorization: `Bearer ${token2}`,
+          },
+        }
+      );
+  
+      if (response.data.success) {
+        console.log("Plan checked successfully:", response?.data?.user);
+      } else {
+        console.error("Plan check failed:", response?.data?.message);
+      }
+    } catch (error) {
+      console.error("Error checking plan:", error?.message);
+    }
+  };
+  
   useEffect(() => {
-    handlePlanChecker()
-  }, [])
+    handlePlanChecker();
+  }, []);
+  
 
   const handleCurrentUser = async () => {
     const response = await axios.get('http://44.196.64.110:9006/api/user/', {
