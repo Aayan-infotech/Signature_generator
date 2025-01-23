@@ -1,11 +1,12 @@
 // components/AppPageGroup1.js
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { MdDesignServices, MdUpload } from 'react-icons/md'
 import { FaFileAlt, FaUser, FaBullhorn, FaVideo } from 'react-icons/fa'
 import { useAppContext } from '../../../context/AppContext'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import Modal from 'react-bootstrap/Modal'
 import PremiumModal from '../../PremiumModal'
+import axios from 'axios'
 
 // Group 1 templates and icons
 export const templateNames1 = [
@@ -185,6 +186,8 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
           borderRadius: '5px',
           maxWidth: '500px',
           width: '100%',
+          maxHeight: '500px',
+          overflowY: 'auto',
         }}
       >
         <h3>Select Content for {templateName}</h3>
@@ -266,7 +269,6 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
           style={{
             marginTop: '10px',
             backgroundColor: 'lightblue',
-            borderRadius: '2px',
             border: '2px solid white',
             color: 'white',
             borderRadius: '8px',
@@ -282,7 +284,6 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
             marginTop: '10px',
             marginLeft: '5px',
             backgroundColor: 'lightcoral',
-            borderRadius: '2px',
             border: '2px solid white',
             color: 'white',
             borderRadius: '8px',
@@ -300,8 +301,29 @@ const AppPageGroup1 = () => {
   const [selectedCard, setSelectedCard] = useState(null)
   const [premiumModal, setPremiumModal] = useState(false)
   const [pricingModal, setPricingModal] = useState(false)
+  const token = localStorage.getItem('token2')
+  const [premiumPlans, setPremiumPlans] = useState('')
+  const [premiumEnd, setPremiumEnd] = useState('')
+  const [premiumStart, setPremiumStart] = useState('')
   const { selectedContent, handleModalSelect, setSelectedTemplate, selectedTemplate } =
     useAppContext()
+
+  const getCurrentUser = async () => {
+    const response = await axios.get('http://localhost:9006/api/user', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    setPremiumPlans(response?.data?.data?.amount)
+    // setPremiumPlans(10)
+    setPremiumEnd(response?.data?.data?.subscriptionEnd)
+    setPremiumStart(response?.data?.data?.subscriptionStarted)
+  }
+
+  useEffect(() => {
+    getCurrentUser()
+  }, [premiumPlans])
 
   const handleTemplateClick = (templateName) => {
     setSelectedTemplate(templateName)
@@ -357,7 +379,9 @@ const AppPageGroup1 = () => {
               border: selectedCard === templateName ? '1px solid blue' : '1px solid gray',
             }}
             onClick={() => {
-              if (['Green footer', 'Video', 'Image gallery'].includes(templateName)) {
+              if (premiumPlans > 0) {
+                handleTemplateClick(templateName)
+              } else if (['Green footer', 'Video', 'Image gallery'].includes(templateName)) {
                 handlePremiumFeatureClick(templateName)
               } else {
                 handleTemplateClick(templateName)
@@ -366,20 +390,27 @@ const AppPageGroup1 = () => {
           >
             {templateIcons1[index]}
             <p className="mb-0">{templateName}</p>
-            {['Green footer', 'Video', 'Image gallery'].includes(templateName) && (
-              <div className="position-absolute start-0 ps-2 pt-1 top-0">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="#ffc107"
-                  class="bi bi-star-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                </svg>
-              </div>
-            )}
+            {premiumPlans === 0 ? (
+              <>
+                {['Green footer', 'Video', 'Image gallery'].includes(templateName) && (
+                  <div
+                    className="position-absolute start-0 ps-2 pt-1 top-0 w-100 h-100 d-flex "
+                    onClick={() => handlePremiumFeatureClick(templateName)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="#ffc107"
+                      class="bi bi-star-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                    </svg>
+                  </div>
+                )}
+              </>
+            ) : null}
           </button>
         ))}
       </div>

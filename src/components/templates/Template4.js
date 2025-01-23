@@ -7,6 +7,8 @@ import AppContent from './AppContent';
 import AppContent2 from './AppContent2'
 import AppContent3 from './AppContent3'
 import Parent from './Parent';
+import avatar from './avatar.jpg'
+
 
 
 const Template4 = ({ data, onSubmit }) => {
@@ -75,7 +77,7 @@ const Template4 = ({ data, onSubmit }) => {
   return (
     <Parent>
       <div style={leftSectionStyle}>
-        <img src={data.image || 'avatar.jpg'} alt="Profile" style={imageStyle} />
+        <img src={data.image || avatar} alt="Profile" style={imageStyle} />
       </div>
       <div style={rightSectionStyle}>
         <div>

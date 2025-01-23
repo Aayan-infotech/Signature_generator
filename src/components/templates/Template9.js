@@ -1,28 +1,42 @@
-import React, { useState } from 'react';
-import { FaPhoneAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaTiktok } from 'react-icons/fa';
-import AppContent from './AppContent';
-import Parent from './Parent';
+import React, { useState } from 'react'
+import {
+  FaPhoneAlt,
+  FaGlobe,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+  FaTiktok,
+} from 'react-icons/fa'
+import AppContent from './AppContent'
+import Parent from './Parent'
 import AppContent2 from './AppContent2'
 import AppContent3 from './AppContent3'
+import avatar from './avatar.jpg'
 
 const Template9 = ({ data, onSubmit }) => {
   // State to manage active social media icon
-  const [activeIcon, setActiveIcon] = useState(null);
+  const [activeIcon, setActiveIcon] = useState(null)
 
   // Function to determine font size
   const getFontSize = () => {
     switch (data.size) {
-      case 'small': return '12px';
-      case 'medium': return '16px';
-      case 'large': return '20px';
-      default: return '16px';
+      case 'small':
+        return '12px'
+      case 'medium':
+        return '16px'
+      case 'large':
+        return '20px'
+      default:
+        return '16px'
     }
-  };
+  }
 
   // Function to determine spacing
   const getSpacing = () => {
-    return data.spacing === 'wide' ? '1.5em' : '1em';
-  };
+    return data.spacing === 'wide' ? '1.5em' : '1em'
+  }
 
   // Main container style
   // const containerStyle = {
@@ -43,7 +57,7 @@ const Template9 = ({ data, onSubmit }) => {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-  };
+  }
 
   // Image style (circular)
   const imageStyle = {
@@ -52,12 +66,12 @@ const Template9 = ({ data, onSubmit }) => {
     height: '100px',
     objectFit: 'cover',
     marginBottom: getSpacing(),
-  };
+  }
 
   // Content style
   const contentStyle = {
     fontSize: getFontSize(),
-  };
+  }
 
   // Social media icons container (positioned to the right from 30%)
   const socialIconsContainerStyle = {
@@ -67,43 +81,53 @@ const Template9 = ({ data, onSubmit }) => {
     display: 'flex',
     flexDirection: 'column',
     gap: '10px',
-  };
+  }
 
   // Social media icon style
   const iconStyle = {
     color: data.fontColor || '#000000',
     cursor: 'pointer',
-  };
+  }
 
   // Media query for social icons visibility and positioning
   const mediaQueryStyle = {
     '@media (min-width: 605px)': {
       visibility: 'visible',
     },
-  };
+  }
 
   return (
     <Parent>
       {/* <div style={containerStyle}> */}
       {/* Left Section for image and content */}
       <div style={leftSectionStyle}>
-        <img src={data.image} alt="Profile" style={imageStyle} />
+        <img src={data.image || avatar} alt="Profile" style={imageStyle} />
         <div style={contentStyle}>
-          <h2 style={{ margin: '0', fontSize: '1.5rem', fontWeight: 'bold', color: data.fontColor }}>{data.name}</h2>
+          <h2
+            style={{ margin: '0', fontSize: '1.5rem', fontWeight: 'bold', color: data.fontColor }}
+          >
+            {data.name}
+          </h2>
           <p style={{ margin: `5px 0 ${getSpacing()}`, fontWeight: 'bold' }}>{data.title}</p>
           <p style={{ margin: `5px 0 ${getSpacing()}` }}>{data.company}</p>
-          <p style={{ margin: `5px 0 ${getSpacing()}` }}><FaPhoneAlt style={{ color: data.fontColor }} /> {data.phone}</p>
+          <p style={{ margin: `5px 0 ${getSpacing()}` }}>
+            <FaPhoneAlt style={{ color: data.fontColor }} /> {data.phone}
+          </p>
           <p style={{ margin: `5px 0 ${getSpacing()}` }}>
             <FaGlobe style={{ color: data.fontColor }} />
-            <a href={`http://${data.website}`}
-              style={{ color: data.fontColor || 'inherit', textDecoration: 'none' }}>
+            <a
+              href={`http://${data.website}`}
+              style={{ color: data.fontColor || 'inherit', textDecoration: 'none' }}
+            >
               {data.website}
             </a>
           </p>
-          <p style={{ margin: `5px 0 ${getSpacing()}` }}><FaEnvelope style={{ color: data.fontColor }} /> {data.email}</p>
-          <p style={{ margin: `5px 0 ${getSpacing()}` }}><FaMapMarkerAlt style={{ color: data.fontColor }} /> {data.address}</p>
-
-
+          <p style={{ margin: `5px 0 ${getSpacing()}` }}>
+            <FaEnvelope style={{ color: data.fontColor }} /> {data.email}
+          </p>
+          <p style={{ margin: `5px 0 ${getSpacing()}` }}>
+            <FaMapMarkerAlt style={{ color: data.fontColor }} /> {data.address}
+          </p>
 
           {/* Render Additional Fields */}
           <div
@@ -124,32 +148,32 @@ const Template9 = ({ data, onSubmit }) => {
               ))}
           </div>
 
-
-
-
           <AppContent />
           <AppContent2 />
           <AppContent3 />
-
         </div>
         {/* </div> */}
 
         {/* Social Media Icons */}
         <div style={{ ...socialIconsContainerStyle, ...mediaQueryStyle }}>
-          {data.socialLinks && data.socialLinks.map((social) => {
-            const Icon = social.icon;
-            return (
-              <div
-                key={social.name}
-                onClick={() => setActiveIcon(social.name)}
-                style={{ ...iconStyle, color: activeIcon === social.name ? '#007bff' : iconStyle.color }}
-              >
-                <a href={social.url} target="_blank" rel="noopener noreferrer">
-                  <Icon size={24} />
-                </a>
-              </div>
-            );
-          })}
+          {data.socialLinks &&
+            data.socialLinks.map((social) => {
+              const Icon = social.icon
+              return (
+                <div
+                  key={social.name}
+                  onClick={() => setActiveIcon(social.name)}
+                  style={{
+                    ...iconStyle,
+                    color: activeIcon === social.name ? '#007bff' : iconStyle.color,
+                  }}
+                >
+                  <a href={social.url} target="_blank" rel="noopener noreferrer">
+                    <Icon size={24} />
+                  </a>
+                </div>
+              )
+            })}
         </div>
 
         {/* Submit Button */}
@@ -164,11 +188,10 @@ const Template9 = ({ data, onSubmit }) => {
         }}>
           OK, I'm done
         </button> */}
-
         </div>
       </div>
     </Parent>
-  );
-};
+  )
+}
 
-export default Template9;
+export default Template9

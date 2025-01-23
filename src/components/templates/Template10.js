@@ -4,6 +4,8 @@ import AppContent from './AppContent';
 import Parent from './Parent';
 import AppContent2 from './AppContent2'
 import AppContent3 from './AppContent3'
+import avatar from './avatar.jpg'
+
 
 const Template10 = ({ data, onSubmit }) => {
   // Function to determine font size
@@ -97,7 +99,7 @@ const Template10 = ({ data, onSubmit }) => {
 
       {/* Middle Section (Circular Image) */}
       <div style={{ flex: '0 0 10%', textAlign: 'center' }}>
-        <img src={data.image} alt="Profile" style={imageStyle} />
+        <img src={data.image || avatar} alt="Profile" style={imageStyle} />
       </div>
 
       {/* Right Section */}
