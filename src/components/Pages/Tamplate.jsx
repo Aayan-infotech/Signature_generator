@@ -12,28 +12,36 @@ const TamplatesPreview = () => {
   const [pricingModal, setPricingModal] = useState(false)
   const [premiumPlans, setPremiumPlans] = useState('')
   const [premiumEnd, setPremiumEnd] = useState('')
+  const [loading, setLoading] = useState(true) // New state to track API loading
   const [premiumStart, setPremiumStart] = useState('')
   const token = localStorage.getItem('token2')
 
   const getCurrentUser = async () => {
-    const response = await axios.get('http://44.196.64.110:9006/api/user', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    setPremiumPlans(response?.data?.data?.amount)
-    // setPremiumPlans(100)
-    setPremiumEnd(response?.data?.data?.subscriptionEnd)
-    setPremiumStart(response?.data?.data?.subscriptionStarted)
+    setLoading(true) // Set loading to true before API call
+    try {
+      const response = await axios.get('http://44.196.64.110:9006/api/user', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      setPremiumPlans(response?.data?.data?.amount || 0)
+      setPremiumEnd(response?.data?.data?.subscriptionEnd)
+      setPremiumStart(response?.data?.data?.subscriptionStarted)
+    } catch (error) {
+      console.error('Failed to fetch user data:', error)
+      setPremiumPlans(0) // Default to 0 if the API call fails
+    } finally {
+      setLoading(false) // Set loading to false after API call finishes
+    }
   }
 
   useEffect(() => {
     getCurrentUser()
-  }, [])
+  }, [premiumPlans])
   // Array of 12 template names
   const templates = Array.from({ length: 12 }, (_, index) => `Template${index + 1}`)
-  console.log('premiumPlans', premiumPlans)
+  console.log('premiumPlans template', premiumPlans)
 
   const handleTemplateClick = (template) => {
     setSelectedTemplate(template) // Set the clicked template as active
@@ -91,6 +99,7 @@ const TamplatesPreview = () => {
                 }}
                 height={100}
                 onClick={() => {
+                  if (loading) return // Block clicks during loading
                   if (
                     (index > 1 && premiumPlans === 0) ||
                     (index > 5 && (premiumPlans === 10 || premiumPlans === 60))
@@ -101,24 +110,25 @@ const TamplatesPreview = () => {
                   }
                 }}
               />
-              {((premiumPlans === 0 && index > 1) ||
-                ((premiumPlans === 10 || premiumPlans === 60) && index > 5)) && (
-                <div
-                  className="position-absolute start-0 ps-2 pt-1 top-0 w-100 h-100 z-1"
-                  onClick={() => handlePremiumFeatureClick(template)}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="#ffc107"
-                    className="bi bi-star-fill"
-                    viewBox="0 0 16 16"
+              {!loading &&
+                ((premiumPlans === 0 && index > 1) ||
+                  ((premiumPlans === 10 || premiumPlans === 60) && index > 5)) && (
+                  <div
+                    className="position-absolute start-0 ps-2 pt-1 top-0 w-100 h-100 z-1"
+                    onClick={() => handlePremiumFeatureClick(template)}
                   >
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                  </svg>
-                </div>
-              )}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="#ffc107"
+                      className="bi bi-star-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                    </svg>
+                  </div>
+                )}
             </div>
           ))}
         </div>

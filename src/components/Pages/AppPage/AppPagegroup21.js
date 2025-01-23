@@ -36,7 +36,7 @@ export const templateIcons21 = [
   <FaMicrosoft style={{ color: '#4CAF50' }} />,
 ]
 
-const AppPageGroup21 = () => {
+const AppPageGroup21 = ({ premiumPlans }) => {
   // const [selectedContent, setSelectedContent] = useState({})
   // model controls
   const [description, setDescription] = useState('')
@@ -47,9 +47,9 @@ const AppPageGroup21 = () => {
   const [selectedCard, setSelectedCard] = useState(null)
   const [premiumModal, setPremiumModal] = useState(false)
   const [pricingModal, setPricingModal] = useState(false)
-  const [premiumPlans, setPremiumPlans] = useState('')
-  const [premiumEnd, setPremiumEnd] = useState('')
-  const [premiumStart, setPremiumStart] = useState('')
+  // const [premiumPlans, setPremiumPlans] = useState('')
+  // const [premiumEnd, setPremiumEnd] = useState('')
+  // const [premiumStart, setPremiumStart] = useState('')
   const token = localStorage.getItem('token2')
 
   const handlePremiumFeatureClick = () => {
@@ -101,22 +101,22 @@ const AppPageGroup21 = () => {
     handleCancel()
   }
 
-  const getCurrentUser = async () => {
-    const response = await axios.get('http://44.196.64.110:9006/api/user', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    setPremiumPlans(response?.data?.data?.amount)
-    // setPremiumPlans(0)
-    setPremiumEnd(response?.data?.data?.subscriptionEnd)
-    setPremiumStart(response?.data?.data?.subscriptionStarted)
-  }
+  // const getCurrentUser = async () => {
+  //   const response = await axios.get('http://44.196.64.110:9006/api/user', {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   })
+  //   setPremiumPlans(response?.data?.data?.amount)
+  //   // setPremiumPlans(0)
+  //   setPremiumEnd(response?.data?.data?.subscriptionEnd)
+  //   setPremiumStart(response?.data?.data?.subscriptionStarted)
+  // }
 
-  useEffect(() => {
-    getCurrentUser()
-  }, [])
+  // useEffect(() => {
+  //   getCurrentUser()
+  // }, [])
   return (
     <>
       <div>
