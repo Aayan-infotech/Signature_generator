@@ -16,7 +16,7 @@ const TamplatesPreview = () => {
   const token = localStorage.getItem('token2')
 
   const getCurrentUser = async () => {
-    const response = await axios.get('http://localhost:9006/api/user', {
+    const response = await axios.get('http://44.196.64.110:9006/api/user', {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,

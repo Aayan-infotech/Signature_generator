@@ -65,7 +65,7 @@ function MySignature({ show, handleClose, signature, selectedImage, handleSelect
   const updateSignature = async (signatureText, imageUrl) => {
     try {
       const response = await axios.post(
-        'http://localhost:9006/update-signature',
+        'http://44.196.64.110:9006/update-signature',
         {
           email, // Include email in the payload
           signature: signatureText,
