@@ -34,7 +34,7 @@ function Header() {
   }
 
   const handlePlanChecker = async () => {
-    const response = await axios.get('http://localhost:9006/api/user/planChecker', {
+    const response = await axios.get('http://44.196.64.110:9006/api/user/planChecker', {
       headers: {
         Authorization: `Bearer ${token2}`,
       },
