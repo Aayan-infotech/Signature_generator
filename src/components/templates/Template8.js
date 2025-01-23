@@ -7,6 +7,8 @@ import AppContent from './AppContent';
 import Parent from './Parent';
 import AppContent2 from './AppContent2'
 import AppContent3 from './AppContent3'
+import avatar from './avatar.jpg'
+
 
 const Template8 = ({ data, onSubmit }) => {
   const getFontSize = () => {
@@ -99,7 +101,7 @@ const Template8 = ({ data, onSubmit }) => {
       {/* <div style={containerStyle}> */}
       {/* Left section for square image */}
       <div style={leftSectionStyle}>
-        <img src={data.image || 'avatar.jpg'} alt="Profile" style={imageStyle} />
+        <img src={data.image || avatar} alt="Profile" style={imageStyle} />
       </div>
 
       {/* Right section for content */}

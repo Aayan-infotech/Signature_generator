@@ -1,15 +1,15 @@
 // App.js
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MainPage from './components/MainPage';
-import DetailPage from './components/Pages/DetailPage';
-import ImageUploadPage from './components/Pages/ImageUploadPage';
-import SocialPage from './components/Pages/SocialPage';
-import DesignPage from './components/Pages/DesignPage';
-import TamplatesPreview from './components/Pages/Tamplate';
-import AppPages from './components/Pages/AppPage/AppPages';
-import { AppProvider } from './context/AppContext';
-import { MySignature } from './components/mySignature';
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import MainPage from './components/MainPage'
+import DetailPage from './components/Pages/DetailPage'
+import ImageUploadPage from './components/Pages/ImageUploadPage'
+import SocialPage from './components/Pages/SocialPage'
+import DesignPage from './components/Pages/DesignPage'
+import TamplatesPreview from './components/Pages/Tamplate'
+import AppPages from './components/Pages/AppPage/AppPages'
+import { AppProvider } from './context/AppContext'
+import { MySignature } from './components/mySignature'
 
 const App = () => {
   return (
@@ -26,11 +26,13 @@ const App = () => {
             <Route path="app" element={<AppPages />} />
             <Route path="signature" element={<MySignature />} />
             <Route path="signature-added" element={<MySignature />} />
+            <Route path="success" element={<MySignature />} />
+            <Route path="declined" element={<MySignature />} />
           </Route>
         </Routes>
       </Router>
     </AppProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

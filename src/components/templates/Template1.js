@@ -4,6 +4,7 @@ import AppContent from './AppContent'
 import Parent from './Parent'
 import AppContent2 from './AppContent2'
 import AppContent3 from './AppContent3'
+import avatar from './avatar.jpg'
 
 const Template1 = ({ data, onSubmit }) => {
   const getFontSize = () => {
@@ -44,8 +45,9 @@ const Template1 = ({ data, onSubmit }) => {
           }}
         >
           <img
-            src={data.image}
+            src={data.image || avatar}
             alt="Profile"
+           
             style={{
               position: 'absolute',
               top: 0,
@@ -53,7 +55,7 @@ const Template1 = ({ data, onSubmit }) => {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              borderRadius: '5px',
+              borderRadius: '50%',
             }}
           />
         </div>
@@ -172,7 +174,6 @@ const Template1 = ({ data, onSubmit }) => {
         <AppContent3 />
         <AppContent />
         <AppContent2 />
-        
       </div>
     </Parent>
   )

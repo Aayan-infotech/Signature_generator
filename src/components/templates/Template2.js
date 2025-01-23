@@ -1,27 +1,31 @@
-import React from 'react';
-import {
-  FaPhoneAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt,
-} from 'react-icons/fa';
-import AppContent from './AppContent';
-import Parent from './Parent';
+import React from 'react'
+import { FaPhoneAlt, FaGlobe, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
+import AppContent from './AppContent'
+import Parent from './Parent'
 import AppContent2 from './AppContent2'
 import AppContent3 from './AppContent3'
+import avatar from './avatar.jpg'
+
 
 const Template2 = ({ data, onSubmit }) => {
   // Function to get font size based on the provided data
   const getFontSize = () => {
     switch (data.size) {
-      case 'small': return '12px';
-      case 'medium': return '16px';
-      case 'large': return '20px';
-      default: return '16px';
+      case 'small':
+        return '12px'
+      case 'medium':
+        return '16px'
+      case 'large':
+        return '20px'
+      default:
+        return '16px'
     }
-  };
+  }
 
   // Function to get line height (spacing) based on the provided data
   const getSpacing = () => {
-    return data.spacing === 'wide' ? '1.5em' : '1em';
-  };
+    return data.spacing === 'wide' ? '1.5em' : '1em'
+  }
 
   // Styling with updated font size and line height
   const containerStyle = {
@@ -36,7 +40,7 @@ const Template2 = ({ data, onSubmit }) => {
     border: `1px solid ${data.borderColor || '#ddd'}`,
     borderRadius: '10px',
     backgroundColor: data.backgroundColor || '#f9f9f9',
-  };
+  }
 
   const leftColumnStyle = {
     width: '20%',
@@ -44,28 +48,27 @@ const Template2 = ({ data, onSubmit }) => {
     flexDirection: 'column',
     alignItems: 'center',
     marginRight: '20px',
-  };
+  }
 
   const rightColumnStyle = {
     width: '80%',
-  };
+  }
 
   const imageStyle = {
     width: '100px',
     height: '100px',
     objectFit: 'cover',
     marginBottom: '20px',
-  };
+  }
 
   const separatorStyle = {
     margin: '0 5px',
-  };
+  }
 
   return (
     <Parent>
-
       <div style={leftColumnStyle}>
-        <img src={data.image || 'default-image.jpg'} alt="Profile" style={imageStyle} />
+        <img src={data.image || avatar} alt="Profile" style={imageStyle} />
       </div>
 
       {/* Right Side: 80% containing name, title, company, and contact details */}
@@ -111,14 +114,21 @@ const Template2 = ({ data, onSubmit }) => {
 
         {/* Social Links */}
         <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-          {data.socialLinks && data.socialLinks.map((social) => {
-            const Icon = social.icon;
-            return (
-              <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" style={{ color: social.color || data.fontColor }}>
-                <Icon size={24} />
-              </a>
-            );
-          })}
+          {data.socialLinks &&
+            data.socialLinks.map((social) => {
+              const Icon = social.icon
+              return (
+                <a
+                  key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: social.color || data.fontColor }}
+                >
+                  <Icon size={24} />
+                </a>
+              )
+            })}
         </div>
 
         {/* Render Additional Fields */}
@@ -160,7 +170,7 @@ const Template2 = ({ data, onSubmit }) => {
         <AppContent3 />
       </div>
     </Parent>
-  );
-};
+  )
+}
 
-export default Template2;
+export default Template2

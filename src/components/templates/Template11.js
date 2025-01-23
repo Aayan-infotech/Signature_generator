@@ -15,6 +15,8 @@ import AppContent from './AppContent';
 import Parent from './Parent';
 import AppContent2 from './AppContent2'
 import AppContent3 from './AppContent3'
+import avatar from './avatar.jpg'
+
 
 const Template11 = ({ data, onSubmit }) => {
   const getFontSize = () => {
@@ -47,7 +49,7 @@ const Template11 = ({ data, onSubmit }) => {
       <div className='w-100' style={{ textAlign: 'left', padding: '20px', }}>
         {/* Circular Image */}
         <div style={{ marginBottom: '20px', textAlign: 'left' }}>
-          <img src={data.image} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }} />
+          <img src={data.image || avatar} alt="Profile" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover' }} />
         </div>
 
         {/* Name, Title, and Company */}

@@ -8,8 +8,9 @@ import Modal from 'react-bootstrap/Modal'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { MySignature } from '../mySignature'
+import { MySignature, PaymentSuccess, PaymentCancel } from '../mySignature'
 import Offcanvas from 'react-bootstrap/Offcanvas'
+import PremiumModal from '../PremiumModal'
 
 function Header() {
   const [showSide, setShowSide] = useState(false)
@@ -17,6 +18,9 @@ function Header() {
   const handleSideClose = () => setShowSide(false)
   const handleSideShow = () => setShowSide(true)
   const [show, setShow] = useState(false)
+  const [paymentShow, setPaymentShow] = useState(false)
+  const [premiumPlans, setPremiumPlans] = useState(false)
+  const [paymentCancelShow, setPaymentCancelShow] = useState(false)
   const [signature, setSignature] = useState([])
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
@@ -24,11 +28,23 @@ function Header() {
   const [selectedImage, setSelectedImage] = useState(null)
   const token2 = localStorage.getItem('token2')
   const location = useLocation()
-  const handleSuccessAdded = () =>{ 
-    navigate("/signature")
+  const handleSuccessAdded = () => {
+    navigate('/signature')
     setSuccessAdded(false)
   }
 
+  const handlePlanChecker = async () => {
+    const response = await axios.get('http://localhost:9006/api/user/planChecker', {
+      headers: {
+        Authorization: `Bearer ${token2}`,
+      },
+    })
+   
+  }
+
+  useEffect(() => {
+    handlePlanChecker()
+  }, [])
 
   const handleCurrentUser = async () => {
     const response = await axios.get('http://44.196.64.110:9006/api/user/', {
@@ -49,12 +65,48 @@ function Header() {
     navigate('/')
   }
 
+  const handlePyamentClose = () => {
+    setPaymentShow(false)
+    setShow(true)
+  }
+
+  const handlePyamentShow = () => {
+    setPaymentShow(true)
+  }
+
+  const handlePyamentCancelShow = () => {
+    setPaymentCancelShow(true)
+  }
+
+  const handlePaymentCancelClose = () => {
+    setPaymentCancelShow(false)
+    setPremiumPlans(true)
+  }
+
   useEffect(() => {
     if (location.pathname === '/signature') {
       handleSignature()
       handleShow()
     }
   }, [location])
+
+  useEffect(() => {
+    if (location.pathname === '/success') {
+      handlePyamentShow()
+      handleSignature()
+    }
+  }, [location])
+
+  useEffect(() => {
+    if (location.pathname === '/declined') {
+      handlePyamentCancelShow()
+    }
+  }, [location])
+
+  const handlePremiumClose = () => {
+    setPremiumPlans(false)
+    navigate('/')
+  }
 
   const handleModalSignature = () => {
     handleSignature()
@@ -81,8 +133,7 @@ function Header() {
     }
   }
 
-  console.log(signature);
-  
+  console.log(signature)
 
   const handleLogout = async () => {
     await axios.post(
@@ -179,28 +230,28 @@ function Header() {
       </Navbar>
 
       <Modal show={successAdded} onHide={handleSuccessAdded} centered>
-      <Modal.Header className="border-0" closeButton>
-        <Modal.Title></Modal.Title>
-      </Modal.Header>
-      <Modal.Body className="text-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="48"
-          height="48"
-          fill="currentColor"
-          className="bi bi-stars text-warning"
-          viewBox="0 0 16 16"
-        >
-          <path d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z" />
-        </svg>
-        <h4 className="text-success mt-4">Signature Added Successfully!</h4>
-        <h6 className="fw-bold mb-2">Thank You For Using Our Service</h6>
-        <h6 className="mt-4">See All Your Signature</h6>
-        <button className=" btn btn-primary mb-4" onClick={handleSuccessAdded}>
-          Click here
-        </button>
-      </Modal.Body>
-    </Modal>
+        <Modal.Header className="border-0" closeButton>
+          <Modal.Title></Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            fill="currentColor"
+            className="bi bi-stars text-warning"
+            viewBox="0 0 16 16"
+          >
+            <path d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z" />
+          </svg>
+          <h4 className="text-success mt-4">Signature Added Successfully!</h4>
+          <h6 className="fw-bold mb-2">Thank You For Using Our Service</h6>
+          <h6 className="mt-4">See All Your Signature</h6>
+          <button className=" btn btn-primary mb-4" onClick={handleSuccessAdded}>
+            Click here
+          </button>
+        </Modal.Body>
+      </Modal>
       <MySignature
         show={show}
         handleClose={handleClose}
@@ -208,6 +259,14 @@ function Header() {
         selectedImage={selectedImage}
         handleSelect={handleSelect}
       />
+      <PaymentSuccess paymentShow={paymentShow} handlePyamentClose={handlePyamentClose} />
+
+      <PaymentCancel
+        paymentCancelShow={paymentCancelShow}
+        handlePaymentCancelClose={handlePaymentCancelClose}
+      />
+
+      <PremiumModal premiumPlans={premiumPlans} handlePremiumClose={handlePremiumClose} />
     </>
   )
 }

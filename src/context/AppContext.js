@@ -51,8 +51,8 @@ export const AppProvider = ({ children }) => {
           },
         });
        console.log("i am here")
-        setData(response.data.data.data || initialsData);
-        setSelectedContent(response.data.data.selectedContent);
+        setData(response?.data?.data?.data || initialsData);
+        setSelectedContent(response?.data?.data?.selectedContent);
       } catch (error) {
         console.error("Error fetching user data:", error);
         // Optionally, handle token expiry here

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   FaBlogger,
   FaHandPointUp,
@@ -11,6 +11,7 @@ import {
 import { useAppContext } from '../../../context/AppContext'
 import Modal from 'react-bootstrap/Modal'
 import PremiumModal from '../../PremiumModal'
+import axios from 'axios'
 
 // Group 2 templates and icons
 const templateData = [
@@ -40,6 +41,27 @@ const AppPageGroup2 = () => {
   const [selectedCard, setSelectedCard] = useState(null)
   const [premiumModal, setPremiumModal] = useState(false)
   const [pricingModal, setPricingModal] = useState(false)
+  const token = localStorage.getItem('token2')
+  const [premiumPlans, setPremiumPlans] = useState('')
+  const [premiumEnd, setPremiumEnd] = useState('')
+  const [premiumStart, setPremiumStart] = useState('')
+
+  const getCurrentUser = async () => {
+    const response = await axios.get('http://localhost:9006/api/user', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    setPremiumPlans(response?.data?.data?.amount)
+    // setPremiumPlans(20)
+    setPremiumEnd(response?.data?.data?.subscriptionEnd)
+    setPremiumStart(response?.data?.data?.subscriptionStarted)
+  }
+
+  useEffect(() => {
+    getCurrentUser()
+  }, [])
 
   const [url, setUrl] = useState('')
   const { setSelectedTemplate, selectedTemplate, handleModalSelect, selectedContent } =
@@ -53,7 +75,7 @@ const AppPageGroup2 = () => {
     setModalOpen(true)
     setSelectedTemplate(template.name)
     setModalData({ templateName: template.name })
-    setSelectedCard(templateName)
+    setSelectedCard(template)
   }
 
   const handleCancel = () => {
@@ -111,34 +133,41 @@ const AppPageGroup2 = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexDirection: 'column',
-                border: selectedCard === templateData ? '1px solid blue' : '1px solid gray',
+                border: '1px solid gray',
                 borderRadius: '8px',
                 cursor: 'pointer',
                 backgroundColor: 'transparent',
               }}
-              className={`position-relative template-item ${selectedCard === templateData ? 'active' : ''}`}
+              className={`position-relative template-item`}
               onClick={() => {
-                if (!selectedCard || !selectedCard.includes(templateData)) {
-                  handlePremiumFeatureClick(templateData)
-                } else {
+                if (premiumPlans === 20) {
                   handleTemplateClick(templateData)
+                } else if (premiumPlans === 100) {
+                  handleTemplateClick(templateData)
+                } else {
+                  handlePremiumFeatureClick(templateData)
                 }
               }}
             >
               {template.icon}
               {template.name}
-              <div className="position-absolute start-0 ps-2 pt-1 top-0">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="#ffc107"
-                  class="bi bi-star-fill"
-                  viewBox="0 0 16 16"
+              {premiumPlans === 0 || premiumPlans === 10 || premiumPlans === 60 ? (
+                <div
+                  className="position-absolute start-0 ps-2 pt-1 top-0 w-100 h-100 d-flex "
+                  onClick={() => handlePremiumFeatureClick(templateData)}
                 >
-                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                </svg>
-              </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#ffc107"
+                    class="bi bi-star-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                  </svg>
+                </div>
+              ) : null}
             </button>
           ))}
         </div>
