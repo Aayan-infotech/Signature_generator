@@ -34,7 +34,7 @@ export const templateNames3 = [
 const taglines = ['Open position', 'Join our team', 'We are hiring', 'Click to join', 'Job opening']
 
 // Main component for handling templates and modal for Group 2
-const AppPageGroup2 = () => {
+const AppPageGroup2 = ({ premiumPlans }) => {
   const [isModalOpen, setModalOpen] = useState(false)
   const [modalData, setModalData] = useState({})
   const [description, setDescription] = useState('')
@@ -42,26 +42,26 @@ const AppPageGroup2 = () => {
   const [premiumModal, setPremiumModal] = useState(false)
   const [pricingModal, setPricingModal] = useState(false)
   const token = localStorage.getItem('token2')
-  const [premiumPlans, setPremiumPlans] = useState('')
-  const [premiumEnd, setPremiumEnd] = useState('')
-  const [premiumStart, setPremiumStart] = useState('')
+  // const [premiumPlans, setPremiumPlans] = useState('')
+  // const [premiumEnd, setPremiumEnd] = useState('')
+  // const [premiumStart, setPremiumStart] = useState('')
 
-  const getCurrentUser = async () => {
-    const response = await axios.get('http://44.196.64.110:9006/api/user', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    setPremiumPlans(response?.data?.data?.amount)
-    // setPremiumPlans(20)
-    setPremiumEnd(response?.data?.data?.subscriptionEnd)
-    setPremiumStart(response?.data?.data?.subscriptionStarted)
-  }
+  // const getCurrentUser = async () => {
+  //   const response = await axios.get('http://44.196.64.110:9006/api/user', {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   })
+  //   setPremiumPlans(response?.data?.data?.amount)
+  //   // setPremiumPlans(20)
+  //   setPremiumEnd(response?.data?.data?.subscriptionEnd)
+  //   setPremiumStart(response?.data?.data?.subscriptionStarted)
+  // }
 
-  useEffect(() => {
-    getCurrentUser()
-  }, [])
+  // useEffect(() => {
+  //   getCurrentUser()
+  // }, [])
 
   const [url, setUrl] = useState('')
   const { setSelectedTemplate, selectedTemplate, handleModalSelect, selectedContent } =

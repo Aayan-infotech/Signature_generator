@@ -296,34 +296,34 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
   )
 }
 
-const AppPageGroup1 = () => {
+const AppPageGroup1 = ({ premiumPlans }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedCard, setSelectedCard] = useState(null)
   const [premiumModal, setPremiumModal] = useState(false)
   const [pricingModal, setPricingModal] = useState(false)
   const token = localStorage.getItem('token2')
-  const [premiumPlans, setPremiumPlans] = useState('')
-  const [premiumEnd, setPremiumEnd] = useState('')
-  const [premiumStart, setPremiumStart] = useState('')
+  // const [premiumPlans, setPremiumPlans] = useState('')
+  // const [premiumEnd, setPremiumEnd] = useState('')
+  // const [premiumStart, setPremiumStart] = useState('')
   const { selectedContent, handleModalSelect, setSelectedTemplate, selectedTemplate } =
     useAppContext()
 
-  const getCurrentUser = async () => {
-    const response = await axios.get('http://44.196.64.110:9006/api/user', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    setPremiumPlans(response?.data?.data?.amount)
-    // setPremiumPlans(10)
-    setPremiumEnd(response?.data?.data?.subscriptionEnd)
-    setPremiumStart(response?.data?.data?.subscriptionStarted)
-  }
+  // const getCurrentUser = async () => {
+  //   const response = await axios.get('http://44.196.64.110:9006/api/user', {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   })
+  //   setPremiumPlans(response?.data?.data?.amount)
+  //   // setPremiumPlans(10)
+  //   setPremiumEnd(response?.data?.data?.subscriptionEnd)
+  //   setPremiumStart(response?.data?.data?.subscriptionStarted)
+  // }
 
-  useEffect(() => {
-    getCurrentUser()
-  }, [premiumPlans])
+  // useEffect(() => {
+  //   getCurrentUser()
+  // }, [premiumPlans])
 
   const handleTemplateClick = (templateName) => {
     setSelectedTemplate(templateName)
