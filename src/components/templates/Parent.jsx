@@ -38,11 +38,10 @@ const Parent = ({ children }) => {
     if (token) {
       localStorage.setItem('token2', token)
     }
-
-    getUser()
-  }, [userId])
+  }, [])
 
   const token2 = localStorage.getItem('token2')
+
   const downloadPdf = () => {
     if (pdfExportComponent.current) {
       pdfExportComponent.current.save()
@@ -71,30 +70,30 @@ const Parent = ({ children }) => {
     }
   }
 
-  async function getUser() {
-    try {
-      const response = await axios.post(
-        'http://44.196.64.110:9006/api/user',
-        {
-          token: token2,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      )
+  // async function getUser() {
+  //   try {
+  //     const response = await axios.post(
+  //       'http://44.196.64.110:9006/api/user',
+  //       {
+  //         token: token2,
+  //       },
+  //       {
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //       },
+  //     )
 
-      if (response.status === 200) {
-        setUserId(response.data._id)
-        return response.data
-      } else {
-        console.error('Error:', response.data.message)
-      }
-    } catch (error) {
-      console.error('Fetch error:', error)
-    }
-  }
+  //     if (response.status === 200) {
+  //       setUserId(response.data._id)
+  //       return response.data
+  //     } else {
+  //       console.error('Error:', response.data.message)
+  //     }
+  //   } catch (error) {
+  //     console.error('Fetch error:', error)
+  //   }
+  // }
 
   const handlegmail = async () => {
     try {
