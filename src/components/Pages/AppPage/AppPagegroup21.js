@@ -36,7 +36,17 @@ export const templateIcons21 = [
   <FaMicrosoft style={{ color: '#4CAF50' }} />,
 ]
 
-const AppPageGroup21 = ({ premiumPlans }) => {
+const AppPageGroup21 = ({
+  premiumPlans,
+  isMonthly,
+  isYearly,
+  allPlan,
+  planMonth,
+  planYear,
+  allPlanMonthy,
+  allPlanYearly,
+  planType,
+}) => {
   // const [selectedContent, setSelectedContent] = useState({})
   // model controls
   const [description, setDescription] = useState('')
@@ -51,6 +61,11 @@ const AppPageGroup21 = ({ premiumPlans }) => {
   // const [premiumEnd, setPremiumEnd] = useState('')
   // const [premiumStart, setPremiumStart] = useState('')
   const token = localStorage.getItem('token2')
+  console.log('premiumPlans22', premiumPlans)
+  console.log('planMonth22', planMonth)
+  console.log('planYear22', planYear)
+  console.log('allPlanMonthy22', allPlanMonthy)
+  console.log('allPlanYearly22', allPlanYearly)
 
   const handlePremiumFeatureClick = () => {
     setSelectedTemplate()
@@ -70,9 +85,9 @@ const AppPageGroup21 = ({ premiumPlans }) => {
   }
 
   const handleTemplateClick = (templateName) => {
-    console.log({ templateName })
+    setPremiumModal(false)
     setModalOpen(true)
-    setSelectedTemplate(templateName)
+    // setSelectedTemplate(templateName)
     setSelectedCard(templateName)
   }
 
@@ -100,23 +115,6 @@ const AppPageGroup21 = ({ premiumPlans }) => {
     // }))
     handleCancel()
   }
-
-  // const getCurrentUser = async () => {
-  //   const response = await axios.get('http://44.196.64.110:9006/api/user', {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //   setPremiumPlans(response?.data?.data?.amount)
-  //   // setPremiumPlans(0)
-  //   setPremiumEnd(response?.data?.data?.subscriptionEnd)
-  //   setPremiumStart(response?.data?.data?.subscriptionStarted)
-  // }
-
-  // useEffect(() => {
-  //   getCurrentUser()
-  // }, [])
   return (
     <>
       <div>
@@ -144,7 +142,11 @@ const AppPageGroup21 = ({ premiumPlans }) => {
                 backgroundColor: 'transparent',
               }}
               onClick={() => {
-                if (premiumPlans > 0) {
+                if (
+                  (planType === 'full' &&
+                    allPlanMonthy.some((plan) => plan.price === premiumPlans)) ||
+                  allPlanYearly.some((plan) => plan.price === premiumPlans)
+                ) {
                   handleTemplateClick(templateNames21)
                 } else {
                   handlePremiumFeatureClick(templateNames21)
@@ -154,14 +156,35 @@ const AppPageGroup21 = ({ premiumPlans }) => {
             >
               {templateIcons21[index]}
               {template}
-              {premiumPlans === 0 ? (
-                <div className="position-absolute start-0 ps-2 pt-1 top-0">
+              {planType !== 'full' && allPlanMonthy.some((plan) => plan.price !== premiumPlans) ? (
+                <div
+                  className="position-absolute start-0 ps-2 pt-1 top-0 w-100 h-100 d-flex"
+                  onClick={() => handlePremiumFeatureClick(templateNames21)}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"
                     fill="#ffc107"
-                    class="bi bi-star-fill"
+                    className="bi bi-star-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                  </svg>
+                </div>
+              ) : null}
+
+              {planType !== 'full' && allPlanYearly.some((plan) => plan.price !== premiumPlans) ? (
+                <div
+                  className="position-absolute start-0 ps-2 pt-1 top-0 w-100 h-100 d-flex"
+                  onClick={() => handlePremiumFeatureClick(templateNames21)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#ffc107"
+                    className="bi bi-star-fill"
                     viewBox="0 0 16 16"
                   >
                     <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />

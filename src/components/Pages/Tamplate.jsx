@@ -12,6 +12,14 @@ const TamplatesPreview = () => {
   const [pricingModal, setPricingModal] = useState(false)
   const [premiumPlans, setPremiumPlans] = useState('')
   const [premiumEnd, setPremiumEnd] = useState('')
+  const [allPlan, setAllPlan] = useState([])
+  const [allPlanMonthy, setAllPlanMonthy] = useState([])
+  const [allPlanYearly, setAllPlanYearly] = useState([])
+  const [isMonthy, setIsMonthly] = useState(false)
+  const [isYearly, setIsYearly] = useState(false)
+  const [planMonth, setPlanMonth] = useState('')
+  const [planYear, setPlanYear] = useState('')
+  const [planType, setPlanType] = useState('')
   const [loading, setLoading] = useState(true) // New state to track API loading
   const [premiumStart, setPremiumStart] = useState('')
   const token = localStorage.getItem('token2')
@@ -19,15 +27,19 @@ const TamplatesPreview = () => {
   const getCurrentUser = async () => {
     setLoading(true) // Set loading to true before API call
     try {
-      const response = await axios.get('http://44.196.64.110:9006/api/user', {
+      const response = await axios.get('http://localhost:9006/api/plan/getUserPlan', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       })
-      setPremiumPlans(response?.data?.data?.amount || 0)
-      setPremiumEnd(response?.data?.data?.subscriptionEnd)
-      setPremiumStart(response?.data?.data?.subscriptionStarted)
+      console.log(response?.data)
+      setPremiumPlans(response?.data?.user?.amount || 0)
+      setPremiumEnd(response?.data?.user?.subscriptionEnd)
+      setPremiumStart(response?.data?.user?.subscriptionStarted)
+      setIsYearly(response?.data?.user?.Plan?.isYearly)
+      setPlanType(response?.data?.user?.Plan?.PlanFeature)
+      setIsMonthly(response?.data?.user?.Plan?.isMonthly)
     } catch (error) {
       console.error('Failed to fetch user data:', error)
       setPremiumPlans(0) // Default to 0 if the API call fails
@@ -35,13 +47,44 @@ const TamplatesPreview = () => {
       setLoading(false) // Set loading to false after API call finishes
     }
   }
-
-  useEffect(() => {
-    getCurrentUser()
-  }, [premiumPlans])
   // Array of 12 template names
   const templates = Array.from({ length: 12 }, (_, index) => `Template${index + 1}`)
   console.log('premiumPlans template', premiumPlans)
+
+  const handleAllPlan = async () => {
+    try {
+      // Fetch plans from the API
+      const response = await axios.get('http://localhost:9006/api/plan/getAllPlans')
+      const plans = response?.data
+
+      // Filter and set plans
+      const monthlyPlans = plans?.filter((plan) => plan.isMonthly)
+      const yearlyPlans = plans?.filter((plan) => plan.isYearly)
+
+      // Update state with filtered plans
+      setAllPlan(plans)
+      setAllPlanMonthy(monthlyPlans)
+      setAllPlanYearly(yearlyPlans)
+    } catch (error) {
+      console.error('Error fetching premium plans:', error)
+    }
+  }
+
+  useEffect(() => {
+    getCurrentUser()
+    handleAllPlan()
+  }, [premiumPlans])
+
+  useEffect(() => {
+    if (isMonthy === true) {
+      setPlanMonth(premiumPlans)
+    } else if (isYearly === true) {
+      setPlanYear(premiumPlans)
+    }
+  }, [isMonthy, isYearly])
+
+  console.log('allPlanMonthy', allPlanMonthy)
+  console.log('allPlanYearly', allPlanYearly)
 
   const handleTemplateClick = (template) => {
     setSelectedTemplate(template) // Set the clicked template as active
@@ -66,6 +109,37 @@ const TamplatesPreview = () => {
   }
 
   const isPremiumExpired = new Date(premiumEnd) < new Date()
+
+  const shouldShowStar = (index) => {
+    const isBasicPlan = planType === 'basic'
+    const isFullPlan = planType === 'full'
+    const isNeitherBasicNorFull = planType !== 'basic' && planType !== 'full' // Check for neither basic nor full
+    const allMonthlyPricesAreZero =
+      allPlanMonthy.length === 0 || allPlanMonthy.every((plan) => plan.price === 0)
+    const allYearlyPricesAreZero =
+      allPlanYearly.length === 0 || allPlanYearly.every((plan) => plan.price === 0)
+
+    const hasMatchingMonthlyPlan = allPlanMonthy.some((plan) => plan.price === premiumPlans)
+    const hasMatchingYearlyPlan = allPlanYearly.some((plan) => plan.price === premiumPlans)
+
+    if (isBasicPlan) {
+      if (index >= 2 && index <= 6) {
+        return !(hasMatchingMonthlyPlan || hasMatchingYearlyPlan) // Show star if NO matching plan
+      } else if (index > 6) {
+        return !(hasMatchingMonthlyPlan || hasMatchingYearlyPlan) // Show star if NO matching plan
+      }
+    } else if (isFullPlan) {
+      if (index >= 6) {
+        return false // Don't show star if it is full plan and index is greater than or equal to 6
+      }
+    } else if (isNeitherBasicNorFull && allMonthlyPricesAreZero && allYearlyPricesAreZero) {
+      if (index >= 2) {
+        return true // Show star from index 2 if neither basic nor full and all prices are 0
+      }
+    }
+
+    return false // Don't show star for other cases
+  }
 
   return (
     <>
@@ -99,36 +173,58 @@ const TamplatesPreview = () => {
                 }}
                 height={100}
                 onClick={() => {
-                  if (loading) return // Block clicks during loading
+                  if (loading) return
+
+                  const isBasicPlan = planType === 'basic'
+                  const isFullPlan = planType === 'full'
+                  const hasMatchingMonthlyPlan = allPlanMonthy.some(
+                    (plan) => plan.price === premiumPlans,
+                  )
+                  const hasMatchingYearlyPlan = allPlanYearly.some(
+                    (plan) => plan.price === premiumPlans,
+                  )
+
                   if (
-                    (index > 1 && premiumPlans === 0) ||
-                    (index > 5 && (premiumPlans === 10 || premiumPlans === 60))
+                    index >= 2 &&
+                    isBasicPlan &&
+                    isFullPlan &&
+                    (hasMatchingMonthlyPlan || hasMatchingYearlyPlan)
                   ) {
+                    handleTemplateClick(template)
+                  } else if (index >= 2 && !isBasicPlan && !isFullPlan) {
+                    handlePremiumFeatureClick(template)
+                  } else if (
+                    index >= 6 &&
+                    isFullPlan &&
+                    (hasMatchingMonthlyPlan || hasMatchingYearlyPlan)
+                  ) {
+                    handleTemplateClick(template)
+                  } else if (index >= 6 && !isFullPlan) {
+                    handlePremiumFeatureClick(template)
+                  } else if (index >= 2 && premiumPlans === 0) {
                     handlePremiumFeatureClick(template)
                   } else {
                     handleTemplateClick(template)
                   }
                 }}
               />
-              {!loading &&
-                ((premiumPlans === 0 && index > 1) ||
-                  ((premiumPlans === 10 || premiumPlans === 60) && index > 5)) && (
-                  <div
-                    className="position-absolute start-0 ps-2 pt-1 top-0 w-100 h-100 z-1"
-                    onClick={() => handlePremiumFeatureClick(template)}
+              {shouldShowStar(index) && ( // Conditionally render the star
+                <div
+                  className="position-absolute start-0 ps-2 pt-1 top-0 w-100 h-100 z-1"
+                  onClick={() => handlePremiumFeatureClick(template)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#ffc107"
+                    className="bi bi-star-fill"
+                    viewBox="0 0 16 16"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="#ffc107"
-                      className="bi bi-star-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                    </svg>
-                  </div>
-                )}
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                  </svg>
+                </div>
+              )}
             </div>
           ))}
         </div>

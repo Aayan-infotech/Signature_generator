@@ -9,31 +9,102 @@ const AppPages = () => {
   const [premiumPlans, setPremiumPlans] = useState('')
   const [premiumEnd, setPremiumEnd] = useState('')
   const [premiumStart, setPremiumStart] = useState('')
+  const [allPlan, setAllPlan] = useState([])
+  const [allPlanMonthy, setAllPlanMonthy] = useState([])
+  const [allPlanYearly, setAllPlanYearly] = useState([])
+  const [isMonthy, setIsMonthly] = useState(false)
+  const [isYearly, setIsYearly] = useState(false)
+  const [planMonth, setPlanMonth] = useState('')
+  const [planYear, setPlanYear] = useState('')
+  const [planType, setPlanType] = useState('')
   const token = localStorage.getItem('token2')
 
   const getCurrentUser = async () => {
-    const response = await axios.get('http://44.196.64.110:9006/api/user', {
+    const response = await axios.get('http://localhost:9006/api/plan/getUserPlan', {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     })
-    setPremiumPlans(response?.data?.data?.amount)
+    setPremiumPlans(response?.data?.user?.amount)
     // setPremiumPlans(0)
-    setPremiumEnd(response?.data?.data?.subscriptionEnd)
-    setPremiumStart(response?.data?.data?.subscriptionStarted)
+    console.log('PlanFeature', response?.data)
+    setPremiumEnd(response?.data?.user?.subscriptionEnd)
+    setPremiumStart(response?.data?.user?.subscriptionStarted)
+    setIsMonthly(response?.data?.user?.Plan?.isMonthly)
+    setIsYearly(response?.data?.user?.Plan?.isYearly)
+    setPlanType(response?.data?.user?.Plan?.PlanFeature)
   }
 
-  console.log("premiumPlans", premiumPlans)
+  const handleAllPlan = async () => {
+    try {
+      // Fetch plans from the API
+      const response = await axios.get('http://localhost:9006/api/plan/getAllPlans')
+      const plans = response?.data
+
+      // Filter and set plans
+      const monthlyPlans = plans?.filter((plan) => plan.isMonthly)
+      const yearlyPlans = plans?.filter((plan) => plan.isYearly)
+
+      // Update state with filtered plans
+      setAllPlan(plans)
+      setAllPlanMonthy(monthlyPlans)
+      setAllPlanYearly(yearlyPlans)
+    } catch (error) {
+      console.error('Error fetching premium plans:', error)
+    }
+  }
 
   useEffect(() => {
     getCurrentUser()
+    handleAllPlan()
   }, [])
+
+  useEffect(() => {
+    if (isMonthy === true) {
+      setPlanMonth(premiumPlans)
+    } else if (isYearly === true) {
+      setPlanYear(premiumPlans)
+    }
+  }, [isMonthy, isYearly])
+
+  console.log('allPlanMonthy', allPlanMonthy)
+  console.log('allPlanYearly', allPlanYearly)
   return (
     <div>
-      <AppPageGroup1 premiumPlans={premiumPlans} />
-      <AppPagegroup21 premiumPlans={premiumPlans} />
-      <AppPageGroup2 premiumPlans={premiumPlans} />
+      <AppPageGroup1
+        premiumPlans={premiumPlans}
+        isMonthly={isMonthy}
+        isYearly={isYearly}
+        allPlan={allPlan}
+        planMonth={planMonth}
+        planYear={planYear}
+        allPlanMonthy={allPlanMonthy}
+        allPlanYearly={allPlanYearly}
+        planType={planType}
+      />
+      <AppPagegroup21
+        premiumPlans={premiumPlans}
+        isMonthly={isMonthy}
+        isYearly={isYearly}
+        allPlan={allPlan}
+        planMonth={planMonth}
+        planYear={planYear}
+        allPlanMonthy={allPlanMonthy}
+        allPlanYearly={allPlanYearly}
+        planType={planType}
+      />
+      <AppPageGroup2
+        premiumPlans={premiumPlans}
+        isMonthly={isMonthy}
+        isYearly={isYearly}
+        allPlan={allPlan}
+        planMonth={planMonth}
+        planYear={planYear}
+        allPlanMonthy={allPlanMonthy}
+        allPlanYearly={allPlanYearly}
+        planType={planType}
+      />
     </div>
   )
 }
