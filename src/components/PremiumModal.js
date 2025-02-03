@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import axios from 'axios'
 // import {ReactStripe} from "@stripe/react-stripe-js"
@@ -12,15 +12,15 @@ export default function PremiumModal({
   const token = localStorage.getItem('token2')
   const publishableKey =
     'pk_test_51QjFfdBgZZyeFEqTuo1HPMhCZQA0ykwEm9y9iFhBLbHtPgFNnsRPsFb38IywwbstwAg4U9K9wBUcnpvTaSwLYKvI00KYTL1C2p'
-
-  const handlePayment = async (price, subscriptionEnd) => {
+  const [plan, setPlan] = useState([])
+  const handlePayment = async (price, subscriptionEnd, id) => {
     if (!Number.isInteger(price)) {
       console.error('Invalid price:', price)
       return
     }
     try {
       const response = await axios.post(
-        'http://44.196.64.110:9006/api/user/makePayment',
+        `http://44.196.64.110:9006/api/user/makePayment/${id}`,
         {
           publishableKey,
           price,
@@ -39,6 +39,19 @@ export default function PremiumModal({
       console.error('Error creating payment session:', error)
     }
   }
+
+  useEffect(() => {
+    const handlePremiumPlan = async () => {
+      try {
+        const response = await axios.get('http://44.196.64.110:9006/api/plan/getAllPlans')
+        setPlan(response?.data)
+      } catch (error) {
+        console.error('Error fetching premium plan:', error)
+      }
+    }
+    handlePremiumPlan()
+  }, [])
+  console.log(plan)
   return (
     <>
       <Modal show={pricingModal} onHide={handlePricingModalClose} size="xl" centered>
@@ -47,7 +60,7 @@ export default function PremiumModal({
         </Modal.Header>
         <Modal.Body>
           <div>
-            <div className="row gy-4 mb-4">
+            <div className="row gy-4 mb-4 justify-content-center">
               <div className="col-lg-4">
                 <div className="card border-0 shadow-lg rounded-4 h-100">
                   <div className="card-body">
@@ -58,89 +71,40 @@ export default function PremiumModal({
                   </div>
                 </div>
               </div>
-              <div className="col-lg-4">
-                <div className="card border-0 shadow-lg rounded-4 h-100">
-                  <div className="card-body">
-                    <div className="d-flex flex-column gap-4 text-center">
-                      <h3 className="mb-0">
-                        <span className="fs-1">$10/</span>month
-                      </h3>
-                      <h6>You can avail this premium feature</h6>
-                      <button
-                        className="btn btn-primary"
-                        onClick={() =>
-                          handlePayment(10, new Date(Date.now() + 30 * 24 * 60 * 60 * 1000))
-                        }
-                      >
-                        Payment
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="card border-0 shadow-lg rounded-4 h-100">
-                  <div className="card-body">
-                    <div className="d-flex flex-column gap-4 text-center">
-                      <h3 className="mb-0">
-                        <span className="fs-1">$20/</span>month
-                      </h3>
-                      <h6>You can avail this premium feature</h6>
-                      <button
-                        className="btn btn-primary"
-                        onClick={() =>
-                          handlePayment(20, new Date(Date.now() + 30 * 24 * 60 * 60 * 1000))
-                        }
-                      >
-                        Payment
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              {plan.map((item) => (
+                <div className="col-lg-4" key={item._id}>
+                  <div className="card border-0 shadow-lg rounded-4 h-100">
+                    <div className="card-body">
+                      <div className="d-flex text-center gap-2 flex-column">
+                        <span className="fs-1">
+                          ${item.price}/ {item.isMonthly === true ? 'monthly' : 'year'}
+                        </span>
+                        <h6>
+                          Plan type: {'  '}
+                          {item.PlanFeature}
+                        </h6>
 
-            <div className="row gy-4 justify-content-center">
-              <div className="col-lg-4">
-                <div className="card border-0 shadow-lg rounded-4 h-100">
-                  <div className="card-body">
-                    <div className="d-flex flex-column gap-4 text-center">
-                      <h3 className="mb-0">
-                        <span className="fs-1">$60/</span>Yearly
-                      </h3>
-                      <h6>You can avail this premium feature</h6>
-                      <button
-                        className="btn btn-primary"
-                        onClick={() =>
-                          handlePayment(60, new Date(Date.now() + 365 * 24 * 60 * 60 * 1000))
-                        }
-                      >
-                        Payment
-                      </button>
+                        <h4>{item?.name}</h4>
+                        <div dangerouslySetInnerHTML={{ __html: item?.description }} />
+                        <button
+                          className="btn btn-primary"
+                          onClick={() =>
+                            handlePayment(
+                              item.price,
+                              new Date(
+                                Date.now() + (item.isMonthly ? 30 : 365) * 24 * 60 * 60 * 1000,
+                              ),
+                              item._id,
+                            )
+                          }
+                        >
+                          Payment
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="card border-0 shadow-lg rounded-4 h-100">
-                  <div className="card-body">
-                    <div className="d-flex flex-column gap-4 text-center">
-                      <h3 className="mb-0">
-                        <span className="fs-1">$100/</span>yearly
-                      </h3>
-                      <h6>You can avail this premium feature</h6>
-                      <button
-                        className="btn btn-primary"
-                        onClick={() =>
-                          handlePayment(100, new Date(Date.now() + 365 * 24 * 60 * 60 * 1000))
-                        }
-                      >
-                        Payment
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </Modal.Body>
@@ -157,7 +121,7 @@ export default function PremiumModal({
         </Modal.Header>
         <Modal.Body>
           <div>
-            <div className="row gy-4 mb-4">
+            <div className="row gy-4 mb-4 justify-content-center">
               <div className="col-lg-4">
                 <div className="card border-0 shadow-lg rounded-4 h-100">
                   <div className="card-body">
@@ -168,89 +132,36 @@ export default function PremiumModal({
                   </div>
                 </div>
               </div>
-              <div className="col-lg-4">
-                <div className="card border-0 shadow-lg rounded-4 h-100">
-                  <div className="card-body">
-                    <div className="d-flex flex-column gap-4 text-center">
-                      <h3 className="mb-0">
-                        <span className="fs-1">$10/</span>month
-                      </h3>
-                      <h6>You can avail this premium feature</h6>
-                      <button
-                        className="btn btn-primary"
-                        onClick={() =>
-                          handlePayment(10, new Date(Date.now() + 30 * 24 * 60 * 60 * 1000))
-                        }
-                      >
-                        Payment
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="card border-0 shadow-lg rounded-4 h-100">
-                  <div className="card-body">
-                    <div className="d-flex flex-column gap-4 text-center">
-                      <h3 className="mb-0">
-                        <span className="fs-1">$20/</span>month
-                      </h3>
-                      <h6>You can avail this premium feature</h6>
-                      <button
-                        className="btn btn-primary"
-                        onClick={() =>
-                          handlePayment(20, new Date(Date.now() + 30 * 24 * 60 * 60 * 1000))
-                        }
-                      >
-                        Payment
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              {plan.map((item) => (
+                <div className="col-lg-4" key={item._id}>
+                  <div className="card border-0 shadow-lg rounded-4 h-100">
+                    <div className="card-body">
+                      <div className="d-flex text-center gap-2 flex-column">
+                        <span className="fs-1">
+                          ${item.price}/ {item.isMonthly === true ? 'monthly' : 'year'}
+                        </span>
 
-            <div className="row gy-4 justify-content-center">
-              <div className="col-lg-4">
-                <div className="card border-0 shadow-lg rounded-4 h-100">
-                  <div className="card-body">
-                    <div className="d-flex flex-column gap-4 text-center">
-                      <h3 className="mb-0">
-                        <span className="fs-1">$60/</span>Yearly
-                      </h3>
-                      <h6>You can avail this premium feature</h6>
-                      <button
-                        className="btn btn-primary"
-                        onClick={() =>
-                          handlePayment(60, new Date(Date.now() + 365 * 24 * 60 * 60 * 1000))
-                        }
-                      >
-                        Payment
-                      </button>
+                        <h4>{item?.name}</h4>
+                        <div dangerouslySetInnerHTML={{ __html: item?.description }} />
+                        <button
+                          className="btn btn-primary"
+                          onClick={() =>
+                            handlePayment(
+                              item.price,
+                              new Date(
+                                Date.now() + (item.isMonthly ? 30 : 365) * 24 * 60 * 60 * 1000,
+                              ),
+                              item._id,
+                            )
+                          }
+                        >
+                          Payment
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="card border-0 shadow-lg rounded-4 h-100">
-                  <div className="card-body">
-                    <div className="d-flex flex-column gap-4 text-center">
-                      <h3 className="mb-0">
-                        <span className="fs-1">$100/</span>yearly
-                      </h3>
-                      <h6>You can avail this premium feature</h6>
-                      <button
-                        className="btn btn-primary"
-                        onClick={() =>
-                          handlePayment(100, new Date(Date.now() + 365 * 24 * 60 * 60 * 1000))
-                        }
-                      >
-                        Payment
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </Modal.Body>

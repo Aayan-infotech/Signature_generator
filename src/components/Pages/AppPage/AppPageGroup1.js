@@ -296,34 +296,29 @@ const SelectionModal = ({ isOpen, onClose, onSelect, templateName, contentOption
   )
 }
 
-const AppPageGroup1 = ({ premiumPlans }) => {
+const AppPageGroup1 = ({
+  premiumPlans,
+  isMonthly,
+  isYearly,
+  allPlan,
+  planMonth,
+  planYear,
+  allPlanMonthy,
+  allPlanYearly,
+  planType,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  console.log('premiumPlans33', premiumPlans)
+  console.log('planMonth33', planMonth)
+  console.log('planYear33', planYear)
+  console.log('allPlanMonthy33', allPlanMonthy)
+  console.log('allPlanYearly33', allPlanYearly)
   const [selectedCard, setSelectedCard] = useState(null)
   const [premiumModal, setPremiumModal] = useState(false)
   const [pricingModal, setPricingModal] = useState(false)
   const token = localStorage.getItem('token2')
-  // const [premiumPlans, setPremiumPlans] = useState('')
-  // const [premiumEnd, setPremiumEnd] = useState('')
-  // const [premiumStart, setPremiumStart] = useState('')
   const { selectedContent, handleModalSelect, setSelectedTemplate, selectedTemplate } =
     useAppContext()
-
-  // const getCurrentUser = async () => {
-  //   const response = await axios.get('http://44.196.64.110:9006/api/user', {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //   setPremiumPlans(response?.data?.data?.amount)
-  //   // setPremiumPlans(10)
-  //   setPremiumEnd(response?.data?.data?.subscriptionEnd)
-  //   setPremiumStart(response?.data?.data?.subscriptionStarted)
-  // }
-
-  // useEffect(() => {
-  //   getCurrentUser()
-  // }, [premiumPlans])
 
   const handleTemplateClick = (templateName) => {
     setSelectedTemplate(templateName)
@@ -390,7 +385,7 @@ const AppPageGroup1 = ({ premiumPlans }) => {
           >
             {templateIcons1[index]}
             <p className="mb-0">{templateName}</p>
-            {premiumPlans === 0 ? (
+            {premiumPlans === '' || premiumPlans === 0 ? (
               <>
                 {['Green footer', 'Video', 'Image gallery'].includes(templateName) && (
                   <div
