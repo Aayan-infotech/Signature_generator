@@ -20,7 +20,7 @@ const AppPages = () => {
   const token = localStorage.getItem('token2')
 
   const getCurrentUser = async () => {
-    const response = await axios.get('http://localhost:9006/api/plan/getUserPlan', {
+    const response = await axios.get('http://44.196.64.110:9006/api/plan/getUserPlan', {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ const AppPages = () => {
   const handleAllPlan = async () => {
     try {
       // Fetch plans from the API
-      const response = await axios.get('http://localhost:9006/api/plan/getAllPlans')
+      const response = await axios.get('http://44.196.64.110:9006/api/plan/getAllPlans')
       const plans = response?.data
 
       // Filter and set plans

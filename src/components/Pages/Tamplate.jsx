@@ -27,7 +27,7 @@ const TamplatesPreview = () => {
   const getCurrentUser = async () => {
     setLoading(true) // Set loading to true before API call
     try {
-      const response = await axios.get('http://localhost:9006/api/plan/getUserPlan', {
+      const response = await axios.get('http://44.196.64.110:9006/api/plan/getUserPlan', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -54,7 +54,7 @@ const TamplatesPreview = () => {
   const handleAllPlan = async () => {
     try {
       // Fetch plans from the API
-      const response = await axios.get('http://localhost:9006/api/plan/getAllPlans')
+      const response = await axios.get('http://44.196.64.110:9006/api/plan/getAllPlans')
       const plans = response?.data
 
       // Filter and set plans
@@ -85,6 +85,9 @@ const TamplatesPreview = () => {
 
   console.log('allPlanMonthy', allPlanMonthy)
   console.log('allPlanYearly', allPlanYearly)
+  console.log('planType', planType)
+  console.log('isYearly', isYearly)
+  console.log('isMonthy', isMonthy)
 
   const handleTemplateClick = (template) => {
     setSelectedTemplate(template) // Set the clicked template as active
@@ -104,6 +107,7 @@ const TamplatesPreview = () => {
     setPremiumModal(false)
     setPricingModal(true)
   }
+
   const handlePricingModalClose = () => {
     setPricingModal(false)
   }
@@ -111,35 +115,16 @@ const TamplatesPreview = () => {
   const isPremiumExpired = new Date(premiumEnd) < new Date()
 
   const shouldShowStar = (index) => {
-    const isBasicPlan = planType === 'basic'
-    const isFullPlan = planType === 'full'
-    const isNeitherBasicNorFull = planType !== 'basic' && planType !== 'full' // Check for neither basic nor full
-    const allMonthlyPricesAreZero =
-      allPlanMonthy.length === 0 || allPlanMonthy.every((plan) => plan.price === 0)
-    const allYearlyPricesAreZero =
-      allPlanYearly.length === 0 || allPlanYearly.every((plan) => plan.price === 0)
+    if (index === 0 || index === 1) return false;
 
-    const hasMatchingMonthlyPlan = allPlanMonthy.some((plan) => plan.price === premiumPlans)
-    const hasMatchingYearlyPlan = allPlanYearly.some((plan) => plan.price === premiumPlans)
-
-    if (isBasicPlan) {
-      if (index >= 2 && index <= 6) {
-        return !(hasMatchingMonthlyPlan || hasMatchingYearlyPlan) // Show star if NO matching plan
-      } else if (index > 6) {
-        return !(hasMatchingMonthlyPlan || hasMatchingYearlyPlan) // Show star if NO matching plan
-      }
-    } else if (isFullPlan) {
-      if (index >= 6) {
-        return false // Don't show star if it is full plan and index is greater than or equal to 6
-      }
-    } else if (isNeitherBasicNorFull && allMonthlyPricesAreZero && allYearlyPricesAreZero) {
-      if (index >= 2) {
-        return true // Show star from index 2 if neither basic nor full and all prices are 0
-      }
+    if (planType === 'full' ) {
+        return false; // No star for full plan
+    } else if (planType === 'basic') {
+        return index >= 6; // Show star from index 6 for basic plan
+    } else {
+        return index >= 2; // Default: show star from index 2
     }
-
-    return false // Don't show star for other cases
-  }
+};
 
   return (
     <>

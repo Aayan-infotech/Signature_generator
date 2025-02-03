@@ -385,7 +385,7 @@ const AppPageGroup1 = ({
           >
             {templateIcons1[index]}
             <p className="mb-0">{templateName}</p>
-            {premiumPlans === '' ? (
+            {premiumPlans === '' || premiumPlans === 0 ? (
               <>
                 {['Green footer', 'Video', 'Image gallery'].includes(templateName) && (
                   <div

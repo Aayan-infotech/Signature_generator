@@ -96,7 +96,7 @@ function MySignature({ show, handleClose, signature, selectedImage, handleSelect
   //       formData.append('image', selectedImage?.url);
 
   //       try {
-  //         const response = await axios.post('http://localhost:9006/update-signature', formData, {
+  //         const response = await axios.post('http://44.196.64.110:9006/update-signature', formData, {
   //           headers: {
   //             'Content-Type': 'multipart/form-data',
   //             Authorization: `Bearer ${token2}`,

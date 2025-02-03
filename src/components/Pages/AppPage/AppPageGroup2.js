@@ -93,7 +93,7 @@ const AppPageGroup2 = ({
   const handlePremiumFeatureClick = () => {
     // setSelectedTemplate()
     setPremiumModal(true)
-    setIsModalOpen(false)
+    handleCancel()
   }
 
   const handlePremiumModalClose = () => {
@@ -142,8 +142,11 @@ const AppPageGroup2 = ({
                   allPlanYearly.some((plan) => plan.price === premiumPlans)
                 ) {
                   handleTemplateClick(templateData)
-                } else {
+                  // handlePremiumFeatureClick(templateData)
+                }
+                else {
                   handlePremiumFeatureClick(templateData)
+                  // handleTemplateClick(templateData)
                 }
               }}
             >
