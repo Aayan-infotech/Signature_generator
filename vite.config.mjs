@@ -51,7 +51,7 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       proxy: {
         // https://vitejs.dev/config/server-options.html
-        '/api': 'http://44.196.64.110:9006',
+        '/api': 'http://54.236.98.193:9006',
       },
     },
   }

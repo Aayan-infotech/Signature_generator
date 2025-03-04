@@ -19,7 +19,7 @@ function Signin() {
         setSuccessMessage('');
 
         try {
-            const response = await fetch('http://44.196.64.110:9006/api/auth/login', {
+            const response = await fetch('http://54.236.98.193:9006/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

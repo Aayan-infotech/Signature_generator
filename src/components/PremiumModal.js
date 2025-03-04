@@ -20,7 +20,7 @@ export default function PremiumModal({
     }
     try {
       const response = await axios.post(
-        `http://44.196.64.110:9006/api/user/makePayment/${id}`,
+        `http://54.236.98.193:9006/api/user/makePayment/${id}`,
         {
           publishableKey,
           price,
@@ -43,7 +43,7 @@ export default function PremiumModal({
   useEffect(() => {
     const handlePremiumPlan = async () => {
       try {
-        const response = await axios.get('http://44.196.64.110:9006/api/plan/getAllPlans')
+        const response = await axios.get('http://54.236.98.193:9006/api/plan/getAllPlans')
         setPlan(response?.data)
       } catch (error) {
         console.error('Error fetching premium plan:', error)

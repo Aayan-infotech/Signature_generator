@@ -44,7 +44,7 @@ export const AppProvider = ({ children }) => {
       if (!token) return;  // Ensure we only try to fetch if token exists
 
       try {
-        const response = await axios.get('http://44.196.64.110:9006/api/user-data', {
+        const response = await axios.get('http://54.236.98.193:9006/api/user-data', {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
