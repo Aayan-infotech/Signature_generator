@@ -41,7 +41,7 @@ function Header() {
       }
   
       const response = await axios.get(
-        'http://44.196.64.110:9006/api/user/planChecker',
+        'http://54.236.98.193:9006/api/user/planChecker',
         {
           headers: {
             Authorization: `Bearer ${token2}`,
@@ -65,7 +65,7 @@ function Header() {
   
 
   const handleCurrentUser = async () => {
-    const response = await axios.get('http://44.196.64.110:9006/api/user/', {
+    const response = await axios.get('http://54.236.98.193:9006/api/user/', {
       headers: {
         Authorization: `Bearer ${token2}`,
       },
@@ -138,7 +138,7 @@ function Header() {
     }
 
     try {
-      const response = await axios.get('http://44.196.64.110:9006/api/get/signature', {
+      const response = await axios.get('http://54.236.98.193:9006/api/get/signature', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token2}`,
@@ -155,7 +155,7 @@ function Header() {
 
   const handleLogout = async () => {
     await axios.post(
-      'http://44.196.64.110:9006/api/user/logout',
+      'http://54.236.98.193:9006/api/user/logout',
       {},
       {
         headers: {
@@ -164,7 +164,7 @@ function Header() {
       },
     )
     localStorage.removeItem('token2')
-    window.location.replace(`http://44.196.64.110:2222/`)
+    window.location.replace(`http://54.236.98.193:2222/`)
   }
 
   const handleSelect = (image) => {
