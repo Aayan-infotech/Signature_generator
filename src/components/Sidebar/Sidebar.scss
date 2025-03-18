@@ -1,10 +1,10 @@
 .sidebar {
-  width: 6%;
+  width: 15%;
   border-right: 1px solid rgb(218, 214, 214);
   padding: 0px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   min-height:100vh
 }
 .navbar-unexpand .collapse:not(.show) {
@@ -12,13 +12,13 @@
 }
 .sidebar-link {
   text-decoration: none;
-  padding: 10px 10px;
+  padding: 10px 20px;
   margin-bottom: 15px;
   background-color: transparent;
   border-radius: 4px;
   color: #333; 
   width: 100%;
-  text-align: center;
+  text-align: start;
   
   transition: color 0.3s ease, background-color 0.3s ease;
   word-wrap: break-word;
@@ -43,7 +43,7 @@
   width: 1.5rem;
 }
 .sideData{
-  width: 30%;
+  width: 40%;
    padding: 20px
 }
 .fontchanger{
