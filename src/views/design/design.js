@@ -27,7 +27,7 @@ const Design = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://54.236.98.193:9006/api/signaturedesign/signature_design', formData);
+      const response = await axios.post('http://3.223.253.106:9006/api/signaturedesign/signature_design', formData);
       console.log('Signature design saved', response.data);
 
       setFormData({

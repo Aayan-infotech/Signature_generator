@@ -58,7 +58,7 @@ const Parent = ({ children }) => {
         console.error('No token found in localStorage')
         return
       }
-      const response = await axios.get('http://54.236.98.193:9006/api/user', { token: token2 })
+      const response = await axios.get('http://3.223.253.106:9006/api/user', { token: token2 })
 
       if (response.status === 200) {
         console.log('User retrieved:', response.data)
@@ -73,7 +73,7 @@ const Parent = ({ children }) => {
   // async function getUser() {
   //   try {
   //     const response = await axios.post(
-  //       'http://54.236.98.193:9006/api/user',
+  //       'http://3.223.253.106:9006/api/user',
   //       {
   //         token: token2,
   //       },
@@ -97,7 +97,7 @@ const Parent = ({ children }) => {
 
   const handlegmail = async () => {
     try {
-      const response = await axios.post('http://54.236.98.193:9006/api/email/send-email', pdfStore)
+      const response = await axios.post('http://3.223.253.106:9006/api/email/send-email', pdfStore)
       console.log(response)
     } catch (error) {
       console.warn(error)
@@ -143,7 +143,7 @@ const Parent = ({ children }) => {
     const data123 = { selectedContent, data }
     try {
       const response = await axios.post(
-        'http://54.236.98.193:9006/api/user-data',
+        'http://3.223.253.106:9006/api/user-data',
         { data: data123 },
         {
           headers: {
@@ -183,7 +183,7 @@ const Parent = ({ children }) => {
   //     const formData = new FormData()
   //     formData.append('images', blob, 'signature.png')
   //     const response = await axios.post(
-  //       'http://54.236.98.193:9006/api/create/signature',
+  //       'http://3.223.253.106:9006/api/create/signature',
   //       formData,
   //       {
   //         headers: {
@@ -230,7 +230,7 @@ const sendImage = async (dataURL) => {
     formData.append('signature', JSON.stringify({  url: 'signature.png' })); // Add id and url
 
     const response = await axios.post(
-      'http://54.236.98.193:9006/api/create/signature',
+      'http://3.223.253.106:9006/api/create/signature',
       formData,
       {
         headers: {

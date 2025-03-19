@@ -46,7 +46,7 @@ function MySignature({ show, handleClose, signature, selectedImage, handleSelect
 
   const deleteSignature = async (id) => {
     try {
-      const response = await axios.delete(`http://54.236.98.193:9006/api/delete/signature/${id}`, {
+      const response = await axios.delete(`http://3.223.253.106:9006/api/delete/signature/${id}`, {
         headers: {
           Authorization: `Bearer ${token2}`,
         },
@@ -65,7 +65,7 @@ function MySignature({ show, handleClose, signature, selectedImage, handleSelect
   const updateSignature = async (signatureText, imageUrl) => {
     try {
       const response = await axios.post(
-        'http://54.236.98.193:9006/update-signature',
+        'http://3.223.253.106:9006/update-signature',
         {
           email, // Include email in the payload
           signature: signatureText,
@@ -96,7 +96,7 @@ function MySignature({ show, handleClose, signature, selectedImage, handleSelect
   //       formData.append('image', selectedImage?.url);
 
   //       try {
-  //         const response = await axios.post('http://54.236.98.193:9006/update-signature', formData, {
+  //         const response = await axios.post('http://3.223.253.106:9006/update-signature', formData, {
   //           headers: {
   //             'Content-Type': 'multipart/form-data',
   //             Authorization: `Bearer ${token2}`,

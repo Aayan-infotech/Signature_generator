@@ -27,7 +27,7 @@ const TamplatesPreview = () => {
   const getCurrentUser = async () => {
     setLoading(true) // Set loading to true before API call
     try {
-      const response = await axios.get('http://54.236.98.193:9006/api/plan/getUserPlan', {
+      const response = await axios.get('http://3.223.253.106:9006/api/plan/getUserPlan', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -54,7 +54,7 @@ const TamplatesPreview = () => {
   const handleAllPlan = async () => {
     try {
       // Fetch plans from the API
-      const response = await axios.get('http://54.236.98.193:9006/api/plan/getAllPlans')
+      const response = await axios.get('http://3.223.253.106:9006/api/plan/getAllPlans')
       const plans = response?.data
 
       // Filter and set plans
