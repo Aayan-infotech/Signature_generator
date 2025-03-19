@@ -12,6 +12,10 @@ import { MySignature, PaymentSuccess, PaymentCancel } from '../mySignature'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import PremiumModal from '../PremiumModal'
 
+
+
+
+
 function Header() {
   const [showSide, setShowSide] = useState(false)
   const [successAdded, setSuccessAdded] = useState(false)
