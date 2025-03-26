@@ -231,12 +231,16 @@ const Parent = ({ children }) => {
       // const signatureId = crypto.randomUUID(); // Generate a unique id for the signature
       formData.append('files', blob)
       // formData.append('signature', JSON.stringify({ url: 'signature.png' })) // Add id and url
-      const response = await axios.post('http://localhost:9006/api/create/signature', formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
+      const response = await axios.post(
+        'http://3.223.253.106:9006/api/create/signature',
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
         },
-      })
+      )
       if (response.status === 200) {
         setSuccessShow(true)
       }
