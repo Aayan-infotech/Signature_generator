@@ -11,7 +11,7 @@ export default function PremiumModal({
 }) {
   const token = localStorage.getItem('token2')
   const publishableKey =
-    'pk_test_51QjFfdBgZZyeFEqTuo1HPMhCZQA0ykwEm9y9iFhBLbHtPgFNnsRPsFb38IywwbstwAg4U9K9wBUcnpvTaSwLYKvI00KYTL1C2p'
+    'pk_test_51IpcxoGFzdgb6ewmeZUmPvqW9A7IoCA7mpkhItFm2h0U6TGalik9eNkl3KSzOGeXUe4YzD58JeZhjEe8FQUBlxnr008GotTFue'
   const [plan, setPlan] = useState([])
   const handlePayment = async (price, subscriptionEnd, id) => {
     if (!Number.isInteger(price)) {
