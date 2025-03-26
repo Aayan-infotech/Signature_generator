@@ -201,52 +201,47 @@ const Parent = ({ children }) => {
   // }
 
   // Update sendImage function to include id and url for each signature item
-const sendImage = async (dataURL) => {
-  if (!dataURL) {
-    console.error('No image data available');
-    return;
-  }
-
-  try {
-    const base64Data = dataURL.split(',')[1];
-    const byteCharacters = atob(base64Data);
-    const byteArrays = [];
-
-    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
-      const slice = byteCharacters.slice(offset, offset + 512);
-      const byteNumbers = new Array(slice.length);
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
+  const sendImage = async (dataURL) => {
+    if (!dataURL) {
+      console.error('No image data available')
+      return
     }
+    console.log('dataURL', dataURL)
 
-    const blob = new Blob(byteArrays, { type: 'image/png' });
-    const token = localStorage.getItem('token2');
-    const formData = new FormData();
-    // const signatureId = crypto.randomUUID(); // Generate a unique id for the signature
-    formData.append('images', blob, 'signature.png');
-    formData.append('signature', JSON.stringify({  url: 'signature.png' })); // Add id and url
+    try {
+      const base64Data = dataURL.split(',')[1]
+      const byteCharacters = atob(base64Data)
+      const byteArrays = []
 
-    const response = await axios.post(
-      'http://3.223.253.106:9006/api/create/signature',
-      formData,
-      {
+      for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+        const slice = byteCharacters.slice(offset, offset + 512)
+        const byteNumbers = new Array(slice.length)
+        for (let i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i)
+        }
+        const byteArray = new Uint8Array(byteNumbers)
+        byteArrays.push(byteArray)
+      }
+
+      const blob = new Blob(byteArrays, { type: 'image/png' })
+      const token = localStorage.getItem('token2')
+      const formData = new FormData()
+      // const signatureId = crypto.randomUUID(); // Generate a unique id for the signature
+      formData.append('files', blob)
+      // formData.append('signature', JSON.stringify({ url: 'signature.png' })) // Add id and url
+      const response = await axios.post('http://localhost:9006/api/create/signature', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
         },
+      })
+      if (response.status === 200) {
+        setSuccessShow(true)
       }
-    );
-    if (response.status === 200) {
-      setSuccessShow(true);
+    } catch (error) {
+      console.error('Error sending image:', error)
     }
-  } catch (error) {
-    console.error('Error sending image:', error);
   }
-};
-
 
   const doubleAction = () => {
     captureScreenshot()
