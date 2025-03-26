@@ -35,8 +35,10 @@ const Parent = ({ children }) => {
   useEffect(() => {
     const params = new URLSearchParams(location.search)
     const token = params.get('token')
+    const email = params.get('email')
     if (token) {
-      localStorage.setItem('token2', token)
+      localStorage.setItem("token2", token);
+      localStorage.setItem("email", email);
     }
   }, [])
 
